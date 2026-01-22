@@ -1,0 +1,36 @@
+/* Navbar */
+header {
+  background: #074151;
+  color: #070707;
+  padding: 10px 30px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo {
+  background: #ffffff;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.logo img {
+  max-width: 50px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 200px;
+  padding-left: 500px;
+}
+
+.navbar ul li a {
+  color: #060606;
+  text-decoration: none;
+}
