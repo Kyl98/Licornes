@@ -34,7 +34,7 @@ _Ces pinatas sont votre source principale de points._
 
 **UFO** 🛸 **RARE** : Bonus spatial de **180 pts**.
 
-**Tokyo** 🐕 ** **EASTER EGG** : Apparition ultra-rare offrant **600 pts** d'un coup.
+**Tokyo** 🐕  **EASTER EGG** : Apparition ultra-rare offrant **600 pts** d'un coup.
 
 ----------
 
