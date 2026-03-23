@@ -15,9 +15,9 @@ Le but est simple : **Éclatez tout ce qui bouge** (ou presque) en 60 secondes.
 
 ## 🎯 Les Cibles Classiques
 
-_Ces pinatas sont votre source principale de points._
-
 **Unicorns** 🦄 **COMMUN** : Cibles classiques donnant **25 pts**.
+
+_Ces pinatas sont votre source principale de points._
 
 ----------
 
