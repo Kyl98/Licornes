@@ -48,7 +48,7 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
 
 ## ⛈️ Evil Lakitu (Le Corrupteur)
 
-**POUVOIR SOMBRE :** Il peut corrompre vos cibles normales pour les transformer subitement en **Bombes** ou en **Yami** juste avant votre clic et retire **-550 pts**.
+**POUVOIR SOMBRE :** Il peut corrompre vos cibles normales pour les transformer subitement en **Bombes** ou en **Yami** juste avant votre clic et retire **-550 pts** quand il est touché.
 
 ----------
 
