@@ -72,7 +72,7 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
     
     Bash
     ```
-    git clone https://github.com/votre-compte/unicorn-shooter.git
+    git clone https://github.com/Kyl98/Licornes.git
     
     ```
     
