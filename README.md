@@ -30,7 +30,7 @@ _Ces pinatas sont votre source principale de points._
 
 **Litimes** ⏳ **CHRONO** : La licorne du temps. Offre **+10s** de survie et **120 pts**.
 
-**Boshi** ⚡**SUPER COMBO** : Cible cachée ce debloque après avoir abattu Lakitu, active le mode frénésie (score max garanti) et donne **90 pts**.
+**Boshi** ⚡**SUPER COMBO** : Cible cachée ce debloque après avoir abattu Lakitu, donne **90 pts** et active le mode frénésie (score max garanti pour x cibles hors malus).
 
 **UFO** 🛸 **RARE** : Bonus spatial de **180 pts**.
 
