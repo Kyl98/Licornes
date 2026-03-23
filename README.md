@@ -24,13 +24,13 @@ _Ces pinatas sont votre source principale de points._
 
 ## 👾 Menaces & Artefacts
 
-**Yami** 🚫 **MALUS** : Brise instantanément votre combo et retire **250 pts**.
+**Yami** 🚫 **MALUS** : Brise instantanément votre combo et retire **-250 pts**.
 
 **Bombe** 💣 **DANGER** : Explosion punitive ! **-320 pts** et secousse d'écran.
 
-**Litimes** ⏳ **CHRONO** : La licorne du temps. Offre **+10s** de survie.
+**Litimes** ⏳ **CHRONO** : La licorne du temps. Offre **+10s** de survie et **120 pts**.
 
-**Boshi** ⚡**SUPER COMBO** : Active le mode frénésie (score max garanti).
+**Boshi** ⚡**SUPER COMBO** : Cible cachée ce debloque après avoir abattu Lakitu, active le mode frénésie (score max garanti) et donne **90 pts**.
 
 **UFO** 🛸 **RARE** : Bonus spatial de **180 pts**.
 
@@ -44,11 +44,11 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
 
 ## 🌤️ Lakitu (Le Gardien)
 
-**CAPACITÉ SPÉCIALE :** Si vous réussissez à l'éliminer (3 clics), il utilise sa magie pour transformer **toutes les bombes** à l'écran en licornes inoffensives !
+**CAPACITÉ SPÉCIALE :** Si vous réussissez à l'éliminer (3 clics), il utilise sa magie pour transformer **toutes les bombes** à l'écran en licornes inoffensives et donne **320 pts** !
 
 ## ⛈️ Evil Lakitu (Le Corrupteur)
 
-**POUVOIR SOMBRE :** Il peut corrompre vos cibles normales pour les transformer subitement en **Bombes** ou en **Yami** juste avant votre clic.
+**POUVOIR SOMBRE :** Il peut corrompre vos cibles normales pour les transformer subitement en **Bombes** ou en **Yami** juste avant votre clic et retire **-550 pts**.
 
 ----------
 
