@@ -1,4 +1,4 @@
-# 🦄 PINATA : Aim & Shoot!
+# 🦄 PINATA (V1) : Aim & Shoot!
 
 **Pinata** est un jeu d'arcade frénétique où réflexes et précision sont vos seules armes. Plongez dans un univers coloré et défendez les cieux contre l'invasion des licornes et les malices de Lakitu.
 
