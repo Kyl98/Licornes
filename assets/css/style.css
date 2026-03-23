@@ -1,4 +1,10 @@
-/* OVERLAY D'ENTREE DE JEU */
+/* =========================================================================================================================
+   SEGEMENT 0 : PAGE D'ENTRÉE (OVERLAY ET PORTES DE NUAGES)
+   ========================================================================================================================= */
+
+/* ===============================================================
+   SOUS SECTION 0.1 : OVERLAY PRINCIPAL
+   =============================================================== */
 .home-overlay {
     position: fixed;
     inset: 0;
@@ -8,20 +14,21 @@
     z-index: 10000;
     background: rgba(255, 255, 255, 0.1); 
     backdrop-filter: blur(10px);
-    transition: opacity 0.8s ease-in-out; /* Pour une disparition fluide */
+    transition: opacity 0.8s ease-in-out;
 }
 
-/* PORTES DE NUAGES : État de base */
+/* ===============================================================
+   SOUS SECTION 0.2 : PORTES DE NUAGES
+   =============================================================== */
 .cloud-door {
     position: absolute;
     left: 0;
     width: 100%;
     height: 50%;
     background-color: #6d6d6d;
-    background-image: url('../images/Entry_Cloud.gif'); /* N'oublie pas de remettre ton lien ici */
+    background-image: url('../images/Entry_Cloud.gif');
     background-size: 250px;
     z-index: -1;
-    /* C'est cette ligne qui gère la fluidité du mouvement */
     transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
@@ -35,9 +42,9 @@
     border-top: 1px solid #eee; 
 }
 
-/* --- LES CLASSES D'ANIMATION (AJOUTÉES) --- */
-
-/* Quand le JS ajoute .opened, on déclenche les mouvements */
+/* ===============================================================
+   SOUS SECTION 0.3 : ANIMATIONS OVERLAY
+   =============================================================== */
 .home-overlay.opened .cloud-door.top {
     transform: translateY(-100%);
 }
@@ -46,15 +53,15 @@
     transform: translateY(100%);
 }
 
-/* On fait disparaître le texte proprement pendant l'ouverture */
 .home-overlay.opened .home-content {
     opacity: 0;
     transform: scale(0.9);
     transition: 0.5s ease;
 }
 
-/* --- DESIGN DU CONTENU --- */
-
+/* ===============================================================
+   SOUS SECTION 0.4 : CONTENU (TEXTE & BOUTONS)
+   =============================================================== */
 .welcome-title {
     font-size: 8rem;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -107,7 +114,9 @@
     animation: blink 1.5s infinite;
 }
 
-/* ANIMATIONS */
+/* ===============================================================
+   SOUS SECTION 0.5 : ANIMATIONS GLOBALES
+   =============================================================== */
 @keyframes simpleFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
@@ -118,11 +127,13 @@
     50% { opacity: 0.2; }
 }
 
-/*===================================================================================================================================
-PAGE ACCEUIL / PAGE ACCEUIL / PAGE ACCEUIL / PAGE ACCEUIL / PAGE ACCEUIL / PAGE ACCEUIL / PAGE ACCEUIL / PAGE ACCEUIL / PAGE ACCEUIL
-=====================================================================================================================================*/
+/* =========================================================================================================================
+   SEGEMENT 1 : PAGE D'ACCUEIL
+   ========================================================================================================================= */
 
-/* 1. BASE ET FOND ANIMÉ */
+/* ===============================================================
+   SOUS SECTION 1.1 : BASE & FOND
+   =============================================================== */
 body.page-accueil_3 { 
     margin: 0;
     padding: 0;
@@ -134,17 +145,17 @@ body.page-accueil_3 {
     overflow: hidden;
     font-family: 'Arial Black', sans-serif;
     overflow-x: hidden;
- }
-    
-  body.page-accueil_3::before {
+}
+
+body.page-accueil_3::before {
     content: "";
-    position: fixed; /* ou absolute selon ta préférence */
-    top: 0; left: 0; right: 0; bottom: 0;
+    position: fixed;
+    inset: 0;
     background: url('../images/Nuage_AkaG.gif') repeat;
     background-size: 220px;
-    opacity: 0.3; /* Remet l'opacité que tu avais (0.3 ou plus) */
+    opacity: 0.3;
     animation: cloudsMove 60s linear infinite;
-    z-index: -1; /* Derrière le menu mais devant rien d'autre */
+    z-index: -1;
 }
 
 @keyframes cloudsMove {
@@ -152,11 +163,9 @@ body.page-accueil_3 {
     to { background-position: 0 0; }
 }
 
-
-
-
-
-/* 2. CONTENEUR PRINCIPAL */
+/* ===============================================================
+   SOUS SECTION 1.2 : STRUCTURE PRINCIPALE
+   =============================================================== */
 .menu-container {
     display: flex;
     flex-direction: column;
@@ -166,14 +175,16 @@ body.page-accueil_3 {
     z-index: 10;
 }
 
-/* 3. LOGO (Plus grand et centré) */
+/* ===============================================================
+   SOUS SECTION 1.3 : LOGO
+   =============================================================== */
 .logo-area {
     margin-bottom: 20px;
     text-align: center;
 }
 
 .main-logo {
-    width: 800px; /* Taille augmentée pour le logo PIÑATA */
+    width: 800px;
     max-width: 90vw;
     display: block;
     margin: 0 auto;
@@ -181,24 +192,74 @@ body.page-accueil_3 {
     animation: float 3s ease-in-out infinite;
 }
 
-/* Animation de flottement */
 @keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-15px); /* Le logo monte de 15px */
-    }
-    100% {
-        transform: translateY(0px);
-    }
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }
 
+/* ===============================================================
+   SOUS SECTION 1.4 : NAVIGATION
+   =============================================================== */
+.nav-bar {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -40px;
+}
 
-/* =================================================================================
-   REGLAGES   REGLAGES   REGLAGES   REGLAGES   REGLAGES   REGLAGES     REGLAGES
- =================================================================================*/
+.nav-line {
+    position: absolute;
+    width: 100%;
+    height: 120px;
+    background: #000;
+    z-index: 1;
+}
 
+.buttons-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 160px;
+}
+
+/* ===============================================================
+   SOUS SECTION 1.5 : BOUTONS MENU
+   =============================================================== */
+.menu-btn {
+    width: 220px;
+    height: 220px;
+    background: #cccccc;
+    border: 15px solid #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    font-weight: 900;
+    font-size: 2rem;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.menu-btn:hover {
+    transform: scale(1.1);
+    background: #f5c2cf;
+    border-color: #333;
+}
+
+.home-page-3 a {
+    text-decoration: none;
+}
+
+/* ===============================================================
+   SOUS SECTION 1.6 : BOUTON PARAMÈTRES
+   =============================================================== */
 .floating-settings {
     position: fixed;
     top: 20px;
@@ -223,7 +284,6 @@ body.page-accueil_3 {
     box-shadow: 0 0 15px rgba(67, 213, 230, 0.5);
 }
 
-/* L'engrenage à l'intérieur */
 .gear-icon {
     width: 30px;
     height: 30px;
@@ -236,11 +296,11 @@ body.page-accueil_3 {
 .gear-icon::before, .gear-icon::after {
     content: "";
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     background: inherit;
     border-radius: 5px;
 }
+
 .gear-icon::before { transform: rotate(30deg); }
 .gear-icon::after { transform: rotate(60deg); }
 
@@ -259,76 +319,17 @@ body.page-accueil_3 {
     background: #43d5e6;
 }
 
-
-
 #settingsOverlay {
     z-index: 9000;   
 }
 
+/* =========================================================================================================================
+   SEGEMENT 2 : PAGE RÈGLES
+   ========================================================================================================================= */
 
-
-/* 4. BARRE DE NAVIGATION (Massive) */
-.nav-bar {
-    position: relative;
-    width: 100%;
-    height: 220px; /* Hauteur augmentée */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -40px;
-}
-
-/* La ligne noire épaisse qui traverse l'écran */
-.nav-line {
-    position: absolute;
-    width: 100%;
-    height: 120px; /* Épaisseur de la ligne noire augmentée */
-    background: #000;
-    z-index: 1;
-}
-
-/* Conteneur des boutons */
-.buttons-wrapper {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    gap: 160px; /* Plus d'espace entre les cercles */
-}
-
-/* 5. LES BOUTONS RONDS (Style précis de l'image) */
-.menu-btn {
-    width: 220px;  /* Plus grand */
-    height: 220px; /* Plus grand */
-    background: #cccccc; /* Gris de l'image */
-    border: 15px solid #000; /* Bordure noire très épaisse */
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: #000;
-    font-weight: 900;
-    font-size: 2rem;
-    text-transform: uppercase;
-    transition: all 0.2s ease-in-out;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1); /* Petit relief interne */
-}
-
-.menu-btn:hover {
-    transform: scale(1.1);
-    background: #f5c2cf;
-    border-color: #333;
-}
-
-/* Adaptation pour ton lien Start qui contient un bouton */
-.home-page-3 a {
-    text-decoration: none;
-}
-
-/*=============================================================================================================================
- PAGE REGLES / PAGE REGLES / PAGE REGLES / PAGE REGLES / PAGE REGLES / PAGE REGLES / PAGE REGLES / PAGE REGLES / PAGE REGLES /
-==============================================================================================================================*/
-
+/* ===============================================================
+   SOUS SECTION 2.1 : BASE & FOND
+   =============================================================== */
 body.page-règles {
   position: relative;
   background-color: rgb(225, 225, 225);
@@ -336,13 +337,13 @@ body.page-règles {
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center;     /* Centre verticalement */
-  min-height: 100vh;       /* Obligatoire pour le centrage vertical */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   overflow: hidden;
-  }
+}
 
-  body.page-règles::before {
+body.page-règles::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -353,14 +354,15 @@ body.page-règles {
   z-index: 0;
 }
 
-/* Tout le contenu au-dessus du fond */
+/* Contenu au-dessus du fond */
 body.page-règles > * {
   position: relative;
   z-index: 1;
 }
 
-
-/* Cartes des règles */
+/* ===============================================================
+   SOUS SECTION 2.2 : VARIABLES CSS
+   =============================================================== */
 :root {
   --wii-blue-light: #a5a7ab;
   --wii-blue-dark: #000000;
@@ -368,35 +370,37 @@ body.page-règles > * {
   --wii-bg-glass: rgba(255, 255, 255, 0.2);
 }
 
-
-/* Le panneau bleu principal */
+/* ===============================================================
+   SOUS SECTION 2.3 : CONTAINER PRINCIPAL (STYLE WII)
+   =============================================================== */
 .wii-container {
-  width: 1320px; /* Élargir la largeur (ex: de 650px à 900px) */
-  min-height: 520px; /* Élargir la hauteur (on définit une hauteur minimale) */
-  align-items: center;/* On garde le reste identique */
+  width: 1320px;
+  min-height: 520px;
+  align-items: center;
   background: linear-gradient(to bottom, var(--wii-blue-light), var(--wii-blue-dark));
   border: 4px solid white;
   border-radius: 40px;
-  padding: 30px; /* Augmenté pour l'espace intérieur */
+  padding: 30px;
   box-shadow: 0 20px 50px rgba(170, 169, 169, 0.3);
   display: flex;
   position: relative;
   z-index: 1;
-  flex-direction: column; /* Superpose Header, Content et Footer */
-  gap: 20px; /* Espace entre les sections internes */
-  }
+  flex-direction: column;
+  gap: 20px;
+}
 
-
-/* Effet de lignes horizontales subtiles sur le fond */
+/* Effet lignes */
 .wii-container::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 3px);
   pointer-events: none;
 }
 
-/* En-tête */
+/* ===============================================================
+   SOUS SECTION 2.4 : HEADER
+   =============================================================== */
 .wii-header {
   display: flex;
   align-items: center;
@@ -414,9 +418,9 @@ body.page-règles > * {
 }
 
 .game-thumbnail img {
-  width: 100%;       /* Prend toute la largeur */
-  height: 100%;      /* Prend toute la hauteur */
-  object-fit: cover; /* Remplit le cadre sans déformer (recadre un peu si besoin) */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .wii-header h1 {
@@ -425,7 +429,9 @@ body.page-règles > * {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Zone centrale blanche semi-transparente */
+/* ===============================================================
+   SOUS SECTION 2.5 : CONTENU CENTRAL
+   =============================================================== */
 .wii-content {
   background: var(--wii-bg-glass);
   border: 2px solid rgba(255,255,255,0.4);
@@ -444,7 +450,6 @@ body.page-règles > * {
   background: white;
   border-radius: 20px;
   min-height: 180px;
-  /* Centrage de l'image de la manette */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -457,7 +462,62 @@ body.page-règles > * {
   font-weight: 500;
 }
 
-/* Footer avec le bouton A */
+/* ===============================================================
+   SOUS SECTION 2.6 : BLOCS D'INFORMATIONS (3 COLONNES)
+   =============================================================== */
+.triple-column-wrapper {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.block-image {
+  background: white;
+  border-radius: 15px;
+  height: 215px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.5);
+}
+
+.block-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.block-text {
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: white;
+  text-align: center;
+  padding: 5px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .triple-column-wrapper {
+    flex-direction: column;
+  }
+  .wii-container {
+    width: 90%;
+  }
+}
+
+/* ===============================================================
+   SOUS SECTION 2.7 : FOOTER & BOUTON
+   =============================================================== */
 .wii-footer {
   display: flex;
   justify-content: space-between;
@@ -476,17 +536,17 @@ body.page-règles > * {
   gap: 10px;
   font-weight: bold;
   box-shadow: 0 4px 0px #bbb;
-  cursor: pointer; /* Change le curseur en main */
-  transition: transform 0.1s ease, box-shadow 0.1s ease; /* Pour l'effet de clic */
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .ok-button:hover {
-  transform: scale(1.05); /* Grossit légèrement le bouton */
-  filter: brightness(1.1); /* Rend le bouton un peu plus lumineux */
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 .ok-button:active {
-  transform: scale(0.95); /* Effet d'enfoncement quand on clique */
+  transform: scale(0.95);
 }
 
 .btn-circle {
@@ -501,64 +561,9 @@ body.page-règles > * {
   font-size: 0.8rem;
 }
 
-/* ... (Garder le reste du CSS précédent) ... */
-
-.triple-column-wrapper {
-  display: flex;
-  gap: 15px; /* Espace entre les 3 blocs */
-  margin-bottom: 20px;
-}
-
-.info-block {
-  flex: 1; /* Permet aux 3 blocs d'avoir la même largeur */
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.block-image {
-  background: white;
-  border-radius: 15px;
-  height: 215px; /* Hauteur fixe pour l'homogénéité */
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border: 2px solid rgba(255,255,255,0.5);
-}
-
-.block-image img {
-  /* L'image prend 100% de la largeur et de la hauteur de la case */
-  width: 100%;
-  height: 100%;
-  
-  /* C'EST LA PROPRIÉTÉ MAGIQUE ICI : */
-  object-fit: cover; 
-  
-  /* Optionnel : assure que l'image est bien centrée si elle est recadrée */
-  object-position: center; 
-}
-
-.block-text {
-  font-size: 1.1rem;
-  line-height: 1.3;
-  color: white;
-  text-align: center;
-  /* Optionnel : ajouter un léger fond si le texte est dur à lire */
-  padding: 5px;
-}
-
-/* Ajustement pour mobile/petits écrans */
-@media (max-width: 600px) {
-  .triple-column-wrapper {
-    flex-direction: column;
-  }
-  .wii-container {
-    width: 90%;
-  }
-}
-
+/* ===============================================================
+   SOUS SECTION 2.8 : TEXTES
+   =============================================================== */
 .rule-message {
     color: white;
     font-weight: bolder;
@@ -569,55 +574,57 @@ body.page-règles > * {
     color: white;
 }
 
-/* **************************************************************************
-    Overlay Ecran Règles   Overlay Ecran Règles   Overlay Ecran Règles
- ***************************************************************************** */
+/* ===============================================================
+   SOUS SECTION 2.9 : MODALE (OVERLAY)
+   =============================================================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7); /* Assombrit l'arrière-plan */
-  display: none; /* Masqué par défaut */
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 100;
-  backdrop-filter: blur(5px); /* Floute le fond Lakitu */
+  backdrop-filter: blur(5px);
 }
 
-/* Style de la fenêtre de détails (Look Wii) */
-/* Style de la fenêtre de détails (Look Wii) */
+.modal-overlay.active {
+  display: flex;
+}
+
+/* ===============================================================
+   SOUS SECTION 2.10 : CONTENU MODALE
+   =============================================================== */
 .modal-content {
   background: linear-gradient(to bottom, #ffffff, #e0e0e0);
   width: 500px;
-  /* --- MODIFICATIONS ICI --- */
-  max-height: 85vh; /* Bloque la hauteur à 85% de l'écran maximum */
-  overflow-y: auto; /* Ajoute le scroll si le contenu dépasse */
+  max-height: 85vh;
+  overflow-y: auto;
   padding: 30px;
-  /* -------------------------- */
   border-radius: 40px;
   border: 6px solid #858585;
   text-align: center;
   box-shadow: 0 0 30px rgba(0,0,0,0.5);
   animation: popIn 0.3s ease-out;
-  position: relative; /* Pour bien centrer par rapport à l'overlay */
+  position: relative;
 }
 
-/* On stylise la barre de défilement pour qu'elle soit plus jolie (look moderne) */
+/* Scrollbar */
 .modal-content::-webkit-scrollbar {
   width: 8px;
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-  background: #000000; /* Couleur de ton bord de fenêtre */
+  background: #000000;
   border-radius: 10px;
 }
 
 .modal-content::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
-  margin: 20px; /* Pour ne pas coller aux bords arrondis */
+  margin: 20px;
 }
 
-
-/* Animation d'apparition */
+/* Animation */
 @keyframes popIn {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -626,32 +633,29 @@ body.page-règles > * {
 .modal-header h1 {
    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
    font-weight: bolder;
-
 }
 
-
-/************************************
- Style de la liste dans la modale 
- *************************************/
+/* ===============================================================
+   SOUS SECTION 2.11 : LISTE D'ITEMS
+   =============================================================== */
 .items-list {
     list-style: none;
     padding: 0;
     margin: 20px 0;
     text-align: left;
-    /* On s'assure que la liste ne crée pas de bug de largeur */
     width: 100%; 
 }
 
 .items-list li {
     display: flex;
-    align-items: center; /* Centre verticalement l'image et le texte */
+    align-items: center;
     margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.1); /* Léger fond pour séparer les items */
+    background: rgba(255, 255, 255, 0.1);
     padding: 10px;
     border-radius: 8px;
 }
 
-/* Taille fixe pour les icônes/gifs */
+/* Icônes */
 .item-icon {
     width: 110px;
     height: 90px;
@@ -659,7 +663,7 @@ body.page-règles > * {
     justify-content: center;
     align-items: center;
     margin-right: 15px;
-    flex-shrink: 0; /* Empêche l'image de s'écraser */
+    flex-shrink: 0;
 }
 
 .starvy-img {
@@ -669,31 +673,29 @@ body.page-règles > * {
     justify-content: center;
     align-items: center;
     margin-right: 15px;
-    flex-shrink: 0; /* Empêche l'image de s'écraser */
+    flex-shrink: 0;
 }
 
-/* 2. On cible l'image des licornes groupées pour la booster */
+/* Images spécifiques */
 .img-licornes-groupe {
-    width: 65px; /* Elle prend toute la largeur du container */
+    width: 65px;
     height: auto;
-    transform: scale(1.4); /* On la grossit de 40% par rapport à sa taille actuelle */
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Optionnel : petite lueur */
+    transform: scale(1.4);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
 
-/* 3. On ajuste les autres (Bombe, OVNI) pour qu'ils restent proportionnels */
 .item-icon img:not(.img-licornes-groupe) {
-    max-width: 80%; /* Pour qu'ils ne paraissent pas gigantesques à côté */
+    max-width: 80%;
     height: auto;
 }
 
-/* Images pour autre items que Cibles Classiques */
 .item-icon img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
 }
 
-
+/* Texte item */
 .item-desc {
     font-size: 0.9rem;
     color: #000000;
@@ -702,21 +704,16 @@ body.page-règles > * {
 }
 
 .item-desc strong {
-    display: block; /* Met le titre en haut */
-    color: #f8a2b7; /* Couleur dorée pour les titres */
+    display: block;
+    color: #f8a2b7;
     font-weight: 900;
     font-size: large;
     margin-bottom: 3px;
 }
 
-/* Classe qui sera ajoutée par JS pour afficher l'onglet */
-.modal-overlay.active {
-  display: flex;
- }
-
-/********************
- Texte Continuer 
- **********************/
+/* ===============================================================
+   SOUS SECTION 2.12 : TEXTE CONTINUER
+   =============================================================== */
 .text-start {  
   width: 100%;
   background: rgba(0, 0, 0, 0.6);
@@ -724,32 +721,27 @@ body.page-règles > * {
   text-align: center;
   padding: 15px 0;
   position: fixed; 
-  bottom: 40px; /* 0 pour être collé au bord, ou 20px pour flotter un peu */
-  left: 0;   /* Assure que la bande commence bien au bord gauche */
+  bottom: 40px;
+  left: 0;
   font-size: 25px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   animation: blink 1.5s infinite;
-  z-index: 5; /* Pour être au-dessus du fond mais sous la modale */
+  z-index: 5;
 }
 
-
+/* Animation (réutilisée) */
 @keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
+/* =========================================================================================================================
+   SEGEMENT 3 : PAGE JEU (GAMEPLAY, CIBLES ET SYSTÈME)
+   ========================================================================================================================= */
 
-/* ==========================================================================================================================================
-PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / PAGE JEU / 
-=============================================================================================================================================*/
-
-/* ==========================================================================
-   1. RESET & BASICS
-   ========================================================================== */
+/* ===============================================================
+   SOUS SECTION 3.1 : RESET & CONFIGURATION DE BASE
+   =============================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -767,11 +759,263 @@ body.world_1, body.world_2, body.world_3 {
     font-family: Arial, sans-serif;
 }
 
-/* ==========================================================================
-   2. OVERLAYS (BIENVENUE & TRANSITION NIVEAUX)
-   ========================================================================== */
+/* ===============================================================
+   SOUS SECTION 3.2 : GESTION DES MONDES (VISUELS & BACKGROUNDS)
+   =============================================================== */
 
-/* Style partagé pour tous les fonds d'overlay */
+/* Fonds des mondes en 1er plan */
+body.world_1 { 
+    background: url('../assets/images/bg_level_1.png') center/cover #ededed ;
+    background-size: cover;
+    background-attachment: fixed;
+    transition: transform 0.1s ease-out; /* Pour un retour au calme fluide */
+}
+
+body.world_2 { 
+    background: url('../assets/images/bg_level_2.png') center/cover #506396; 
+    background-size: cover;
+    background-attachment: fixed;
+    transition: transform 0.1s ease-out; /* Pour un retour au calme fluide */
+}
+
+body.world_3 { 
+    background: url('../assets/images/bg_level_3.png') center/cover #535353;
+    background-size: cover;
+    background-attachment: fixed;
+    transition: transform 0.1s ease-out; /* Pour un retour au calme fluide */ 
+}
+
+/* Nuages animés et effets atmosphériques (Before de body) */
+body.world_1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../images/Nuage_AkaG.gif") repeat;
+    background-size: 300px;
+    opacity: 0.25;
+    pointer-events: none;
+    animation: cloudsMove 60s linear infinite;
+}
+
+body.world_2::before  {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../images/Entry_Cloud.gif") repeat;
+    background-size: 300px;
+    opacity: 0.25;
+    pointer-events: none;
+    animation: cloudsMove 60s linear infinite;
+}
+
+body.world_3::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../images/Evil_Good_Lakitu.gif") repeat;
+    background-size: 300px;
+    opacity: 0.25;
+    pointer-events: none;
+    animation: cloudsMove 60s linear infinite;
+}
+
+/* ===============================================================
+   SOUS SECTION 3.3 : INTERFACE UTILISATEUR EN JEU (HUD)
+   =============================================================== */
+
+.game-infos {
+    position: absolute;
+    top: 20px;
+    inset-inline: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.score img { width: 45px; }
+
+.timer {
+    background: black;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.current-level {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-weight: 900;
+    font-size: 35px;
+}
+
+.btn-pause {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 42px;
+    padding: 16px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* ===============================================================
+   SOUS SECTION 3.4 : SYSTÈME DE CIBLES & GAMEPLAY
+   =============================================================== */
+
+#levelContainer { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
+
+.targets {
+    position: absolute;
+    width: 270px;
+    image-rendering: pixelated;
+    pointer-events: auto;
+    cursor: crosshair;
+    z-index: 20;
+}
+
+.evil-target {
+    width: 100px;
+    filter: drop-shadow(0 0 10px red); /* Lueur rouge */
+    animation: pulse-red 0.5s infinite alternate;
+    z-index: 25;
+}
+
+/* Harmonisation des deux nuages */
+.lakitu-target, 
+.evil-lakitu-target {
+    width: 140px !important;
+    height: auto;
+    filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.3));
+    z-index: 35;
+}
+
+.lakitu-target {
+    filter: drop-shadow(0px 0px 10px rgb(255, 254, 254));
+    animation: pulse-white 0.5s infinite alternate;
+}
+
+.evil-lakitu-target {
+    filter: drop-shadow(0px 0px 10px red);
+    animation: pulse-red 0.5s infinite alternate;
+}
+
+/* Effet fantôme */
+.targets.ghost-mode {
+    opacity: 0.35 !important; /* Très transparent */
+    filter: brightness(1.2) grayscale(0.6) blur(1px);
+    pointer-events: none;
+    transition: opacity 1s ease-in;
+    z-index: 5;
+}
+
+/* Classe temporaire pour cacher l'image pendant l'explosion */
+.is-exploding {
+    visibility: hidden;
+}
+
+/* Bombes et Explosions */
+.targets.bomb-target {
+    width: 150px;
+    height: 150px;
+    z-index: 30;
+}
+
+.bomb-target {
+    filter: drop-shadow(0 0 5px red);
+    animation: pulse-red 0.5s infinite alternate;
+    width: 120px;
+}
+
+/* Spéciaux (UFO, Star, Boshi) */
+.ufo-target {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 15px cyan);
+    z-index: 31; 
+}
+
+.star-target {
+    width: 210px;
+    filter: drop-shadow(0 0 15px #FFD700);
+    z-index: 29;
+}
+
+.boshi-target {
+    animation: boshi-sparkle 0.8s infinite alternate;
+    width: 110px;
+    z-index: 15;
+}
+
+/* Easter Egg (Chien) */
+.targets.dog-target {
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(0 0 8px #ADFF2F) drop-shadow(0 0 15px #ADFF2F);
+    animation: bounce-dog 1s infinite alternate ease-in-out;
+    z-index: 50;
+}
+
+/* ===============================================================
+   SOUS SECTION 3.5 : FEEDBACK VISUEL & TEXTES FLOTTANTS
+   =============================================================== */
+
+.combo-text {
+    position: absolute;
+    pointer-events: none;
+    color: #ffffff;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+    z-index: 9999;
+    animation: comboAnimation 0.8s ease-out forwards;
+}
+
+.combo-text.dog-bonus {
+    color: #ADFF2F !important;
+    font-weight: bold;
+    font-size: 2.2em;
+    animation: pop-up-bonus 0.8s forwards;
+}
+
+.combo-text.malus {
+    color: #ff0000 !important;
+    font-weight: bold;
+    font-size: 2.2em;
+}
+
+.super-combo-active #scoreValue {
+    color: #0077ff !important;
+    text-shadow: 0 0 15px #00ffff, 0 0 25px #0077ff;
+    animation: pulse-score 0.5s infinite alternate;
+}
+
+.low-time-alert {
+    color: #ff0000 !important;
+    animation: pulse-red 0.5s infinite alternate;
+    font-weight: bold;
+    transform: scale(1.2);
+}
+
+/* ===============================================================
+   SOUS SECTION 3.6 : OVERLAYS (BIENVENUE, PAUSE & FIN)
+   =============================================================== */
+
+/* Style partagé Overlays */
 .welcome-overlay, .end-overlay {
     position: fixed;
     inset: 0;
@@ -783,15 +1027,9 @@ body.world_1, body.world_2, body.world_3 {
     z-index: 2000;
 }
 
+/* Overlay de Bienvenue */
 .welcome-overlay { background: rgba(0, 0, 0, 0.7); }
-.end-overlay { 
-    background: rgba(0, 0, 0, 0.2); 
-    flex-direction: column;
-    display: none; /* JS bascule en flex */
-    z-index: 1500; 
-}
 
-/* Contenu de la boîte de bienvenue */
 .welcome-content {
     background: rgb(181, 181, 181);
     padding: 40px;
@@ -841,390 +1079,13 @@ body.world_1, body.world_2, body.world_3 {
 
 #startGameBtn:hover { transform: scale(1.1); }
 
-/* ==========================================================================
-   3. GESTION DES NIVEAUX (BACKGROUNDS & INFOS)
-   ========================================================================== */
-
-/* Fonds des mondes en 1er plan */
-body.world_1 { background: url('../assets/images/bg_level_1.png') center/cover #ededed ;
-   background-size: cover;
-   background-attachment: fixed;
-   transition: transform 0.1s ease-out; /* Pour un retour au calme fluide */}
-
-body.world_2 { background: url('../assets/images/bg_level_2.png') center/cover #506396; 
-    background-size: cover;
-    background-attachment: fixed;
-    transition: transform 0.1s ease-out; /* Pour un retour au calme fluide */}
-
-body.world_3 { background: url('../assets/images/bg_level_3.png') center/cover #535353;
-    background-size: cover;
-    background-attachment: fixed;
-    transition: transform 0.1s ease-out; /* Pour un retour au calme fluide */ }
-
-/* Infos en haut (Score & Timer) */
-.game-infos {
-    position: absolute;
-    top: 20px;
-    inset-inline: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Overlay de Fin */
+.end-overlay { 
+    background: rgba(0, 0, 0, 0.2); 
+    flex-direction: column;
+    display: none; 
+    z-index: 1500; 
 }
-
-.score {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.score img { width: 45px; }
-
-.timer {
-    background: black;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 20px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Nuages animés (Before de body) */
-
-body.world_1::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url("../images/Nuage_AkaG.gif") repeat;
-    background-size: 300px;
-    opacity: 0.25;
-    pointer-events: none;
-    animation: cloudsMove 60s linear infinite;
-}
-
-
-body.world_2::before  {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url("../images/Entry_Cloud.gif") repeat;
-    background-size: 300px;
-    opacity: 0.25;
-    pointer-events: none;
-    animation: cloudsMove 60s linear infinite;
-}
-
-
-
-body.world_3::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url("../images/Evil_Good_Lakitu.gif") repeat;
-    background-size: 300px;
-    opacity: 0.25;
-    pointer-events: none;
-    animation: cloudsMove 60s linear infinite;
-  }
-
-
-
-/* UI Niveau & Pause */
-.current-level {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    font-weight: 900;
-    font-size: 35px;
-}
-
-.btn-pause {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    font-size: 42px;
-    padding: 16px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.restart-countdown {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 80px;
-    color: white;
-    text-shadow: 4px 4px 0 black;
-    z-index: 500;
-    animation: pulseRestart 0.5s infinite alternate;
-}
-
-@keyframes pulseRestart {
-    from { transform: translate(-50%, -50%) scale(1); }
-    to { transform: translate(-50%, -50%) scale(1.05); }
-}
-
-
-
-/* Secousse de l'écran : Bomby */
-.screen-shake {
-    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-    /* On force un léger zoom pour éviter les bords blancs pendant que ça vibre */
-    transform: scale(1.05); 
-    overflow: hidden; /* Empêche l'apparition de barres de défilement */
-}
-
-@keyframes shake {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    10% { transform: translate(-12px, -12px) rotate(-3deg); } /* Déplacement plus grand */
-    20% { transform: translate(12px, 10px) rotate(3deg); }
-    30% { transform: translate(-12px, 8px) rotate(-2.5deg); }
-    40% { transform: translate(12px, -10px) rotate(2.5deg); }
-    50% { transform: translate(-10px, 12px) rotate(-2deg); }
-    60% { transform: translate(10px, -8px) rotate(2deg); }
-    70% { transform: translate(-12px, 10px) rotate(-1.5deg); }
-    80% { transform: translate(12px, -12px) rotate(1.5deg); }
-    90% { transform: translate(-8px, 8px) rotate(-1deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
-}
-
-/* ==========================================================================
-   4. CIBLES & GAMEPLAY
-   ========================================================================== */
-#levelContainer { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
-
-.targets {
-    position: absolute;
-    width: 270px;
-    image-rendering: pixelated;
-    pointer-events: auto;
-    cursor: crosshair;
-    z-index: 20;
-}
-
-.evil-target {
-    width: 100px;
-    filter: drop-shadow(0 0 10px red); /* Lueur rouge */
-    animation: pulse-red 0.5s infinite alternate;
-    z-index: 25;
-}
-
-/* Harmonisation des deux nuages */
-.lakitu-target, 
-.evil-lakitu-target {
-    width: 140px !important;
-    height: auto;
-    /* Optionnel : petite ombre pour les faire ressortir */
-    filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.3));
-    z-index: 35;
-}
-
-.lakitu-target {
-    filter: drop-shadow(0px 0px 10px rgb(255, 254, 254));
-    animation: pulse-white 0.5s infinite alternate;
-}
-
-@keyframes pulse-white {
-    from { filter: drop-shadow(0 0 2px rgb(255, 255, 255)); }
-    to { filter: drop-shadow(0 0 15px rgb(216, 216, 216)); transform: scale(1.1); }
-}
-
-.evil-lakitu-target {
-    filter: drop-shadow(0px 0px 10px red);
-    animation: pulse-red 0.5s infinite alternate;
-}
-
-/* Taille spécifique pour la bombe */
-.targets.bomb-target {
-    width: 150px;  /* Ajuste la largeur ici */
-    height: 150px; /* Ajuste la hauteur ici */
-    z-index: 30;   /* Pour qu'elle passe au-dessus des licornes si besoin */
-}
-
-.bomb-target {
-    filter: drop-shadow(0 0 5px red);
-    animation: pulse-red 0.5s infinite alternate;
-    width: 120px;
-}
-
-@keyframes pulse-red {
-    from { filter: drop-shadow(0 0 2px red); }
-    to { filter: drop-shadow(0 0 15px red); transform: scale(1.1); }
-}
-
-
-/* Augmente la taille de l'OVNI uniquement */
-.ufo-target {
-    width: 150px; /* Ajuste la valeur selon tes besoins (ex: 120px, 180px) */
-    height: auto;  /* Garde les proportions de l'image */
-    
-    /* Optionnel : Ajoute un filtre pour le rendre encore plus "spatial" */
-    filter: drop-shadow(0 0 15px cyan);
-    z-index: 31; 
-}
-
-.star-target {
-    width: 210px;
-    filter: drop-shadow(0 0 15px #FFD700);
-    z-index: 29;
-}
-
-/* Style spécifique pour le chien (Easter Egg) */
-.targets.dog-target {
-    width: 90px;  /* Le chien est un peu plus petit que la bombe */
-    height: 90px;
-    filter: drop-shadow(0 0 8px #ADFF2F) drop-shadow(0 0 15px #ADFF2F); /* Lueur verte */
-    animation: bounce-dog 1s infinite alternate ease-in-out; /* Animation subtile */
-    z-index: 50; /* S'assure qu'il est au-dessus de tout le reste */
-}
-
-@keyframes bounce-dog {
-    from { transform: translateY(0) rotate(0deg); }
-    to { transform: translateY(-15px) rotate(5deg); }
-}
-
-/* Texte flottant pour le bonus du chien */
-.combo-text.dog-bonus {
-    color: #ADFF2F !important; /* Vert fluo */
-    font-weight: bold;
-    font-size: 2.2em;
-    animation: pop-up-bonus 0.8s forwards;
-}
-
-@keyframes pop-up-bonus {
-    0% { opacity: 0; transform: translateY(0) scale(0.5); }
-    50% { opacity: 1; transform: translateY(-50px) scale(1.2); }
-    100% { opacity: 0; transform: translateY(-100px) scale(1); }
-}
-
-
-
-.boshi-target {
-    animation: boshi-sparkle 0.8s infinite alternate;
-    width: 110px;
-    z-index: 15;
-}
-
-@keyframes boshi-sparkle {
-    0% { filter: drop-shadow(0 0 5px #0077ff) brightness(1); }
-    100% { filter: drop-shadow(0 0 20px #00ffff) brightness(1.5) hue-rotate(90deg); }
-}
-
-.super-combo-active #scoreValue {
-    color: #0077ff !important;
-    text-shadow: 0 0 15px #00ffff, 0 0 25px #0077ff;
-    animation: pulse-score 0.5s infinite alternate;
-}
-
-@keyframes pulse-score {
-    from { transform: scale(1); }
-    to { transform: scale(1.2); }
-}
-
-/*-----------------------------------------------------------
-  DECOMPTE NIVEAU     DECOMPTE NIVEAU      DECOMPTE NIVEAU
------------------------------------------------------------- */
-
-.start-message {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 80px;
-    color: white;
-    text-shadow: 4px 4px 0 black;
-    z-index: 500;
-}
-
-
-/* Animation de pulsation rouge pour les 10 dernières secondes */
-.low-time-alert {
-    color: #ff0000 !important;
-    animation: pulse-red 0.5s infinite alternate;
-    font-weight: bold;
-    transform: scale(1.2);
-}
-
-@keyframes pulse-red {
-    from { text-shadow: 0 0 5px #ff0000; transform: scale(1.1); }
-    to { text-shadow: 0 0 20px #ff0000; transform: scale(1.3); }
-}
-
-
-/* L'élément d'explosion */
-
-.retro-explosion {
-    position: absolute;
-    pointer-events: none;
-    z-index: 100;
-}
-
-/* Les petits pixels d'explosion */
-.pixel {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    /* On alterne entre blanc et rose flashy */
-    background-color: #f5c2cf;
-    box-shadow: 2px 2px 0px #000; /* Petit contour noir rétro */
-    animation: pixelScatter 0.5s steps(5) forwards;
-}
-
-@keyframes pixelScatter {
-    0% { transform: translate(0, 0) scale(1); opacity: 1; }
-    100% { 
-        /* Les pixels s'éloignent de façon aléatoire via JS */
-        transform: translate(var(--dx), var(--dy)) scale(0); 
-        opacity: 0; 
-    }
-}
-
-/* Style des messages de combo */
-.combo-text {
-    position: absolute;
-    pointer-events: none; /* Important : ne bloque pas les clics suivants */
-    color: #ffffff;
-    font-family: 'Arial Black', sans-serif; /* Ou ta police de jeu */
-    font-size: 28px;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-shadow: 
-        3px 3px 0px #000, 
-        -1px -1px 0px #000,  
-        1px -1px 0px #000,
-        -1px 1px 0px #000;
-    z-index: 9999;
-    animation: comboAnimation 0.8s ease-out forwards;
-}
-
-@keyframes comboAnimation {
-    0% {
-        transform: scale(0.5) translateY(0);
-        opacity: 0;
-    }
-    20% {
-        transform: scale(1.2) translateY(-20px);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1) translateY(-100px);
-        opacity: 0;
-    }
-}
-
-/* Style spécifique pour le texte malus */
-.combo-text.malus {
-    color: #ff0000 !important;
-    font-weight: bold;
-    font-size: 2em;
-}
-
-
-/* ==========================================================================
-   5. OVERLAY DE FIN (TRANSITION NIVEAU)
-   ========================================================================== */
 
 .end-title {
     width: 100%;
@@ -1276,18 +1137,16 @@ body.world_3::before {
     animation: blink 1.5s infinite;
 }
 
-/* ==========================================================================
-   6. OVERLAY DE PAUSE
-   ========================================================================== */
+/* Overlay de Pause */
 .pause-overlay {
     position: fixed;
     inset: 0;
-    display: none; /* Caché par défaut */
+    display: none;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
-    z-index: 3000; /* Au-dessus de tout */
+    z-index: 3000;
 }
 
 .pause-content {
@@ -1324,32 +1183,141 @@ body.world_3::before {
     transition: transform 0.2s, background 0.2s;
 }
 
-.btn-pause-menu:hover {
-    transform: scale(1.05);
-    background: #333;
+.btn-pause-menu:hover { transform: scale(1.05); background: #333; }
+.btn-quit { background: #8b0000; }
+.btn-quit:hover { background: #ff0000; }
+
+/* ===============================================================
+   SOUS SECTION 3.7 : SYSTÈME DE DÉCOMPTE & ÉCRANS INTERMÉDIAIRES
+   =============================================================== */
+
+.start-message {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    color: white;
+    text-shadow: 4px 4px 0 black;
+    z-index: 500;
 }
 
-.btn-quit {
-    background: #8b0000; /* Rouge foncé pour quitter */
+.restart-countdown {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    color: white;
+    text-shadow: 4px 4px 0 black;
+    z-index: 500;
+    animation: pulseRestart 0.5s infinite alternate;
 }
 
-.btn-quit:hover {
-    background: #ff0000;
+/* ===============================================================
+   SOUS SECTION 3.8 : ANIMATIONS ET EFFETS SPÉCIAUX (KEYFRAMES)
+   =============================================================== */
+
+/* Vibrations & Secousses */
+.screen-shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    transform: scale(1.05); 
+    overflow: hidden;
+}
+
+@keyframes shake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-12px, -12px) rotate(-3deg); }
+    20% { transform: translate(12px, 10px) rotate(3deg); }
+    30% { transform: translate(-12px, 8px) rotate(-2.5deg); }
+    40% { transform: translate(12px, -10px) rotate(2.5deg); }
+    50% { transform: translate(-10px, 12px) rotate(-2deg); }
+    60% { transform: translate(10px, -8px) rotate(2deg); }
+    70% { transform: translate(-12px, 10px) rotate(-1.5deg); }
+    80% { transform: translate(12px, -12px) rotate(1.5deg); }
+    90% { transform: translate(-8px, 8px) rotate(-1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Explosions Pixel Art */
+.retro-explosion {
+    position: absolute;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.pixel {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #f5c2cf;
+    box-shadow: 2px 2px 0px #000;
+    animation: pixelScatter 0.5s steps(5) forwards;
+}
+
+@keyframes pixelScatter {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+/* Pulsations & Mouvements */
+@keyframes pulseRestart {
+    from { transform: translate(-50%, -50%) scale(1); }
+    to { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+@keyframes pulse-white {
+    from { filter: drop-shadow(0 0 2px rgb(255, 255, 255)); }
+    to { filter: drop-shadow(0 0 15px rgb(216, 216, 216)); transform: scale(1.1); }
+}
+
+@keyframes pulse-red {
+    from { filter: drop-shadow(0 0 2px red); text-shadow: 0 0 5px #ff0000; transform: scale(1.1); }
+    to { filter: drop-shadow(0 0 15px red); text-shadow: 0 0 20px #ff0000; transform: scale(1.3); }
+}
+
+@keyframes bounce-dog {
+    from { transform: translateY(0) rotate(0deg); }
+    to { transform: translateY(-15px) rotate(5deg); }
+}
+
+@keyframes boshi-sparkle {
+    0% { filter: drop-shadow(0 0 5px #0077ff) brightness(1); }
+    100% { filter: drop-shadow(0 0 20px #00ffff) brightness(1.5) hue-rotate(90deg); }
+}
+
+@keyframes comboAnimation {
+    0% { transform: scale(0.5) translateY(0); opacity: 0; }
+    20% { transform: scale(1.2) translateY(-20px); opacity: 1; }
+    100% { transform: scale(1) translateY(-100px); opacity: 0; }
+}
+
+@keyframes pop-up-bonus {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    50% { opacity: 1; transform: translateY(-50px) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-100px) scale(1); }
+}
+
+@keyframes pulse-score {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
 }
 
 
-/* ======================================================================================================================================
-    SCOREBOARD (CLASSEMENT) / SCOREBOARD (CLASSEMENT) / SCOREBOARD (CLASSEMENT) / SCOREBOARD (CLASSEMENT) / SCOREBOARD (CLASSEMENT) /
-   ====================================================================================================================================== */
+/* =========================================================================================================================
+   SEGEMENT 4 : SCOREBOARD (CLASSEMENT)
+   ========================================================================================================================= */
 
+/* ===============================================================
+   SOUS SECTION 4.1 : BASE & FOND
+   =============================================================== */
 body.score-board {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #e5e5e5; /* Ou ton image de fond */
+    background-color: #e5e5e5;
     overflow-x: hidden;
 }
 
+/* Fond animé */
 body.score-board::before {
   content: "";
   position: absolute;
@@ -1362,14 +1330,15 @@ body.score-board::before {
   animation: cloudsMove 60s linear infinite;
 }
 
-/* Tout le contenu au-dessus du fond */
+/* Contenu au-dessus */
 body.score-board > * {
   position: relative;
   z-index: 1;
 }
 
-
-/* Titre principal "SCORES TOTAUX" */
+/* ===============================================================
+   SOUS SECTION 4.2 : TITRE PRINCIPAL
+   =============================================================== */
 .title {
     width: 100%;
     background-color: #9e9e9e;
@@ -1382,9 +1351,9 @@ body.score-board > * {
     letter-spacing: 2px;
 }
 
-/* ==========================================================================
-   2. LISTE DES SCORES & SCROLL
-   ========================================================================== */
+/* ===============================================================
+   SOUS SECTION 4.3 : LISTE DES SCORES
+   =============================================================== */
 .score-list {
     display: flex;
     flex-direction: column;
@@ -1392,24 +1361,25 @@ body.score-board > * {
     width: 90%;
     max-width: 850px;
     margin: 0 auto;
-    padding-left: 30px; /* Espace pour les pastilles rank */
-    padding-bottom: 120px; /* Espace pour ne pas que la banderole cache les scores */
-    max-height: 60vh; /* Hauteur max avant de scroller */
+    padding-left: 30px;
+    padding-bottom: 120px;
+    max-height: 60vh;
     overflow-y: auto;
 }
 
-/* Personnalisation de la barre de scroll */
+/* Scrollbar personnalisée */
 .score-list::-webkit-scrollbar {
     width: 8px;
 }
+
 .score-list::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border-radius: 10px;
 }
 
-/* ==========================================================================
-   3. STYLE D'UNE LIGNE DE SCORE (SCORE-ITEM)
-   ========================================================================== */
+/* ===============================================================
+   SOUS SECTION 4.4 : ITEM DE SCORE
+   =============================================================== */
 .score-item {
     position: relative;
     display: flex;
@@ -1417,7 +1387,7 @@ body.score-board > * {
     opacity: 1;
 }
 
-/* Pastille Rose du Rang */
+/* Pastille rang */
 .rank {
     width: 80px;
     height: 70px;
@@ -1433,7 +1403,7 @@ body.score-board > * {
     z-index: 2;
 }
 
-/* Barre Noire du Score */
+/* Barre score */
 .score-bar {
     background-color: black;
     color: white;
@@ -1445,74 +1415,89 @@ body.score-board > * {
     font-size: 20px;
 }
 
-.name { font-weight: 900; margin-right: 10px; }
-.value { font-weight: bold; }
+.name { 
+    font-weight: 900; 
+    margin-right: 10px; 
+}
 
-/* ==========================================================================
-   4. PODIUM (OR, ARGENT, BRONZE)
-   ========================================================================== */
-.score-item:nth-child(1) .rank { background-color: #FFD700; color: #000; }
-.score-item:nth-child(2) .rank { background-color: #C0C0C0; color: #000; }
-.score-item:nth-child(3) .rank { background-color: #CD7F32; color: #000; }
+.value { 
+    font-weight: bold; 
+}
 
-/* ==========================================================================
-   5. JOUEUR ACTUEL (BARRE ROSE CLIGNOTANTE)
-   ========================================================================== */
+/* ===============================================================
+   SOUS SECTION 4.5 : PODIUM (TOP 3)
+   =============================================================== */
+.score-item:nth-child(1) .rank { 
+    background-color: #FFD700; 
+    color: #000; 
+}
+
+.score-item:nth-child(2) .rank { 
+    background-color: #C0C0C0; 
+    color: #000; 
+}
+
+.score-item:nth-child(3) .rank { 
+    background-color: #CD7F32; 
+    color: #000; 
+}
+
+/* ===============================================================
+   SOUS SECTION 4.6 : JOUEUR ACTUEL (HIGHLIGHT)
+   =============================================================== */
 .score-item.current-player .score-bar {
-    background-color: #f5c2cf !important; /* Rose */
+    background-color: #f5c2cf !important;
     color: #000 !important;
     border: 3px solid white;
     animation: flashCurrentPlayer 0.8s infinite alternate;
 }
 
+/* Animation highlight */
 @keyframes flashCurrentPlayer {
     from { box-shadow: 0 0 5px #f5c2cf; filter: brightness(1); }
     to { box-shadow: 0 0 20px #f5c2cf; filter: brightness(1.2); }
 }
 
-/* ==========================================================================
-   6. BANDEROLE NOIRE & EFFET CLIGNOTANT SUR LE BLOC
-   ========================================================================== */
+/* ===============================================================
+   SOUS SECTION 4.7 : BANDEAU "CONTINUER"
+   =============================================================== */
 .tap-to-continue {
     width: 100%;
-    background: rgba(60, 60, 60, 0.95); /* Couleur de base */
+    background: rgba(60, 60, 60, 0.95);
     color: white;
     text-align: center;
     padding: 25px 0;
     cursor: pointer;
     margin-top: 60px;
     position: fixed;
-    /* MODIFICATION : Monte la banderole de 20px par rapport au bas */
     left: 0;
     z-index: 1000;
-
-    /* L'animation est maintenant appliquée ICI (sur la banderole) */
     animation: blink 1.5s infinite;
 }
 
-/* Animation qui fait clignoter le fond (on passe de visible à invisible) */
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
-
+/* Texte interne */
 .flashing-text {
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 3px;
-    /* On retire l'animation d'ici car c'est le parent qui gère tout */
 }
 
-/* ========================================================================================================================================================
-    REMERCIEMENTS (PAGE FINALE) / REMERCIEMENTS (PAGE FINALE) / REMERCIEMENTS (PAGE FINALE) / REMERCIEMENTS (PAGE FINALE) / REMERCIEMENTS (PAGE FINALE) /
-   ========================================================================================================================================================= */
+/* ===============================================================
+   SOUS SECTION 4.8 : ANIMATION GLOBALE
+   =============================================================== */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
 
-/* Fond de la page de fin */
+/* =========================================================================================================================
+   SEGEMENT 5 : PAGE FINALE (REMERCIEMENTS / ENDING)
+   ========================================================================================================================= */
+
+/* ===============================================================
+   SOUS SECTION 5.1 : BASE & LAYOUT GLOBAL
+   =============================================================== */
 body.ending-game {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -1523,28 +1508,29 @@ body.ending-game {
     height: 100vh;
 }
 
-/* 2. L'ARRIÈRE-PLAN ANIMÉ (NUAGES) */
+/* ===============================================================
+   SOUS SECTION 5.2 : FOND ANIMÉ
+   =============================================================== */
 body.ending-game::before {
     content: "";
     position: fixed;
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0;
+    inset: 0;
     background: url('../images/Evil_Good_Lakitu.gif') repeat;
     background-size: 220px;
-    opacity: 0.3; /* Ajuste l'opacité selon tes envies */
+    opacity: 0.3;
     animation: cloudsMoveEnding 60s linear infinite;
-    z-index: -1; /* Derrière tout le contenu */
+    z-index: -1;
 }
 
-/* 3. L'ANIMATION */
+/* Animation fond */
 @keyframes cloudsMoveEnding {
     from { background-position: 0 0; }
     to { background-position: 0 2000px; }
 }
 
-/* 4. MISE EN PAGE DES CRÉDITS */
+/* ===============================================================
+   SOUS SECTION 5.3 : STRUCTURE DES CRÉDITS
+   =============================================================== */
 .credits-layout {
     text-align: center;
     width: 1000px;
@@ -1557,8 +1543,9 @@ body.ending-game::before {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
 }
 
-
-/* Barre de score noire avec pastille rose */
+/* ===============================================================
+   SOUS SECTION 5.4 : SCORE FINAL
+   =============================================================== */
 .score-final {
     display: flex;
     align-items: center;
@@ -1592,7 +1579,9 @@ body.ending-game::before {
     color: white;
 }
 
-/* Boîte grise "Lakitu" */
+/* ===============================================================
+   SOUS SECTION 5.5 : BOÎTE DE CRÉDITS
+   =============================================================== */
 .credits-box {
     width: 100%;
     min-height: 200px;
@@ -1604,27 +1593,17 @@ body.ending-game::before {
     align-items: center;
 }
 
+/* Image Lakitu */
 .credits-img {
     width: 190px;
     height: auto;
     margin-left: 20px;
-    /* On applique l'animation ici */
-    animation: lakituFloat 3s ease-in-out infinite, lakituBounce 0.6s ease-in-out infinite alternate;
+    animation: lakituFloat 3s ease-in-out infinite, 
+               lakituBounce 0.6s ease-in-out infinite alternate;
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
 }
 
-/* Animation de flottaison (haut/bas lent) */
-@keyframes lakituFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* Animation de rythme (léger écrasement pour le "beat") */
-@keyframes lakituBounce {
-    from { transform: scale(1); }
-    to { transform: scale(1.05); }
-}
-
+/* Texte crédits */
 .credits-text {
     flex: 1;
     padding: 20px;
@@ -1635,7 +1614,22 @@ body.ending-game::before {
     line-height: 1.4;
 }
 
-/* Boutons du bas */
+/* ===============================================================
+   SOUS SECTION 5.6 : ANIMATIONS (LAKITU)
+   =============================================================== */
+@keyframes lakituFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes lakituBounce {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+/* ===============================================================
+   SOUS SECTION 5.7 : BOUTONS FIN
+   =============================================================== */
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -1645,7 +1639,7 @@ body.ending-game::before {
     padding: 35px 110px;
     border-radius: 25px;
     border: 4px solid #000;
-    background-color: #f3cfd3; /* Rose bouton */
+    background-color: #f3cfd3;
     font-size: 30px;
     font-weight: bold;
     cursor: pointer;

@@ -549,6 +549,7 @@ class Target {
             this.showFloatingText("TIME BONUS +10s!", centerX, centerY, false, "#FFD700");
             this.createParticles(centerX, centerY, "#FFD700");
             this.game.checkTimeAlert(); 
+        
         } else if (this.isLakitu) {
             if (this.game.lakituSaveSound) { this.game.lakituSaveSound.currentTime = 0; this.game.lakituSaveSound.play(); }
             this.game.score += 320; 
@@ -561,6 +562,18 @@ class Target {
             this.spawnLoot(this.game.targetImages[1], centerX, centerY);
             this.spawnLoot('../assets/images/Chien.gif', centerX, centerY);
             this.game.targets.forEach(t => { if(t.isBomb) t.convertToBonus(); });
+    
+         // --- AJOUT : Animation de transition ---
+            this.element.classList.add('is-exploding'); // On le cache 
+            this.hp = Infinity; // Devient totalement intouchable
+    
+            setTimeout(() => {
+            this.element.classList.remove('is-exploding'); // On le remontre
+            this.element.classList.add('ghost-mode');      // En mode fantôme
+            }, 600); // Délai de 300ms pour laisser l'explosion se voir
+
+            setTimeout(() => this.remove(), 30000); 
+
         } else if (this.isEvilLakitu) {
             if (this.game.lakituEvilSound) { this.game.lakituEvilSound.currentTime = 0; this.game.lakituEvilSound.play(); }
             this.game.score = Math.max(0, this.game.score - 550);
@@ -574,7 +587,19 @@ class Target {
             setTimeout(() => flash.remove(), 200);
             this.game.targets.forEach(t => t.convertToMalus());
             for(let i=0; i<3; i++) this.game.targets.push(new Target('../assets/images/Licornes-3.png', this.game));
-        } else if (this.isBomb) {
+    
+            // --- AJOUT : Animation de transition ---
+            this.element.classList.add('is-exploding');
+            this.hp = Infinity; // Devient totalement intouchable
+
+            setTimeout(() => {
+            this.element.classList.remove('is-exploding');
+            this.element.classList.add('ghost-mode');
+            }, 600);
+
+            setTimeout(() => this.remove(), 30000);
+
+       } else if (this.isBomb) {
             if (this.game.bombSound) { this.game.bombSound.currentTime = 0; this.game.bombSound.play(); }
             document.body.classList.add('screen-shake');
             setTimeout(() => document.body.classList.remove('screen-shake'), 500);
@@ -608,7 +633,9 @@ class Target {
             this.showFloatingText(`+${pts}`, centerX, centerY, false);
             this.createParticles(centerX, centerY, "#ff00ff");
         }
-        this.game.updateUI(); this.remove(); 
+        if (!this.isLakitu && !this.isEvilLakitu) {
+    this.remove();
+}
     }
 
     spawnLoot(img, x, y) {
