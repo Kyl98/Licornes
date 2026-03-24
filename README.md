@@ -69,7 +69,7 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
 ## 
 ## 📦 Installation et Lancement
 
-1. Cliquez sur code et telecharger le dossier zip et extraire le contenu sur votre PC
+1. Cliquez sur code et telecharger le dossier zip puis extraire le contenu sur votre PC
   
   
 1.1. Ou clonez le dépôt sur votre terminal :
