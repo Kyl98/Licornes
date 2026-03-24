@@ -69,7 +69,10 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
 ## 
 ## 📦 Installation et Lancement
 
-1.  Clonez le dépôt :
+1. Cliquez sur code et telecharger le dossier zip et extraire le contenu sur votre PC
+  
+  
+1.1. Ou clonez le dépôt sur votre terminal :
     
     Bash
     ```
@@ -77,9 +80,9 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
     
     ```
     
-2.  Ouvrez le fichier `index.html` dans votre navigateur préféré.
+2.  Ouvrez ensuite le fichier `index.html` dans votre navigateur préféré.
     
-3.  Entrez votre pseudo et tentez de battre le record !
+4.  Entrez votre pseudo et tentez de battre le record !
     
 3.  **Visez juste, tirez vite !**
 
