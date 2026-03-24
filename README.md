@@ -44,13 +44,14 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
 
 ## 🌤️ Lakitu (Le Gardien)
 
-**CAPACITÉ SPÉCIALE :** Si vous réussissez à l'éliminer (3 clics), il utilise sa magie pour transformer **toutes les bombes** à l'écran en licornes inoffensives et donne **320 pts** !
+**CAPACITÉ SPÉCIALE :** Si vous réussissez à l'éliminer (3 clics), il utilise sa magie pour transformer **toutes les bombes** à l'écran en licornes inoffensives et donne **320 pts** et distribue des Boshis sur son chemin !
 
 ## ⛈️ Evil Lakitu (Le Corrupteur)
 
-**POUVOIR SOMBRE :** Il peut corrompre vos cibles normales pour les transformer subitement en **Bombes** ou en **Yami** juste avant votre clic et retire **-550 pts** quand il est touché.
+**POUVOIR SOMBRE :** Il peut corrompre vos cibles normales pour les transformer subitement en **Bombes** ou en **Yami** quand il est touché et retire **-550 pts**, il distribue aussi des bombes sur son chemin pour mieux vous démentlez.
 
-----------
+-
+---------
 
 ## ⚙️ Spécifications Techniques
 
