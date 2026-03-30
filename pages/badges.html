@@ -2,129 +2,108 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Piñata - Badges en construction</title>
-    <link rel="shortcut icon" href="../assets/images/Evil_Lakitu.png"/>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #474747;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Correction du background animé */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('../assets/images/EL_404.gif');
-            background-repeat: repeat;
-            background-size: 214px; /* Ajuste la taille des petits nuages ici */
-            animation: cloudsMove 40s linear infinite;
-            z-index: -1;
-            opacity: 0.8; /* Optionnel : pour que les nuages soient un peu plus discrets */
-        }
-
-        @keyframes cloudsMove {
-            from { background-position: 2000px 0; }
-            to { background-position: 0 0; } /* Déplacement en diagonale pour plus de vie */
-        }
-
-        .content {
-            margin-top: 8vh;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .error-code {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 100px;
-            color: #ff0055;
-            text-shadow: 4px 4px 0px #000;
-            margin-bottom: 30px;
-        }
-
-        .worker-icon {
-            font-size: 90px;
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        .pixel-text {
-            font-family: 'Press Start 2P', cursive;
-            color: #333;
-            line-height: 1.8;
-            font-size: 22px;
-            margin-bottom: 80px;
-            background: rgba(255, 255, 255, 0.7); /* Petit fond blanc semi-transparent pour la lisibilité */
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bolder;
-        }
-
-        .black-bar {
-            position: absolute;
-            width: 100%;
-            height: 100px;
-            background-color: #000000;
-            bottom: 15%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .circle-button {
-            width: 170px;
-            height: 170px;
-            background-color: #bdbdbd;
-            border: 8px solid #000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #000;
-            font-weight: bolder;
-            font-family: 'Arial', sans-serif;
-            font-size: 22px;
-            transition: transform 0.2s;
-            cursor: pointer;
-            box-shadow: 0 10px 0 rgba(0,0,0,0.2);
-        }
-
-        .circle-button:hover {
-            transform: scale(1.05);
-            background-color:#f5c2cf;
-        }
-    </style>
+    <title>Collections - Unicorn Shooter</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="shortcut icon" href="../assets/images/Lakitu.Favicon.png"/>
 </head>
-<body>
+<body class="badge-page">
 
-    <div class="content">
-        <div class="error-code">404</div>
-        <div class="worker-icon">🏗️</div>
-        <div class="pixel-text">
-            LES BADGES SONT<br>
-            EN COURS DE<br>
-            CONSTRUCTION !!
+    <div class="badge-main-container">
+        <div class="notebook">
+            <div class="notebook-header">
+                <button class="back-btn" onclick="window.location.href='../index.html'">BACK</button>
+                <div class="game-tabs">
+                    <span class="tab active">BtB</span>
+                    <span class="tab">EtP</span>
+                    <span class="tab">StD</span>
+                    <span class="tab">ItA</span>
+                </div>
+            </div>
+
+            <div class="notebook-content">
+                <div class="badge-grid" id="badgeGrid">
+                    </div>
+                
+                <div class="page-numbers">
+                    <div class="page-btn active">1</div>
+                    <div class="page-btn">2</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-card" id="detailsCard">
+            <div class="card-inner">
+                <div class="card-photo">
+                    <img src="../assets/images/placeholder_badge.png" id="detailImg" alt="Badge">
+                </div>
+                <div class="card-name" id="detailName">???</div>
+                <div class="card-description">
+                    <p id="detailDesc">Clique sur un badge pour voir ses détails.</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="black-bar">
-        <a href="../index.html" class="circle-button">RETOUR</a>
-    </div>
+    <script>
+        // Configuration des badges (ID, Nom, Description, Image)
+        const badgeData = [
+            { id: 'first_kill', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/Laki1.png" },
+            { id: 'combo_10', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/Laki2.png" },
+            { id: 'lakitu_slayer', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu 5 fois dans une partie.", img: "../assets/images/Laki3.png" },
+            { id: 'dog_lover', name: "Ami des Animaux", desc: "Cliquer sur le chien secret.", img: "../assets/images/badges/b4.png" },
+            { id: 'perfect_game', name: "Score Parfait", desc: "Terminer un niveau avec 100% de précision.", img: "../assets/images/badges/b5.png" },
+            // Ajoute autant de badges que tu veux pour remplir la grille (20 par page idéalement)
+        ];
 
+        window.onload = () => {
+            const grid = document.getElementById('badgeGrid');
+            // Récupérer les badges débloqués dans le localStorage
+            const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+
+            badgeData.forEach(badge => {
+                const isUnlocked = unlockedBadges.includes(badge.id);
+                
+                const item = document.createElement('div');
+                item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+                
+                // Si verrouillé, on met un point d'interrogation ou une ombre
+                item.innerHTML = isUnlocked 
+                    ? `<img src="${badge.img}" alt="${badge.name}">`
+                    : `<div class="lock-icon">?</div>`;
+
+                item.onclick = () => {
+                    if (isUnlocked) {
+                        showDetails(badge);
+                    } else {
+                        showDetails({ name: "???", desc: "Contenu verrouillé. Continuez à jouer pour le découvrir !", img: "../assets/images/lock_placeholder.png" });
+                    }
+                };
+
+                grid.appendChild(item);
+            });
+        };
+
+        function showDetails(badge) {
+            document.getElementById('detailImg').src = badge.img;
+            document.getElementById('detailName').textContent = badge.name;
+            document.getElementById('detailDesc').textContent = badge.desc;
+            
+            // Petite animation sur la carte
+            const card = document.getElementById('detailsCard');
+            card.style.transform = "rotate(2deg) scale(1.02)";
+            setTimeout(() => card.style.transform = "rotate(0deg) scale(1)", 150);
+        }
+
+        /** * FONCTION À UTILISER DANS TON JEU POUR DÉBLOQUER UN BADGE :
+         * unlockBadge('combo_10');
+         */
+        function unlockBadge(id) {
+            let unlocked = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+            if (!unlocked.includes(id)) {
+                unlocked.push(id);
+                localStorage.setItem('unlockedBadges', JSON.stringify(unlocked));
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1603,6 +1603,12 @@ body.ending-game::before {
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
 }
 
+#evilCreditsImg {
+    transform: scaleX(-1); /* Retourne l'image horizontalement */
+    animation: lakituFloat 3s ease-in-out infinite, lakituBounce 0.6s ease-in-out infinite alternate;
+}
+
+
 /* Texte crédits */
 .credits-text {
     flex: 1;
@@ -1649,4 +1655,182 @@ body.ending-game::before {
 .btn:hover {
     background-color: #e6b9bf;
     transform: scale(1.05);
+}
+
+/* =========================================================================================================================
+   SEGEMENT 6 : BADGES (COLLECTIONS)
+   ========================================================================================================================= */
+
+   /* =========================================================================================================================
+   SEGEMENT 6 : BADGES (COLLECTIONS) - DESIGN HENRY STICKMIN
+   ========================================================================================================================= */
+
+body.badge-page {
+    background-color: #888; /* Fond neutre pour faire ressortir le carnet */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.badge-main-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* --- LE CARNET (Notebook) --- */
+.notebook {
+    background: #fff;
+    width: 600px;
+    height: 700px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+    padding: 20px;
+    background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
+    background-size: 20px 20px; /* Effet petits points / quadrillage */
+    border: 3px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.notebook-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: 3px solid #333;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.game-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab {
+    padding: 5px 15px;
+    border: 2px solid #333;
+    background: #eee;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tab.active { background: #f5c2cf; }
+
+/* --- GRILLE DES BADGES --- */
+.badge-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.badge-item {
+    aspect-ratio: 1;
+    border: 2px solid #555;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    transition: transform 0.1s;
+}
+
+.badge-item:hover { transform: scale(1.1); background: #f0f0f0; }
+
+.badge-item.locked {
+    background: #ccc;
+    opacity: 0.5;
+}
+
+.badge-item img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.lock-icon { font-size: 24px; color: #777; }
+
+.page-numbers {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.page-btn {
+    border: 2px solid #333;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.page-btn.active { background: #333; color: white; }
+
+/* --- CARTE DE DÉTAILS --- */
+.details-card {
+    width: 350px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.card-inner {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-photo {
+    width: 100%;
+    height: 200px;
+    background: #f9f9f9;
+    border: 2px solid #333;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-photo img { max-width: 90%; max-height: 90%; }
+
+.card-name {
+    font-size: 24px;
+    font-weight: bold;
+    background: #f5c2cf;
+    border: 2px solid #333;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    text-align: left;
+    background: #eee;
+    padding: 10px;
+    border-radius: 5px;
+    min-height: 80px;
 }

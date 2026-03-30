@@ -18,10 +18,11 @@
         </div>
 
         <div class="credits-box">
-            <img src="../assets/images/Lakitu.png" class="credits-img" alt="Lakitu">
-            <div class="credits-text" id="dynamicCreditsText">
-                </div>
+    <img src="../assets/images/Lakitu.png" class="credits-img" id="mainCreditsImg" alt="Lakitu">
+    <div class="credits-text" id="dynamicCreditsText">
         </div>
+    <img src="" class="credits-img" id="evilCreditsImg" alt="Evil Lakitu" style="display: none;">
+</div>
 
         <div class="buttons">
             <button class="btn" id="btnRetry">Recommencer</button>
@@ -65,48 +66,70 @@ window.onload = () => {
     if (finalScoreDisplay) finalScoreDisplay.textContent = `${playerName} : ${lastScore}`;
     if (finalRankElement) finalRankElement.textContent = rank > 0 ? rank : "-";
 
-    // 4. LOGIQUE DYNAMIQUE DU PODIUM (Le reste de ton code ne change pas)
-    let confettiColors = ['#f5c2cf', '#000000']; 
+    // 4. LOGIQUE DYNAMIQUE DU PODIUM
+let confettiColors = ['#f5c2cf', '#000000']; 
+const mainImg = document.getElementById('mainCreditsImg');
+const evilImg = document.getElementById('evilCreditsImg');
 
-    if (rank >= 1 && rank <= 3) {
-        let color = "";
-        if (rank === 1) {
-            color = "#FFD700"; 
-            confettiColors = ['#FFD700', '#FFF9E3', '#000000'];
-        } else if (rank === 2) {
-            color = "#C0C0C0"; 
-            confettiColors = ['#C0C0C0', '#FFFFFF', '#000000'];
-        } else if (rank === 3) {
-            color = "#CD7F32"; 
-            confettiColors = ['#CD7F32', '#F5E6D7', '#000000'];
-        }
+if (rank >= 1 && rank <= 3) {
+    let color = "";
+    let mainSrc = "";
+    let evilSrc = "";
 
-        if (scoreBanner) {
-            scoreBanner.style.backgroundColor = "black";
-            scoreBanner.style.border = `3px solid ${color}`;
-            scoreBanner.style.color = "white";
-        }
-
-        if (finalRankElement) {
-            finalRankElement.style.backgroundColor = color;
-            finalRankElement.style.color = "black";
-            finalRankElement.style.fontWeight = "bold";
-        }
-
-        if (creditsBox) {
-            creditsBox.style.backgroundColor = "black";
-            creditsBox.style.border = `3px solid ${color}`;
-            creditsBox.style.color = "white";
-        }
-
-        [btnRetry, btnHome].forEach(btn => {
-            if (btn) {
-                btn.style.backgroundColor = color;
-                btn.style.color = "black";
-                btn.style.fontWeight = "bold";
-            }
-        });
+    if (rank === 1) {
+        color = "#FFD700"; 
+        confettiColors = ['#FFD700', '#FFF9E3', '#000000'];
+        mainSrc = "../assets/images/Rank1Cloud.png";
+        evilSrc = "../assets/images/Rank1EvilCloud.png";
+    } else if (rank === 2) {
+        color = "#C0C0C0"; 
+        confettiColors = ['#C0C0C0', '#FFFFFF', '#000000'];
+        mainSrc = "../assets/images/Rank2Cloud.png";
+        evilSrc = "../assets/images/Rank2EvilCloud.png";
+    } else if (rank === 3) {
+        color = "#CD7F32"; 
+        confettiColors = ['#CD7F32', '#F5E6D7', '#000000'];
+        mainSrc = "../assets/images/Rank3Cloud.png";
+        evilSrc = "../assets/images/Rank3EvilCloud.png";
     }
+
+    // Application des images de rang
+    if (mainImg) mainImg.src = mainSrc;
+    if (evilImg) {
+        evilImg.src = evilSrc;
+        evilImg.style.display = "block"; // On affiche le 2ème nuage
+        evilImg.style.marginRight = "20px";
+        evilImg.style.marginLeft = "0"; // Reset marge pour l'équilibre
+    }
+
+    // Style du cadre (Ta logique existante conservée)
+    if (scoreBanner) {
+        scoreBanner.style.backgroundColor = "black";
+        scoreBanner.style.border = `3px solid ${color}`;
+        scoreBanner.style.color = "white";
+    }
+
+    if (finalRankElement) {
+        finalRankElement.style.backgroundColor = color;
+        finalRankElement.style.color = "black";
+        finalRankElement.style.fontWeight = "bold";
+    }
+
+    if (creditsBox) {
+        creditsBox.style.backgroundColor = "black";
+        creditsBox.style.border = `4px solid ${color}`; // Bordure un peu plus épaisse pour le top 3
+        creditsBox.style.color = "white";
+        creditsBox.style.justifyContent = "space-between"; // Aligne les nuages aux extrémités
+    }
+
+    [btnRetry, btnHome].forEach(btn => {
+        if (btn) {
+            btn.style.backgroundColor = color;
+            btn.style.color = "black";
+            btn.style.fontWeight = "bold";
+        }
+    });
+}
 
     if (creditsText) {
         creditsText.innerHTML = `
