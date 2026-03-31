@@ -9,6 +9,10 @@
 </head>
 <body class="page-règles">
 
+<button id="lakituBadgeBtn" class="lakitu-nav-btn">
+    <img src="../assets/images/Lakitu.Favicon.png" id="lakituImg" alt="Lakitu">
+</button>
+
 <div class="wii-container">
   <header class="wii-header">
     <div class="game-thumbnail">
@@ -38,8 +42,6 @@
         </div>
       </div>
 
-
-
       <div class="info-block">
         <div class="block-image">
           <img src="../assets/images/0074.png" alt="Step 2">
@@ -48,8 +50,6 @@
           Cliquez sur les cibles bonus pour gagner beaucoup de points rapidement
         </div>
       </div>
-
-
 
     </div>
 
@@ -86,13 +86,13 @@
           <div class="item-icon"><img src="../assets/images/OVNI.gif" alt="OVNI"></div>
           <div class="item-desc"><strong>OVNI (+180pts) :</strong> Cible rare ! Il rapporte beaucoup de plus de points qu'une cible normale </div>
         </li>
-         <li>
+          <li>
           <div class="item-icon"><img src="../assets/images/Licornes-3.png" alt="Licorne-Maléfique"></div>
           <div class="item-desc"><strong>Yami (-250pts) :</strong> Évitez-le ! Il vous fait perdre des points et il s'en délecte.</div>
         </li>
         <li>
           <div class="item-icon"><img src="../assets/images/Boshi.png" alt="Boshi"></div>
-          <div class="item-desc"><strong>Boshi (+90) :</strong>Destrier caché de Lakitu n'apparait en tant que cible récurente seulement qu'après avoir abattu sa monture nuage, fixe les pts gagné à 50 pendant 10 secondes sur n'importe quel cible (hors malus)</div>
+          <div class="item-desc"><strong>Boshi (+90) :</strong>Destrier caché de Lakitu n'apparait en tant que cible récurente seulement qu'after avoir abattu sa monture nuage, fixe les pts gagné à 50 pendant 10 secondes sur n'importe quel cible (hors malus)</div>
         </li>
         <li>
           <div class="item-icon"><img src="../assets/images/Lakitu.png" alt="Lakitu"></div>
@@ -102,7 +102,7 @@
           <div class="item-icon"><img src="../assets/images/Bomb.gif" alt="Bombe"></div>
           <div class="item-desc"><strong>Bomby (-320pts) :</strong> Évitez-les ! Ils font perdre des points et brisent votre combo.</div>
         </li> 
-         <li>
+          <li>
           <div class="item-icon"><img src="../assets/images/Evil_Lakitu.png" alt="Evil-Lakitu"></div>
           <div class="item-desc"><strong>Evil Lakitu (-550pts) :</strong> Distribue des Bomby à travers la map, si vous le voyer évitez de lui cliquer dessus à vos dépends... </div>
         </li>
@@ -121,10 +121,31 @@
        <div class="text-start" id="btnStart">Appuyer sur Entrée ou Espace pour Continuer</div>
 </main>
 
+<button id="homeSettingsBtn" class="floating-settings">
+    <div class="gear-icon">
+        <div class="gear-inner"></div>
+    </div>
+</button>
+
+<div id="settingsOverlay" class="modal-overlay">
+    <div class="modal-content settings-box">
+        <h2 class="pause-title" style="color: #000; margin-bottom: 20px;">RÉGLAGES</h2>
+        <div class="setting-item">
+            <label>Musique</label>
+            <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="0.5">
+        </div>
+        <div class="setting-item">
+            <label>Bruitages</label>
+            <input type="range" id="sfxVolume" min="0" max="1" step="0.1" value="0.7">
+        </div>
+        <button id="closeSettingsBtn" class="btn-pause-menu" style="margin-top: 20px;">OK</button>
+    </div>
+</div>
 
 <audio id="RulMusic" src="../assets/sounds/Rules_Music.mp3" loop></audio>
 <audio id="clickRules" src="../assets/sounds/Open_Rules.mp3"></audio>
 <audio id="closeRules" src="../assets/sounds/Off_Rules.mp3"></audio>
+<audio id="evilSound" src="../assets/sounds/K.Booo.mp3"></audio>
 
 <script>
     const rulMusic = document.getElementById('RulMusic');
@@ -136,9 +157,74 @@
     const closeBtn = document.getElementById('close-btn');
     const btnStart = document.getElementById('btnStart');
 
+    // --- VARIABLES PARAMÈTRES ---
+    const settingsOverlay = document.getElementById('settingsOverlay');
+    const homeSettingsBtn = document.getElementById('homeSettingsBtn');
+    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    const musicSlider = document.getElementById('musicVolume');
+    const sfxSlider = document.getElementById('sfxVolume');
+
+    // --- LOGIQUE LAKITU ---
+    const lakituBtn = document.getElementById('lakituBadgeBtn');
+    const lakituImg = document.getElementById('lakituImg');
+    const evilSound = document.getElementById('evilSound'); // Nouvelle variable audio
+
+    if (lakituBtn) {
+        lakituBtn.onclick = () => {
+            // 1. ARRÊTER LA MUSIQUE IMMÉDIATEMENT
+            if (rulMusic) {
+                rulMusic.pause();
+                rulMusic.currentTime = 0;
+            }
+
+            // 2. JOUER LE SON LAKITU EVIL (ou clickRules si le fichier n'est pas prêt)
+            const targetSound = evilSound || clickRulesSound;
+            if (targetSound) {
+                targetSound.volume = getSavedSfxVol();
+                targetSound.currentTime = 0;
+                targetSound.play();
+            }
+
+            // 3. CHANGER L'APPARENCE
+            lakituImg.src = "../assets/images/EL.png";
+            lakituBtn.classList.add('evil');
+
+            // 4. DÉLAI DE CHARGEMENT AUGMENTÉ (3 secondes)
+            setTimeout(() => {
+                window.location.href = "badges.html";
+            }, 3000);
+        };
+    }
+
     // --- SYNCHRONISATION DES VOLUMES ---
     const getSavedMusicVol = () => parseFloat(localStorage.getItem('musicVol') || 0.5);
     const getSavedSfxVol = () => parseFloat(localStorage.getItem('sfxVol') || 0.7);
+
+    // Initialisation sliders au chargement
+    window.addEventListener('DOMContentLoaded', () => {
+        musicSlider.value = getSavedMusicVol();
+        sfxSlider.value = getSavedSfxVol();
+    });
+
+    // --- LOGIQUE PARAMÈTRES ---
+    if (homeSettingsBtn) {
+        homeSettingsBtn.onclick = () => {
+            settingsOverlay.style.display = 'flex';
+        };
+    }
+
+    closeSettingsBtn.onclick = () => {
+        settingsOverlay.style.display = 'none';
+    };
+
+    musicSlider.oninput = () => {
+        if (rulMusic) rulMusic.volume = musicSlider.value;
+        localStorage.setItem('musicVol', musicSlider.value);
+    };
+
+    sfxSlider.oninput = () => {
+        localStorage.setItem('sfxVol', sfxSlider.value);
+    };
 
     // --- FONCTION DE LANCEMENT AVEC FADE IN ---
     const startMusicWithFade = () => {
@@ -153,16 +239,12 @@
                         clearInterval(fadeIn);
                     }
                 }, 100);
-                // Une fois que ça joue, on retire l'écouteur de clic pour ne pas relancer le fade
                 document.removeEventListener('click', startMusicWithFade);
             }).catch(e => console.log("L'audio attend une interaction."));
         }
     };
 
-    // Tentative au chargement
     window.addEventListener('load', startMusicWithFade);
-
-    // Secours : Relance au clic n'importe où (utile après un rafraîchissement)
     document.addEventListener('click', startMusicWithFade);
 
     openBtn.addEventListener('click', (e) => {
@@ -197,6 +279,8 @@
 
     const leavePage = () => {
         if (btnStart.classList.contains('leaving')) return;
+        if (settingsOverlay.style.display === 'flex') return;
+
         btnStart.classList.add('leaving');
 
         if (rulMusic) {
@@ -217,7 +301,9 @@
 
     document.addEventListener('keydown', (e) => {
         const isModalOpen = modal.classList.contains('active');
-        if ((e.key === "Enter" || e.key === " ") && !isModalOpen) {
+        const isSettingsOpen = settingsOverlay.style.display === 'flex';
+        
+        if ((e.key === "Enter" || e.key === " ") && !isModalOpen && !isSettingsOpen) {
             leavePage();
         }
     });

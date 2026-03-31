@@ -5,13 +5,23 @@
     <title>Collections - Unicorn Shooter</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="shortcut icon" href="../assets/images/Lakitu.Favicon.png"/>
+    <style>
+        /* Sécurité au cas où le CSS externe bloque l'affichage */
+        .floating-settings {
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            z-index: 9999 !important;
+            display: flex !important;
+        }
+    </style>
 </head>
 <body class="badge-page">
 
     <div class="badge-main-container">
         <div class="notebook">
             <div class="notebook-header">
-                <button class="back-btn" onclick="window.location.href='../index.html'">RETOUR</button>
+                <button class="back-btn">RETOUR</button>
                 <div class="game-tabs">
                     <span class="tab active">GoD</span>
                     <span class="tab">SiV</span>
@@ -21,50 +31,89 @@
             </div>
 
             <div class="notebook-content">
-                <div class="badge-grid" id="badgeGrid">
-                    </div>
-                
+                <div class="badge-grid" id="badgeGrid"></div>
                 <div class="page-numbers">
                     <div class="page-btn active">1</div>
                 </div>
             </div>
         </div>
 
-        
-        
         <div class="side-column-container">
-        <div class="details-card" id="detailsCard">
-        <div class="card-inner">
-            <div class="card-photo">
-                <img src="../assets/images/placeholder_badge.png" id="detailImg" alt="Badge">
+            <div class="details-card" id="detailsCard">
+                <div class="card-inner">
+                    <div class="card-photo">
+                        <img src="../assets/images/placeholder_badge.png" id="detailImg" alt="Badge">
+                    </div>
+                    <div class="card-name" id="detailName">???</div>
+                    <div class="card-description">
+                        <p id="detailDesc">Clique sur un badge pour voir ses détails.</p>
+                    </div>
+                </div>
             </div>
-            <div class="card-name" id="detailName">???</div>
-            <div class="card-description">
-                <p id="detailDesc">Clique sur un badge pour voir ses détails.</p>
-            </div>
+            <a href="règles.html" class="btn-rect-rules">JOUER AU JEU</a>
         </div>
     </div>
-    <a href="règles.html" class="btn-rect-rules">JOUER AU JEU</a>
-   </div>
-    </div>
+
+    <button id="homeSettingsBtn" class="floating-settings">
+        <div class="gear-icon">
+            <div class="gear-inner"></div>
+        </div>
+    </button>
 
     <audio id="badgeMusic" src="../assets/sounds/Badges.mp3" loop preload="auto"></audio>
-    
 
-  <script>
-    // --- 1. LANCEMENT IMMÉDIAT DE LA MUSIQUE ---
-    const bgMusic = document.getElementById('badgeMusic');
-    if (bgMusic) {
-        bgMusic.loop = true; 
-        const savedVol = localStorage.getItem('musicVol') || 0.5;
-        bgMusic.volume = parseFloat(savedVol);
-        
-        bgMusic.play().catch(() => {
-            document.addEventListener('click', () => bgMusic.play(), { once: true });
-        });
+    <div id="settingsOverlay" class="modal-overlay">
+        <div class="modal-content settings-box">
+            <h2 class="pause-title" style="color: #000; margin-bottom: 20px;">RÉGLAGES</h2>
+            <div class="setting-item">
+                <label>Musique</label>
+                <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="0.5">
+            </div>
+            <div class="setting-item">
+                <label>Bruitages</label>
+                <input type="range" id="sfxVolume" min="0" max="1" step="0.1" value="0.7">
+            </div>
+            <button id="closeSettingsBtn" class="btn-pause-menu" style="margin-top: 20px;">OK</button>
+        </div>
+    </div>
+
+<script>
+    // 1. SÉLECTION ET SYNC MUSIQUE
+    const badgeMusic = document.getElementById('badgeMusic');
+    const settingsOverlay = document.getElementById('settingsOverlay');
+    const homeSettingsBtn = document.getElementById('homeSettingsBtn');
+    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    const musicSlider = document.getElementById('musicVolume');
+    const sfxSlider = document.getElementById('sfxVolume');
+
+    // Charger les volumes
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedMusic = localStorage.getItem('musicVol') || 0.5;
+        const savedSfx = localStorage.getItem('sfxVol') || 0.7;
+        musicSlider.value = savedMusic;
+        sfxSlider.value = savedSfx;
+        if (badgeMusic) {
+            badgeMusic.volume = savedMusic;
+            badgeMusic.play().catch(() => {
+                document.addEventListener('click', () => { if(badgeMusic.paused) badgeMusic.play(); }, { once: true });
+            });
+        }
+    });
+
+    // 2. LOGIQUE SETTINGS
+    if (homeSettingsBtn) {
+        homeSettingsBtn.onclick = () => settingsOverlay.style.display = 'flex';
     }
+    if (closeSettingsBtn) {
+        closeSettingsBtn.onclick = () => settingsOverlay.style.display = 'none';
+    }
+    musicSlider.oninput = () => {
+        if (badgeMusic) badgeMusic.volume = musicSlider.value;
+        localStorage.setItem('musicVol', musicSlider.value);
+    };
+    sfxSlider.oninput = () => localStorage.setItem('sfxVol', sfxSlider.value);
 
-    // --- 2. Configuration des badges ---
+    // 3. DONNÉES BADGES
     const badgeData = [
         { id: 'first_kill', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/Laki1.png" },
         { id: 'combo_10', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/Laki2.png" },
@@ -88,7 +137,7 @@
         { id: 'full_collection', name: "Maître des Licornes", desc: "Débloquer tous les autres badges du jeu.", img: "../assets/images/badges/b25.png" }
     ];
 
-    // --- 3. Initialisation de la grille et des boutons ---
+    // 4. INITIALISATION GRILLE
     window.onload = () => {
         const grid = document.getElementById('badgeGrid');
         const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
@@ -98,68 +147,49 @@
             const isUnlocked = unlockedBadges.includes(badge.id);
             const item = document.createElement('div');
             item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
-            
             item.innerHTML = isUnlocked 
                 ? `<img src="${badge.img}" alt="${badge.name}">`
                 : `<div class="lock-icon">?</div>`;
 
             item.onclick = () => {
+                const sndPath = isUnlocked ? '../assets/sounds/Open_Rules.mp3' : '../assets/sounds/Blocked.mp3';
+                const snd = new Audio(sndPath);
+                snd.volume = sfxVol;
+                snd.play();
+                
                 if (isUnlocked) {
-                    // SON POUR BADGE DÉBLOQUÉ
-                    const soundUnlock = new Audio('../assets/sounds/Open_Rules.mp3');
-                    soundUnlock.volume = sfxVol;
-                    soundUnlock.play();
                     showDetails(badge);
                 } else {
-                    // SON POUR BADGE VERROUILLÉ
-                    const soundLocked = new Audio('../assets/sounds/Blocked.mp3');
-                    soundLocked.volume = sfxVol;
-                    soundLocked.play();
-                    showDetails({ 
-                        name: "???", 
-                        desc: "Contenu verrouillé. Continuez à jouer !", 
-                        img: "../assets/images/lock_placeholder.png" 
-                    });
+                    showDetails({ name: "???", desc: "Contenu verrouillé. Continuez à jouer !", img: "../assets/images/lock_placeholder.png" });
                 }
             };
-            grid.appendChild(item);
+            if (grid) grid.appendChild(item);
         });
 
-        // --- GESTION DU BOUTON RÈGLES ---
+        // BOUTONS NAVIGATION
         const rulesBtn = document.querySelector('.btn-rect-rules');
         if (rulesBtn) {
             rulesBtn.onclick = (e) => {
                 e.preventDefault();
-                const targetUrl = rulesBtn.getAttribute('href');
-                const clickSound = new Audio('../assets/sounds/Game_Entry.mp3');
-                clickSound.volume = sfxVol;
-                clickSound.play();
+                const snd = new Audio('../assets/sounds/Game_Entry.mp3');
+                snd.volume = sfxVol;
+                snd.play();
                 rulesBtn.innerText = "CHARGEMENT...";
                 rulesBtn.style.opacity = "0.6";
-                setTimeout(() => { window.location.href = targetUrl; }, 2000);
+                setTimeout(() => { window.location.href = rulesBtn.getAttribute('href'); }, 2000);
             };
         }
 
-        // --- GESTION DU BOUTON RETOUR (back-btn) ---
         const backBtn = document.querySelector('.back-btn');
         if (backBtn) {
-            // On supprime l'attribut onclick du HTML pour tout gérer ici
-            backBtn.removeAttribute('onclick'); 
-            
             backBtn.onclick = (e) => {
                 e.preventDefault();
-                // Son de retour (on utilise close_rules pour varier ou Game_Entry)
-                const exitSound = new Audio('../assets/sounds/Return.mp3');
-                exitSound.volume = sfxVol;
-                exitSound.play();
-
+                const snd = new Audio('../assets/sounds/Return.mp3');
+                snd.volume = sfxVol;
+                snd.play();
                 backBtn.innerText = "HOME...";
                 backBtn.style.opacity = "0.6";
-
-                // Délai de 2 secondes avant redirection
-                setTimeout(() => {
-                    window.location.href = '../index.html';
-                }, 2000);
+                setTimeout(() => { window.location.href = '../index.html'; }, 2000);
             };
         }
     };
@@ -168,11 +198,6 @@
         document.getElementById('detailImg').src = badge.img;
         document.getElementById('detailName').textContent = badge.name;
         document.getElementById('detailDesc').textContent = badge.desc;
-        const card = document.getElementById('detailsCard');
-        if (card) {
-            card.style.transform = "rotate(2deg) scale(1.02)";
-            setTimeout(() => card.style.transform = "rotate(0deg) scale(1)", 150);
-        }
     }
 </script>
 </body>
