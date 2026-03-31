@@ -1719,10 +1719,6 @@ body.ending-game::before {
    SEGEMENT 6 : BADGES (COLLECTIONS)
    ========================================================================================================================= */
 
-   /* =========================================================================================================================
-   SEGEMENT 6 : BADGES (COLLECTIONS) - DESIGN HENRY STICKMIN
-   ========================================================================================================================= */
-
 body.badge-page {
     background-color: #888; /* Fond neutre pour faire ressortir le carnet */
     display: flex;
@@ -1730,6 +1726,23 @@ body.badge-page {
     align-items: center;
     height: 100vh;
     margin: 0;
+}
+
+body.badge-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../images/Evil_Lakitu.gif");
+  background-repeat: repeat;
+  background-size: 220px;
+  opacity: 0.40;
+  z-index: 0;
+}
+
+/* Contenu au-dessus du fond */
+body.badge-page > * {
+  position: relative;
+  z-index: 1;
 }
 
 .badge-main-container {
@@ -1765,11 +1778,12 @@ body.badge-page {
     background: #cccccc;
     border: 3px solid #333;
     border-radius: 50%;
-    width: 65px;
-    height: 60px;
+    width: 68px;
+    height: 65px;
     font-weight: bold;
     cursor: pointer;
     margin-right: 20px;
+
 }
 
 .back-btn:hover {
@@ -1914,8 +1928,8 @@ body.badge-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;            /* Il prend la même largeur que la carte */
-    max-width: 350px;       /* Ajuste selon la largeur de ta carte */
+    width: 100%;            
+    max-width: 350px;       
     height: 60px;
     background-color:#f5c2cf;
     color: rgb(0, 0, 0);
@@ -1926,21 +1940,20 @@ body.badge-page {
     box-shadow: 0 4px 0 #f5c2cf;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.2s ease; /* Animation fluide de 0.2 secondes */
+    transition: all 0.2s ease; 
 }
 
-/* 2. Effet au SURVOL (Hover) */
 .btn-rect-rules:hover {
-    background-color: #ff0000; /* Change en bleu cyan flashy */
-    color: #000;               /* Le texte passe en noir pour mieux se voir */
+    background-color: #ff0000;
+    color: #000;              
     border-color: #ffffff;
-    box-shadow: 0 6px 0 #cc0000; /* Ombre bleue plus profonde */
-    transform: translateY(-3px); /* Le bouton monte légèrement */
+    box-shadow: 0 6px 0 #cc0000; 
+    transform: translateY(-3px);
     cursor: pointer;
 }
 
 /* 3. Effet au CLIC (Active) - Optionnel mais conseillé */
 .btn-rect-rules:active {
-    transform: translateY(2px);  /* Le bouton s'enfonce */
-    box-shadow: 0 2px 0 #00cccc; /* L'ombre rétrécit */
+    transform: translateY(2px);  
+    box-shadow: 0 2px 0 #00cccc;
 }

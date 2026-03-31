@@ -51,13 +51,11 @@
     <audio id="badgeMusic" src="../assets/sounds/Badges.mp3" loop preload="auto"></audio>
     
 
-   <script>
+  <script>
     // --- 1. LANCEMENT IMMÉDIAT DE LA MUSIQUE ---
     const bgMusic = document.getElementById('badgeMusic');
     if (bgMusic) {
-        // Force la boucle même en JS pour être sûr
         bgMusic.loop = true; 
-        
         const savedVol = localStorage.getItem('musicVol') || 0.5;
         bgMusic.volume = parseFloat(savedVol);
         
@@ -66,7 +64,7 @@
         });
     }
 
-    // --- 2. Configuration des badges (ID, Nom, Description, Image) ---
+    // --- 2. Configuration des badges ---
     const badgeData = [
         { id: 'first_kill', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/Laki1.png" },
         { id: 'combo_10', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/Laki2.png" },
@@ -94,6 +92,7 @@
     window.onload = () => {
         const grid = document.getElementById('badgeGrid');
         const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+        const sfxVol = parseFloat(localStorage.getItem('sfxVol') || 0.7);
 
         badgeData.forEach(badge => {
             const isUnlocked = unlockedBadges.includes(badge.id);
@@ -106,8 +105,16 @@
 
             item.onclick = () => {
                 if (isUnlocked) {
+                    // SON POUR BADGE DÉBLOQUÉ
+                    const soundUnlock = new Audio('../assets/sounds/Open_Rules.mp3');
+                    soundUnlock.volume = sfxVol;
+                    soundUnlock.play();
                     showDetails(badge);
                 } else {
+                    // SON POUR BADGE VERROUILLÉ
+                    const soundLocked = new Audio('../assets/sounds/Blocked.mp3');
+                    soundLocked.volume = sfxVol;
+                    soundLocked.play();
                     showDetails({ 
                         name: "???", 
                         desc: "Contenu verrouillé. Continuez à jouer !", 
@@ -124,20 +131,34 @@
             rulesBtn.onclick = (e) => {
                 e.preventDefault();
                 const targetUrl = rulesBtn.getAttribute('href');
-
-                // AJOUT DU SON DE CLIC
                 const clickSound = new Audio('../assets/sounds/Game_Entry.mp3');
-                const sfxVol = localStorage.getItem('sfxVol') || 0.7;
-                clickSound.volume = parseFloat(sfxVol);
-                clickSound.play(); // On joue le son immédiatement
-
-                // Feedback visuel
+                clickSound.volume = sfxVol;
+                clickSound.play();
                 rulesBtn.innerText = "PATIENTEZ...";
                 rulesBtn.style.opacity = "0.6";
+                setTimeout(() => { window.location.href = targetUrl; }, 2000);
+            };
+        }
 
-                // Délai de 1.5s avant de changer de page
-                setTimeout(() => { 
-                    window.location.href = targetUrl; 
+        // --- GESTION DU BOUTON RETOUR (back-btn) ---
+        const backBtn = document.querySelector('.back-btn');
+        if (backBtn) {
+            // On supprime l'attribut onclick du HTML pour tout gérer ici
+            backBtn.removeAttribute('onclick'); 
+            
+            backBtn.onclick = (e) => {
+                e.preventDefault();
+                // Son de retour (on utilise close_rules pour varier ou Game_Entry)
+                const exitSound = new Audio('../assets/sounds/Return.mp3');
+                exitSound.volume = sfxVol;
+                exitSound.play();
+
+                backBtn.innerText = "HOME...";
+                backBtn.style.opacity = "0.6";
+
+                // Délai de 2 secondes avant redirection
+                setTimeout(() => {
+                    window.location.href = '../index.html';
                 }, 2000);
             };
         }

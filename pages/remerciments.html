@@ -55,12 +55,25 @@ window.onload = () => {
     const btnHome = document.getElementById('btnHome');
     const endMusic = document.getElementById('EndMusic'); 
 
-    // --- LANCEMENT DE LA MUSIQUE SYNCHRONISÉ ---
-    if (endMusic) {
-        const savedVol = localStorage.getItem('musicVol') || 0.5;
-        endMusic.volume = parseFloat(savedVol); // On applique ton réglage ici
-        endMusic.play().catch(e => console.log("Lecture auto bloquée"));
-    }
+    // --- LOGIQUE DE MUSIQUE (FONCTION DE SECOURS) ---
+    const playEndMusic = () => {
+        if (endMusic && endMusic.paused) {
+            const savedVol = localStorage.getItem('musicVol') || 0.5;
+            endMusic.volume = parseFloat(savedVol);
+            endMusic.play()
+                .then(() => {
+                    // Si la musique démarre, on peut enlever l'écouteur de clic de secours
+                    document.removeEventListener('click', playEndMusic);
+                })
+                .catch(e => console.log("Lecture auto bloquée, en attente d'un clic."));
+        }
+    };
+
+    // Tentative immédiate au chargement
+    playEndMusic();
+
+    // Ajout de l'écouteur pour relancer au clic si bloqué par le navigateur (F5 ou autre)
+    document.addEventListener('click', playEndMusic);
 
     // Affichage texte initial
     if (finalScoreDisplay) finalScoreDisplay.textContent = `${playerName} : ${lastScore}`;
