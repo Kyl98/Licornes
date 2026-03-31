@@ -98,10 +98,9 @@
 
     musicSlider.oninput = () => {
         if (bgMusic) bgMusic.volume = musicSlider.value;
-        localStorage.setItem('musicVol', musicSlider.value); // Sauvegarde immédiate
+        localStorage.setItem('musicVol', musicSlider.value); 
     };
 
-    // AJOUT : Sauvegarde immédiate du SFX pour les autres pages
     sfxSlider.oninput = () => {
         localStorage.setItem('sfxVol', sfxSlider.value);
     };
@@ -109,8 +108,6 @@
     if(homeSettingsBtn) {
         homeSettingsBtn.onclick = () => {
             settingsOverlay.style.display = 'flex';
-
-            // --- AJOUT DU BADGE ICI ---
             if (typeof unlockBadge === 'function') {
                 unlockBadge('settings_pro');
             }
@@ -150,12 +147,26 @@
         }
     }
 
+    // --- LOGIQUE MODIFIÉE POUR LES BOUTONS DU MENU ---
     menuButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             const targetUrl = this.getAttribute('href');
             if (!targetUrl || targetUrl === "#") return;
             e.preventDefault(); 
 
+            // 1. CHANGEMENT VISUEL (PATIENTEZ + OPACITÉ)
+            this.innerText = "LOAD...";
+            this.style.opacity = "0.6";
+            this.style.pointerEvents = "none"; // Empêche de cliquer plusieurs fois
+
+            // 2. GESTION DU SON SFX
+            if (btnClickSound) {
+                btnClickSound.volume = localStorage.getItem('sfxVol') || 0.7;
+                btnClickSound.currentTime = 0;
+                btnClickSound.play();
+            }
+
+            // 3. FADE OUT DE LA MUSIQUE
             if (bgMusic) {
                 let fadeOutInterval = setInterval(() => {
                     if (bgMusic.volume > 0.1) { 
@@ -167,12 +178,7 @@
                 }, 40);
             }
 
-            if (btnClickSound) {
-                btnClickSound.volume = localStorage.getItem('sfxVol') || 0.7;
-                btnClickSound.currentTime = 0;
-                btnClickSound.play();
-            }
-
+            // 4. REDIRECTION APRÈS LE DÉLAI
             setTimeout(() => { window.location.href = targetUrl; }, 1900); 
         });
     });
