@@ -5,16 +5,6 @@
     <title>Collections - Unicorn Shooter</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="shortcut icon" href="../assets/images/Lakitu.Favicon.png"/>
-    <style>
-        /* Sécurité au cas où le CSS externe bloque l'affichage */
-        .floating-settings {
-            position: fixed !important;
-            top: 20px !important;
-            right: 20px !important;
-            z-index: 9999 !important;
-            display: flex !important;
-        }
-    </style>
 </head>
 <body class="badge-page">
 
@@ -141,12 +131,17 @@
     window.onload = () => {
         const grid = document.getElementById('badgeGrid');
         const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+        const newBadges = JSON.parse(localStorage.getItem('newBadges')) || []; // Récupération des nouveaux badges
         const sfxVol = parseFloat(localStorage.getItem('sfxVol') || 0.7);
 
         badgeData.forEach(badge => {
             const isUnlocked = unlockedBadges.includes(badge.id);
+            const isNew = newBadges.includes(badge.id);
+
             const item = document.createElement('div');
-            item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+            // Ajout de la classe new-badge si nécessaire
+            item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${isUnlocked && isNew ? 'new-badge' : ''}`;
+            
             item.innerHTML = isUnlocked 
                 ? `<img src="${badge.img}" alt="${badge.name}">`
                 : `<div class="lock-icon">?</div>`;
@@ -159,6 +154,14 @@
                 
                 if (isUnlocked) {
                     showDetails(badge);
+                    
+                    // Retrait du point rouge au clic
+                    if (item.classList.contains('new-badge')) {
+                        item.classList.remove('new-badge');
+                        const currentNew = JSON.parse(localStorage.getItem('newBadges')) || [];
+                        const updatedNew = currentNew.filter(id => id !== badge.id);
+                        localStorage.setItem('newBadges', JSON.stringify(updatedNew));
+                    }
                 } else {
                     showDetails({ name: "???", desc: "Contenu verrouillé. Continuez à jouer !", img: "../assets/images/lock_placeholder.png" });
                 }

@@ -34,6 +34,13 @@ function unlockBadge(badgeId) {
     unlocked.push(badgeId);
     localStorage.setItem('unlockedBadges', JSON.stringify(unlocked));
 
+    // --- AJOUT POUR NOTIFICATION POINT ROUGE ---
+    let news = JSON.parse(localStorage.getItem('newBadges')) || [];
+    if (!news.includes(badgeId)) {
+        news.push(badgeId);
+        localStorage.setItem('newBadges', JSON.stringify(news));
+    }
+
     const badge = badgeData.find(b => b.id === badgeId);
     if (!badge) return;
 
@@ -63,7 +70,6 @@ function unlockBadge(badgeId) {
         setTimeout(() => notif.remove(), 600);
     }, 5000);
 }
-
 
 class UnicornShooter {
     constructor() {
