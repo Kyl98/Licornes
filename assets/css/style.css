@@ -1802,7 +1802,7 @@ body.badge-page::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("../images/Evil_Lakitu.gif");
+  background-image: url("../images/EvilL.gif");
   background-repeat: repeat;
   background-size: 220px;
   opacity: 0.40;
