@@ -11,11 +11,11 @@
     <div class="badge-main-container">
         <div class="notebook">
             <div class="notebook-header">
-                <button class="back-btn" onclick="window.location.href='../index.html'">BACK</button>
+                <button class="back-btn" onclick="window.location.href='../index.html'">RETOUR</button>
                 <div class="game-tabs">
-                    <span class="tab active">BtB</span>
-                    <span class="tab">EtP</span>
-                    <span class="tab">StD</span>
+                    <span class="tab active">GoD</span>
+                    <span class="tab">SiV</span>
+                    <span class="tab">CoP</span>
                     <span class="tab">ItA</span>
                 </div>
             </div>
@@ -26,84 +26,133 @@
                 
                 <div class="page-numbers">
                     <div class="page-btn active">1</div>
-                    <div class="page-btn">2</div>
                 </div>
             </div>
         </div>
 
+        
+        
+        <div class="side-column-container">
         <div class="details-card" id="detailsCard">
-            <div class="card-inner">
-                <div class="card-photo">
-                    <img src="../assets/images/placeholder_badge.png" id="detailImg" alt="Badge">
-                </div>
-                <div class="card-name" id="detailName">???</div>
-                <div class="card-description">
-                    <p id="detailDesc">Clique sur un badge pour voir ses détails.</p>
-                </div>
+        <div class="card-inner">
+            <div class="card-photo">
+                <img src="../assets/images/placeholder_badge.png" id="detailImg" alt="Badge">
+            </div>
+            <div class="card-name" id="detailName">???</div>
+            <div class="card-description">
+                <p id="detailDesc">Clique sur un badge pour voir ses détails.</p>
             </div>
         </div>
     </div>
+    <a href="règles.html" class="btn-rect-rules">JOUER AU JEU</a>
+   </div>
+    </div>
 
-    <script>
-        // Configuration des badges (ID, Nom, Description, Image)
-        const badgeData = [
-            { id: 'first_kill', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/Laki1.png" },
-            { id: 'combo_10', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/Laki2.png" },
-            { id: 'lakitu_slayer', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu 5 fois dans une partie.", img: "../assets/images/Laki3.png" },
-            { id: 'dog_lover', name: "Ami des Animaux", desc: "Cliquer sur le chien secret.", img: "../assets/images/badges/b4.png" },
-            { id: 'perfect_game', name: "Score Parfait", desc: "Terminer un niveau avec 100% de précision.", img: "../assets/images/badges/b5.png" },
-            // Ajoute autant de badges que tu veux pour remplir la grille (20 par page idéalement)
-        ];
+    <audio id="badgeMusic" src="../assets/sounds/Badges.mp3" loop preload="auto"></audio>
+    
 
-        window.onload = () => {
-            const grid = document.getElementById('badgeGrid');
-            // Récupérer les badges débloqués dans le localStorage
-            const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+   <script>
+    // --- 1. LANCEMENT IMMÉDIAT DE LA MUSIQUE ---
+    const bgMusic = document.getElementById('badgeMusic');
+    if (bgMusic) {
+        // Force la boucle même en JS pour être sûr
+        bgMusic.loop = true; 
+        
+        const savedVol = localStorage.getItem('musicVol') || 0.5;
+        bgMusic.volume = parseFloat(savedVol);
+        
+        bgMusic.play().catch(() => {
+            document.addEventListener('click', () => bgMusic.play(), { once: true });
+        });
+    }
 
-            badgeData.forEach(badge => {
-                const isUnlocked = unlockedBadges.includes(badge.id);
-                
-                const item = document.createElement('div');
-                item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
-                
-                // Si verrouillé, on met un point d'interrogation ou une ombre
-                item.innerHTML = isUnlocked 
-                    ? `<img src="${badge.img}" alt="${badge.name}">`
-                    : `<div class="lock-icon">?</div>`;
+    // --- 2. Configuration des badges (ID, Nom, Description, Image) ---
+    const badgeData = [
+        { id: 'first_kill', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/Laki1.png" },
+        { id: 'combo_10', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/Laki2.png" },
+        { id: 'lakitu_slayer', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu 5 fois dans une partie.", img: "../assets/images/Laki1.png" },
+        { id: 'dog_lover', name: "Ami des Animaux", desc: "Cliquer sur le chien secret.", img: "../assets/images/badges/b4.png" },
+        { id: 'perfect_game', name: "Score Parfait", desc: "Terminer un niveau avec 100% de précision.", img: "../assets/images/" },
+        { id: 'score_5000', name: "Score de Bronze", desc: "Atteindre un score de 5 000 points.", img: "../assets/images/badges/b6.png" },
+        { id: 'score_15000', name: "Score d'Argent", desc: "Atteindre un score de 15 000 points.", img: "../assets/images/badges/b7.png" },
+        { id: 'yami_hunter', name: "Yami !", desc: "A débusqué un Yami caché.", img: "../assets/images/yami3.png" },
+        { id: 'sniper_master', name: "Œil de Lynx", desc: "Éliminer 20 cibles à la suite sans rater un seul tir.", img: "../assets/images/badges/b9.png" },
+        { id: 'super_combo', name: "Fureur de Vaincre", desc: "Maintenir un Super Combo pendant plus de 10 secondes.", img: "../assets/images/badges/b10.png" },
+        { id: 'world_1_clear', name: "Explorateur des Plaines", desc: "Terminer avec succès le Monde 1.", img: "../assets/images/badges/b16.png" },
+        { id: 'world_2_clear', name: "Voyageur des Cieux", desc: "Terminer avec succès le Monde 2.", img: "../assets/images/badges/b17.png" },
+        { id: 'world_3_clear', name: "Héros de l'Ombre", desc: "Terminer avec succès le Monde 3.", img: "../assets/images/badges/b18.png" },
+        { id: 'game_marathon', name: "Marathonien", desc: "Jouer plus de 10 parties au total.", img: "../assets/images/badges/b19.png" },
+        { id: 'ghost_touch', name: "Chasseur de Fantômes", desc: "Cliquer sur une cible en mode Fantôme (Ghost-mode).", img: "../assets/images/badges/b20.png" },
+        { id: 'time_saver', name: "Juste à Temps", desc: "Récupérer un bonus de temps quand il reste moins de 3 secondes.", img: "../assets/images/badges/b21.png" },
+        { id: 'trigger_happy', name: "Gâchette Facile", desc: "Cliquer plus de 100 fois dans une seule partie.", img: "../assets/images/badges/b22.png" },
+        { id: 'peaceful', name: "Pacifiste", desc: "Ne rien toucher pendant les 10 premières secondes d'une partie.", img: "../assets/images/badges/b23.png" },
+        { id: 'settings_pro', name: "Curieux", desc: "Ouvrir le menu des paramètres avant de lancer une partie.", img: "../assets/images/badges/b24.png" },
+        { id: 'full_collection', name: "Maître des Licornes", desc: "Débloquer tous les autres badges du jeu.", img: "../assets/images/badges/b25.png" }
+    ];
 
-                item.onclick = () => {
-                    if (isUnlocked) {
-                        showDetails(badge);
-                    } else {
-                        showDetails({ name: "???", desc: "Contenu verrouillé. Continuez à jouer pour le découvrir !", img: "../assets/images/lock_placeholder.png" });
-                    }
-                };
+    // --- 3. Initialisation de la grille et des boutons ---
+    window.onload = () => {
+        const grid = document.getElementById('badgeGrid');
+        const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
 
-                grid.appendChild(item);
-            });
-        };
-
-        function showDetails(badge) {
-            document.getElementById('detailImg').src = badge.img;
-            document.getElementById('detailName').textContent = badge.name;
-            document.getElementById('detailDesc').textContent = badge.desc;
+        badgeData.forEach(badge => {
+            const isUnlocked = unlockedBadges.includes(badge.id);
+            const item = document.createElement('div');
+            item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
             
-            // Petite animation sur la carte
-            const card = document.getElementById('detailsCard');
+            item.innerHTML = isUnlocked 
+                ? `<img src="${badge.img}" alt="${badge.name}">`
+                : `<div class="lock-icon">?</div>`;
+
+            item.onclick = () => {
+                if (isUnlocked) {
+                    showDetails(badge);
+                } else {
+                    showDetails({ 
+                        name: "???", 
+                        desc: "Contenu verrouillé. Continuez à jouer !", 
+                        img: "../assets/images/lock_placeholder.png" 
+                    });
+                }
+            };
+            grid.appendChild(item);
+        });
+
+        // --- GESTION DU BOUTON RÈGLES ---
+        const rulesBtn = document.querySelector('.btn-rect-rules');
+        if (rulesBtn) {
+            rulesBtn.onclick = (e) => {
+                e.preventDefault();
+                const targetUrl = rulesBtn.getAttribute('href');
+
+                // AJOUT DU SON DE CLIC
+                const clickSound = new Audio('../assets/sounds/Game_Entry.mp3');
+                const sfxVol = localStorage.getItem('sfxVol') || 0.7;
+                clickSound.volume = parseFloat(sfxVol);
+                clickSound.play(); // On joue le son immédiatement
+
+                // Feedback visuel
+                rulesBtn.innerText = "PATIENTEZ...";
+                rulesBtn.style.opacity = "0.6";
+
+                // Délai de 1.5s avant de changer de page
+                setTimeout(() => { 
+                    window.location.href = targetUrl; 
+                }, 2000);
+            };
+        }
+    };
+
+    function showDetails(badge) {
+        document.getElementById('detailImg').src = badge.img;
+        document.getElementById('detailName').textContent = badge.name;
+        document.getElementById('detailDesc').textContent = badge.desc;
+        const card = document.getElementById('detailsCard');
+        if (card) {
             card.style.transform = "rotate(2deg) scale(1.02)";
             setTimeout(() => card.style.transform = "rotate(0deg) scale(1)", 150);
         }
-
-        /** * FONCTION À UTILISER DANS TON JEU POUR DÉBLOQUER UN BADGE :
-         * unlockBadge('combo_10');
-         */
-        function unlockBadge(id) {
-            let unlocked = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
-            if (!unlocked.includes(id)) {
-                unlocked.push(id);
-                localStorage.setItem('unlockedBadges', JSON.stringify(unlocked));
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>

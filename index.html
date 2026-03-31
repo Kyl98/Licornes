@@ -109,6 +109,11 @@
     if(homeSettingsBtn) {
         homeSettingsBtn.onclick = () => {
             settingsOverlay.style.display = 'flex';
+
+            // --- AJOUT DU BADGE ICI ---
+            if (typeof unlockBadge === 'function') {
+                unlockBadge('settings_pro');
+            }
         };
     }
 

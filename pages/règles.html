@@ -140,26 +140,34 @@
     const getSavedMusicVol = () => parseFloat(localStorage.getItem('musicVol') || 0.5);
     const getSavedSfxVol = () => parseFloat(localStorage.getItem('sfxVol') || 0.7);
 
-    window.addEventListener('load', () => {
-        if (rulMusic) {
+    // --- FONCTION DE LANCEMENT AVEC FADE IN ---
+    const startMusicWithFade = () => {
+        if (rulMusic && rulMusic.paused) {
             const targetMusicVol = getSavedMusicVol();
             rulMusic.volume = 0; 
             rulMusic.play().then(() => {
                 let fadeIn = setInterval(() => {
-                    // On monte jusqu'au volume sauvegardé au lieu de 1
                     if (rulMusic.volume < targetMusicVol) {
                         rulMusic.volume = Math.min(targetMusicVol, rulMusic.volume + 0.05);
                     } else {
                         clearInterval(fadeIn);
                     }
                 }, 100);
+                // Une fois que ça joue, on retire l'écouteur de clic pour ne pas relancer le fade
+                document.removeEventListener('click', startMusicWithFade);
             }).catch(e => console.log("L'audio attend une interaction."));
         }
-    });
+    };
+
+    // Tentative au chargement
+    window.addEventListener('load', startMusicWithFade);
+
+    // Secours : Relance au clic n'importe où (utile après un rafraîchissement)
+    document.addEventListener('click', startMusicWithFade);
 
     openBtn.addEventListener('click', (e) => {
         if (clickRulesSound) {
-            clickRulesSound.volume = getSavedSfxVol(); // Applique le volume SFX
+            clickRulesSound.volume = getSavedSfxVol(); 
             clickRulesSound.currentTime = 0;
             clickRulesSound.play();
         }
@@ -169,7 +177,7 @@
     closeBtn.addEventListener('click', (e) => {
         e.stopPropagation(); 
         if (closeRulesSound) {
-            closeRulesSound.volume = getSavedSfxVol(); // Applique le volume SFX
+            closeRulesSound.volume = getSavedSfxVol(); 
             closeRulesSound.currentTime = 0;
             closeRulesSound.play();
         }

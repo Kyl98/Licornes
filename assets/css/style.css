@@ -871,6 +871,64 @@ body.world_3::before {
     cursor: pointer;
 }
 
+/* --- Notification de Badge (Style PS5) --- */
+.badge-notification {
+    position: fixed;
+    top: 20px;
+    right: -350px; /* Caché au départ */
+    width: 320px;
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 8px solid #f5c2cf; /* Ta couleur thème */
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 10000;
+    transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: Arial, sans-serif;
+}
+
+.badge-notification.show {
+    right: 20px; /* Glisse vers l'intérieur */
+}
+
+.badge-icon-notify {
+    width: 50px;
+    height: 50px;
+    background: #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.badge-icon-notify img {
+    width: 30px;
+}
+
+.badge-info-notify {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-info-notify .title-notif {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #777;
+    font-weight: bold;
+    margin: 0;
+}
+
+.badge-info-notify .name-notif {
+    font-size: 16px;
+    color: #000;
+    font-weight: 900;
+    margin: 2px 0;
+}
+
 /* ===============================================================
    SOUS SECTION 3.4 : SYSTÈME DE CIBLES & GAMEPLAY
    =============================================================== */
@@ -1704,14 +1762,18 @@ body.badge-page {
 }
 
 .back-btn {
-    background: none;
+    background: #cccccc;
     border: 3px solid #333;
     border-radius: 50%;
-    width: 60px;
+    width: 65px;
     height: 60px;
     font-weight: bold;
     cursor: pointer;
     margin-right: 20px;
+}
+
+.back-btn:hover {
+    background: #f32d5e;
 }
 
 .game-tabs {
@@ -1833,4 +1895,52 @@ body.badge-page {
     padding: 10px;
     border-radius: 5px;
     min-height: 80px;
+}
+
+/* Cette classe pilote l'alignement des deux éléments */
+.side-column-container {
+    display: flex;
+    flex-direction: column; /* Force l'empilement vertical */
+    align-items: center;    /* Centre le bouton horizontalement par rapport à la carte */
+    gap: 20px;              /* Crée l'espace vide entre le bas de la carte et le bouton */
+}
+
+/* ===============================================================
+   SOUS SECTION 6.7 : BOUTON MENANT AU JEU
+   =============================================================== */
+
+   /* Le style de ton bouton indépendant */
+.btn-rect-rules {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;            /* Il prend la même largeur que la carte */
+    max-width: 350px;       /* Ajuste selon la largeur de ta carte */
+    height: 60px;
+    background-color:#f5c2cf;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-family: 'Arial Black', sans-serif;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 0 #f5c2cf;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease; /* Animation fluide de 0.2 secondes */
+}
+
+/* 2. Effet au SURVOL (Hover) */
+.btn-rect-rules:hover {
+    background-color: #ff0000; /* Change en bleu cyan flashy */
+    color: #000;               /* Le texte passe en noir pour mieux se voir */
+    border-color: #ffffff;
+    box-shadow: 0 6px 0 #cc0000; /* Ombre bleue plus profonde */
+    transform: translateY(-3px); /* Le bouton monte légèrement */
+    cursor: pointer;
+}
+
+/* 3. Effet au CLIC (Active) - Optionnel mais conseillé */
+.btn-rect-rules:active {
+    transform: translateY(2px);  /* Le bouton s'enfonce */
+    box-shadow: 0 2px 0 #00cccc; /* L'ombre rétrécit */
 }
