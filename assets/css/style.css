@@ -1720,7 +1720,7 @@ body.ending-game::before {
    ========================================================================================================================= */
 
 body.badge-page {
-    background-color: #888; /* Fond neutre pour faire ressortir le carnet */
+    background-color: #888;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1783,6 +1783,8 @@ body.badge-page > * {
     font-weight: bold;
     cursor: pointer;
     margin-right: 20px;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 11px;
 
 }
 
@@ -1911,12 +1913,12 @@ body.badge-page > * {
     min-height: 80px;
 }
 
-/* Cette classe pilote l'alignement des deux éléments */
+/* Cette classe pilote l'alignement des deux éléments : Carte et Bouton Jouer */
 .side-column-container {
     display: flex;
-    flex-direction: column; /* Force l'empilement vertical */
-    align-items: center;    /* Centre le bouton horizontalement par rapport à la carte */
-    gap: 20px;              /* Crée l'espace vide entre le bas de la carte et le bouton */
+    flex-direction: column;
+    align-items: center;    
+    gap: 20px;             
 }
 
 /* ===============================================================
