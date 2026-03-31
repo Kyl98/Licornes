@@ -75,10 +75,10 @@ Les cieux sont régis par deux entités aux pouvoirs opposés. Apprenez à les r
 1.1. Ou clonez le dépôt sur votre terminal :
     
     Bash
-    ```
+    
     git clone https://github.com/Kyl98/Licornes.git
     
-    ```
+    
     
 2.  Ouvrez ensuite le fichier `index.html` dans votre navigateur préféré.
     
