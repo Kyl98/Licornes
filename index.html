@@ -44,10 +44,8 @@
     </div>
 </button>
 
-    <audio id="bgMusic" src="./assets/sounds/Home_Music.mp3" loop></audio>
-    <audio id="clickSound" src="./assets/sounds/Demarrage.mp3"></audio>
-    <audio id="btnClickSound" src="./assets/sounds/Game_Entry.mp3" preload="auto"></audio>
-
+    
+<div id="badgeNotificationContainer"></div>
 
 
 <div id="settingsOverlay" class="modal-overlay">
@@ -68,9 +66,18 @@
     </div>
 </div>
 
-
+    <audio id="bgMusic" src="./assets/sounds/Home_Music.mp3" loop></audio>
+    <audio id="clickSound" src="./assets/sounds/Demarrage.mp3"></audio>
+    <audio id="btnClickSound" src="./assets/sounds/Game_Entry.mp3" preload="auto"></audio>
+    <audio id="badgeSound" src="./assets/sounds/Achievement.mp3" preload="auto"></audio>
 
 <script>
+    // --- DONNÉES DES BADGES (Ajout du badge SiV) ---
+    const badgeData = [
+        { id: 'settings_pro', category: 'CoP', name: "Curieux", desc: "Ouvrir le menu des paramètres avant de lancer une partie.", img: "./assets/images/gear3.png" },
+        { id: 'click_start', category: 'SiV', name: "Traditionnel", desc: "Lancer l'expérience en cliquant sur le bouton Start.", img: "./assets/images/gear2.png" }
+    ];
+
     const bgMusic = document.getElementById('bgMusic');
     const clickSound = document.getElementById('clickSound'); 
     const btnClickSound = document.getElementById('btnClickSound'); 
@@ -105,13 +112,52 @@
         localStorage.setItem('sfxVol', sfxSlider.value);
     };
 
-    if(homeSettingsBtn) {
+    if (homeSettingsBtn) {
         homeSettingsBtn.onclick = () => {
             settingsOverlay.style.display = 'flex';
-            if (typeof unlockBadge === 'function') {
-                unlockBadge('settings_pro');
-            }
+            unlockBadge('settings_pro');
         };
+    }
+
+    // Fonction universelle de déblocage
+    function unlockBadge(badgeId) {
+        let unlocked = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+        let newBadges = JSON.parse(localStorage.getItem('newBadges')) || [];
+
+        if (!unlocked.includes(badgeId)) {
+            unlocked.push(badgeId);
+            newBadges.push(badgeId); 
+            localStorage.setItem('unlockedBadges', JSON.stringify(unlocked));
+            localStorage.setItem('newBadges', JSON.stringify(newBadges));
+            
+            const badge = badgeData.find(b => b.id === badgeId);
+            if (badge) {
+                const sound = document.getElementById('badgeSound');
+                if (sound) {
+                    sound.currentTime = 0;
+                    sound.volume = localStorage.getItem('sfxVol') || 0.7;
+                    sound.play().catch(e => console.log("Audio bloqué"));
+                }
+
+                const container = document.getElementById('badgeNotificationContainer');
+                if (container) {
+                    const notif = document.createElement('div');
+                    notif.className = 'badge-notification';
+                    notif.innerHTML = `
+                        <div class="badge-icon-notify"><img src="${badge.img}" alt="Icon"></div>
+                        <div class="badge-info-notify">
+                            <p class="title-notif">Badge Débloqué !</p>
+                            <p class="name-notif">${badge.name}</p>
+                        </div>`;
+                    container.appendChild(notif);
+                    setTimeout(() => notif.classList.add('show'), 100);
+                    setTimeout(() => {
+                        notif.classList.remove('show');
+                        setTimeout(() => notif.remove(), 600);
+                    }, 5000);
+                }
+            }
+        }
     }
 
     closeSettingsBtn.onclick = () => {
@@ -120,8 +166,15 @@
         settingsOverlay.style.display = 'none';
     };
 
-    function startExperience() {
+    // Modification pour détecter l'origine de l'activation (isClick)
+    function startExperience(isClick = false) {
         if (isStarted) return;
+        
+        // Si l'utilisateur a cliqué sur le bouton au lieu du clavier
+        if (isClick === true) {
+            unlockBadge('click_start');
+        }
+
         isStarted = true;
         homeOverlay.classList.add('opened');
         
@@ -147,26 +200,22 @@
         }
     }
 
-    // --- LOGIQUE MODIFIÉE POUR LES BOUTONS DU MENU ---
     menuButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             const targetUrl = this.getAttribute('href');
             if (!targetUrl || targetUrl === "#") return;
             e.preventDefault(); 
 
-            // 1. CHANGEMENT VISUEL (PATIENTEZ + OPACITÉ)
             this.innerText = "LOAD...";
-            this.style.opacity = "0.6";
-            this.style.pointerEvents = "none"; // Empêche de cliquer plusieurs fois
+            this.style.opacity = "0.8";
+            this.style.pointerEvents = "none"; 
 
-            // 2. GESTION DU SON SFX
             if (btnClickSound) {
                 btnClickSound.volume = localStorage.getItem('sfxVol') || 0.7;
                 btnClickSound.currentTime = 0;
                 btnClickSound.play();
             }
 
-            // 3. FADE OUT DE LA MUSIQUE
             if (bgMusic) {
                 let fadeOutInterval = setInterval(() => {
                     if (bgMusic.volume > 0.1) { 
@@ -178,13 +227,15 @@
                 }, 40);
             }
 
-            // 4. REDIRECTION APRÈS LE DÉLAI
             setTimeout(() => { window.location.href = targetUrl; }, 1900); 
         });
     });
 
-    if (enterBtn) enterBtn.onclick = startExperience;
+    // On passe 'true' ici car c'est l'événement de clic
+    if (enterBtn) enterBtn.onclick = () => startExperience(true);
+
     document.addEventListener('keydown', (e) => {
+        // Ici on ne passe rien, donc isClick restera false par défaut
         if (e.code === 'Space' || e.code === 'Enter') startExperience();
     });
 </script>

@@ -13,9 +13,9 @@
             <div class="notebook-header">
                 <button class="back-btn">RETOUR</button>
                 <div class="game-tabs">
-                    <span class="tab active">GoD</span>
+                    <span class="tab active">CoP</span>
                     <span class="tab">SiV</span>
-                    <span class="tab">CoP</span>
+                    <span class="tab">GoD</span>
                     <span class="tab">ItA</span>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="details-card" id="detailsCard">
                 <div class="card-inner">
                     <div class="card-photo">
-                        <img src="../assets/images/placeholder_badge.png" id="detailImg" alt="Badge">
+                        <img src="../assets/images/Unknown.png" id="detailImg" alt="Badge">
                     </div>
                     <div class="card-name" id="detailName">???</div>
                     <div class="card-description">
@@ -50,7 +50,7 @@
         </div>
     </button>
 
-    <audio id="badgeMusic" src="../assets/sounds/Badges.mp3" loop preload="auto"></audio>
+    <div id="badgeNotificationContainer"></div>
 
     <div id="settingsOverlay" class="modal-overlay">
         <div class="modal-content settings-box">
@@ -66,6 +66,10 @@
             <button id="closeSettingsBtn" class="btn-pause-menu" style="margin-top: 20px;">OK</button>
         </div>
     </div>
+
+
+<audio id="badgeMusic" src="../assets/sounds/Badges.mp3" loop preload="auto"></audio>
+<audio id="badgeSound" src="../assets/sounds/Achievement.mp3" preload="auto"></audio>
 
 <script>
     // 1. SÉLECTION ET SYNC MUSIQUE
@@ -92,7 +96,11 @@
 
     // 2. LOGIQUE SETTINGS
     if (homeSettingsBtn) {
-        homeSettingsBtn.onclick = () => settingsOverlay.style.display = 'flex';
+        homeSettingsBtn.onclick = () => {
+            settingsOverlay.style.display = 'flex';
+            // Déclenchement de la notification du badge Curieux
+            unlockBadge('settings_pro');
+        };
     }
     if (closeSettingsBtn) {
         closeSettingsBtn.onclick = () => settingsOverlay.style.display = 'none';
@@ -105,75 +113,210 @@
 
     // 3. DONNÉES BADGES
     const badgeData = [
-        { id: 'first_kill', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/Laki1.png" },
-        { id: 'combo_10', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/Laki2.png" },
-        { id: 'lakitu_slayer', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu 5 fois dans une partie.", img: "../assets/images/Laki1.png" },
-        { id: 'dog_lover', name: "Ami des Animaux", desc: "Cliquer sur le chien secret.", img: "../assets/images/badges/b4.png" },
-        { id: 'perfect_game', name: "Score Parfait", desc: "Terminer un niveau avec 100% de précision.", img: "../assets/images/" },
-        { id: 'score_5000', name: "Score de Bronze", desc: "Atteindre un score de 5 000 points.", img: "../assets/images/badges/b6.png" },
-        { id: 'score_15000', name: "Score d'Argent", desc: "Atteindre un score de 15 000 points.", img: "../assets/images/badges/b7.png" },
-        { id: 'yami_hunter', name: "Yami !", desc: "A débusqué un Yami caché.", img: "../assets/images/yami3.png" },
-        { id: 'sniper_master', name: "Œil de Lynx", desc: "Éliminer 20 cibles à la suite sans rater un seul tir.", img: "../assets/images/badges/b9.png" },
-        { id: 'super_combo', name: "Fureur de Vaincre", desc: "Maintenir un Super Combo pendant plus de 10 secondes.", img: "../assets/images/badges/b10.png" },
-        { id: 'world_1_clear', name: "Explorateur des Plaines", desc: "Terminer avec succès le Monde 1.", img: "../assets/images/badges/b16.png" },
-        { id: 'world_2_clear', name: "Voyageur des Cieux", desc: "Terminer avec succès le Monde 2.", img: "../assets/images/badges/b17.png" },
-        { id: 'world_3_clear', name: "Héros de l'Ombre", desc: "Terminer avec succès le Monde 3.", img: "../assets/images/badges/b18.png" },
-        { id: 'game_marathon', name: "Marathonien", desc: "Jouer plus de 10 parties au total.", img: "../assets/images/badges/b19.png" },
-        { id: 'ghost_touch', name: "Chasseur de Fantômes", desc: "Cliquer sur une cible en mode Fantôme (Ghost-mode).", img: "../assets/images/badges/b20.png" },
-        { id: 'time_saver', name: "Juste à Temps", desc: "Récupérer un bonus de temps quand il reste moins de 3 secondes.", img: "../assets/images/badges/b21.png" },
-        { id: 'trigger_happy', name: "Gâchette Facile", desc: "Cliquer plus de 100 fois dans une seule partie.", img: "../assets/images/badges/b22.png" },
-        { id: 'peaceful', name: "Pacifiste", desc: "Ne rien toucher pendant les 10 premières secondes d'une partie.", img: "../assets/images/badges/b23.png" },
-        { id: 'settings_pro', name: "Curieux", desc: "Ouvrir le menu des paramètres avant de lancer une partie.", img: "../assets/images/badges/b24.png" },
-        { id: 'full_collection', name: "Maître des Licornes", desc: "Débloquer tous les autres badges du jeu.", img: "../assets/images/badges/b25.png" }
+     // ======================== BADGES CATEGORIE CoP ===========================================================================================================================
+    { id: 'first_kill', category: 'CoP', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/star3.png" },
+    { id: 'hit_all_classics', category: 'CoP', name: "Chasseur Complet", desc: "Toucher les 4 types de cibles classiques dans une partie.", img: "../assets/images/regular3.png" },
+    { id: 'yami_hunter', category: 'CoP', name: "Yami !", desc: "A débusqué un Yami caché.", img: "../assets/images/yami3.png" },
+    { id: 'hit_bomb', category: 'CoP', name: "Boum !", desc: "Toucher une bombe par erreur.", img: "../assets/images/Bomby3.png" },
+    { id: 'hit_litimes', category: 'CoP', name: "Ouf j'ai encore du temps", desc: "Toucher un Litimes (Bonus de temps).", img: "../assets/images/clock3.png" },
+    { id: 'ufo_slayer', category: 'CoP', name: "Menace Extraterrestre", desc: "Détruire l'OVNI secret.", img: "../assets/images/ovni3.png" },
+    { id: 'lakitu_slayer', category: 'CoP', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu dans une partie.", img: "../assets/images/Laki3.png" },
+    { id: 'hit_evil_lakitu', category: 'CoP', name: "Justice", desc: "Éliminer un Evil Lakitu.", img: "../assets/images/Evil3.png" },
+    { id: 'hit_boshi', category: 'CoP', name: "Grand Timide", desc: "Toucher Boshi.", img: "../assets/images/Boshi3.png" },
+    { id: 'dog_lover', category: 'CoP', name: "Ami des Animaux", desc: "Cliquer sur le chien secret.", img: "../assets/images/Tokyo3.png" },
+    { id: 'world_1_clear', category: 'CoP', name: "Explorateur des Plaines", desc: "Terminer avec succès le Monde 1.", img: "../assets/images/fusée3.png" },
+    { id: 'settings_pro', category: 'CoP', name: "Curieux", desc: "Ouvrir le menu des paramètres avant de lancer une partie.", img: "../assets/images/gear3.png" },
+    { id: 'rank_3', category: 'CoP', name: "Médaille de Bronze", desc: "Terminer à la 3ème place du classement.", img: "../assets/images/trophy3.png" },
+    { id: 'score_1500', category: 'CoP', name: "Apprenti Tireur", desc: "Dépasser un score de 1 500 points.", img: "../assets/images/faceless3.png" },
+    { id: 'trigger_happy', category: 'CoP', name: "Gâchette Facile", desc: "Cliquer plus de 100 fois dans une seule partie.", img: "../assets/images/cursor3.png" }, 
+    
+    // =========== INDEX ==============
+    { id: 'click_start', category: 'CoP', name: "Traditionnel", desc: "Lancer l'expérience en cliquant sur le bouton Start.", img: "../assets/images/cloudy3.png" },
+
+    // ======================== BADGES CATEGORIE SiV  =========================================================================================================================
+    { id: 'peaceful', category: 'SiV', name: "Pacifiste", desc: "Ne rien toucher pendant les 10 premières secondes d'une partie.", img: "../assets/images/regular2.png" },
+    { id: 'score_4500', category: 'SiV', name: "Score d'Argent", desc: "Atteindre un score de 4500 points.", img: "../assets/images/faceless2.png" },
+    { id: 'ghost_touch', category: 'SiV', name: "Chasseur de Fantômes", desc: "Cliquer sur une cible en mode Fantôme (Ghost-mode).", img: "../assets/images/cloudy2.png" },
+    { id: 'pause_master', category: 'SiV', name: "Maître du Temps", desc: "Avoir utilisé la pause pour reprendre son souffle.", img: "../assets/images/clock2.png"},
+    { id: 'rank_2', category: 'SiV', name: "Médaille d'Argent", desc: "Terminer à la 2ème place du classement.", img: "../assets/images/trophy2.png" },
+    { id: 'world_2_clear', category: 'SiV', name: "Voyageur des Cieux", desc: "Terminer avec succès le Monde 2.", img: "../assets/images/fusée2.png" },
+    { id: 'super_combo', category: 'SiV', name: "Fureur de Vaincre", desc: "Maintenir un Super Combo pendant plus de 30 secondes.", img: "../assets/images/star2.png" },
+    { id: 'combo_10', category: 'SiV', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/cursor2.png" },
+    { id: 'yami_eye', category: 'SiV', name: "Oeil de Yami", desc: "Éliminer 20 Yami dans la même session.", img: "../assets/images/yami2.png" },
+    { id: 'bomb_dodger', category: 'SiV', name: "Esquiveur", desc: "Finir une partie avec plus de 300 bombes ignorées.", img: "../assets/images/Bomby2.png" },
+    { id: 'ufo_finder', category: 'SiV', name: "Observateur d'OVNI", desc: "Toucher l'OVNI 20 fois au total.", img: "../assets/images/ovni2.png" },
+    { id: 'laki_expert', category: 'SiV', name: "Expert Lakitu", desc: "Toucher Lakitu 7 fois au total.", img: "../assets/images/Laki2.png" },
+    { id: 'boshi_hunter', category: 'SiV', name: "Chasseur de Boshi", desc: "Toucher Boshi 50 fois au total.", img: "../assets/images/Boshi2.png" },
+    { id: 'tokyo_visitor', category: 'SiV', name: "Visiteur de Tokyo", desc: "Cliquer sur le chien secret 7 fois.", img: "../assets/images/Tokyo2.png" },
+    
+    // =========== REGLES ==============
+    { id: 'fast_check', category: 'SiV', name: "L'Oeil du Savant", desc: "Avoir consulté les détails des items dans le guide des règles.", img: "../assets/images/gear2.png"},
+    { id: 'lakitu_clicker', category: 'SiV', name: "Rencontre Maléfique", desc: "Avoir osé déranger Lakitu dans les règles.", img: "../assets/images/Evil2.png" },
+
+    // ======================== CATEGORIE GoD (16) - Suffixe 1 =====================================================================================================================
+    { id: 'god_slayer', category: 'GoD', name: "GoD", desc: "A dompté l'Evil Lakitu.", img: "../assets/images/Evil1" },
+    { id: 'score_5000', category: 'GoD', name: "Score d'Or", desc: "Atteindre un score de 7000 points.", img: "../assets/images/faceless1.png" },
+    { id: 'lakitu_slayer_god', category: 'GoD', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu 5 fois dans une partie.", img: "../assets/images/Laki1.png" },
+    { id: 'sniper_master', category: 'GoD', name: "Œil de Lynx", desc: "Éliminer 20 cibles à la suite sans rater un seul tir.", img: "../assets/images/cursor1.png" },
+    { id: 'rank_1', category: 'GoD', name: "Médaille d'Or", desc: "Terminer à la 1ère place du classement.", img: "../assets/images/trophy1.png" },
+    { id: 'world_3_clear', category: 'GoD', name: "Héros de l'Ombre", desc: "Terminer avec succès le Monde 3.", img: "../assets/images/cloudy1.png" },
+    { id: 'game_marathon', category: 'GoD', name: "Marathonien", desc: "Jouer plus de 10 parties au total.", img: "../assets/images/gear1.png" },
+    { id: 'time_saver', category: 'GoD', name: "Juste à Temps", desc: "Récupérer un bonus de temps quand il reste moins de 3 secondes.", img: "../assets/images/clock1.png" },
+    { id: 'perfect_game', category: 'GoD', name: "Score Parfait", desc: "Terminer un niveau avec 100% de précision.", img: "../assets/images/star1.png" },
+
+    // Nouveaux ajouts GoD pour arriver à 16 :
+    { id: 'quad_kill', category: 'GoD', name: "Quadruple Kill", desc: "Toucher 4 cibles en moins de 1 seconde.", img: "../assets/images/regular1.png" },
+    { id: 'yami_god', category: 'GoD', name: "Dieu des Yami", desc: "Débusquer 10 Yami au total.", img: "../assets/images/yami1.png" },
+    { id: 'bomb_legend', category: 'GoD', name: "Démineur de l'Ombre", desc: "Toucher 5 bombes volontairement en une partie.", img: "../assets/images/Bomby1.png" },
+    { id: 'ufo_god', category: 'GoD', name: "As de l'Espace", desc: "Détruire l'OVNI 5 fois au total.", img: "../assets/images/ovni1.png" },
+    { id: 'evil_slayer', category: 'GoD', name: "Exorciste Suprême", desc: "Éliminer 20 Evil Lakitu au total.", img: "../assets/images/Evil1.png" },
+    { id: 'boshi_god', category: 'GoD', name: "Dieu Boshi", desc: "Toucher Boshi 10 fois au total.", img: "../assets/images/Boshi1.png" },
+    { id: 'dog_god', category: 'GoD', name: "Dieu Canin", desc: "Cliquer sur le chien secret 10 fois.", img: "../assets/images/Tokyo1.png" },
+    { id: 'ultimate_clear', category: 'GoD', name: "Fin de l'Aventure", desc: "Terminer le Monde 3 avec plus de 10 000 points.", img: "../assets/images/fusée1.png" },
+
+        
+        { id: 'full_collection', category: 'ItA', name: "Maître des Licornes", desc: "Débloquer tous les autres badges du jeu.", img: "../assets/images/badges/b25.png" }
     ];
 
-    // 4. INITIALISATION GRILLE
+    // --- FONCTION DE DÉBLOCAGE ET NOTIFICATION VISUELLE ---
+    function unlockBadge(badgeId) {
+        let unlocked = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+        let newBadges = JSON.parse(localStorage.getItem('newBadges')) || [];
+
+        if (!unlocked.includes(badgeId)) {
+            unlocked.push(badgeId);
+            newBadges.push(badgeId); 
+            localStorage.setItem('unlockedBadges', JSON.stringify(unlocked));
+            localStorage.setItem('newBadges', JSON.stringify(newBadges));
+            
+            const badge = badgeData.find(b => b.id === badgeId);
+            if (badge) {
+                // Son du badge
+                const sound = document.getElementById('badgeSound');
+                if (sound) {
+                    sound.currentTime = 0;
+                    sound.volume = localStorage.getItem('sfxVol') || 0.7;
+                    sound.play().catch(e => console.log("Audio blocked"));
+                }
+
+                // Notification visuelle
+                const container = document.getElementById('badgeNotificationContainer');
+                if (container) {
+                    const notif = document.createElement('div');
+                    notif.className = 'badge-notification';
+                    notif.innerHTML = `
+                        <div class="badge-icon-notify"><img src="${badge.img}" alt="Icon"></div>
+                        <div class="badge-info-notify">
+                            <p class="title-notif">Badge Débloqué !</p>
+                            <p class="name-notif">${badge.name}</p>
+                        </div>`;
+                    container.appendChild(notif);
+                    setTimeout(() => notif.classList.add('show'), 100);
+                    setTimeout(() => {
+                        notif.classList.remove('show');
+                        setTimeout(() => notif.remove(), 600);
+                    }, 5000);
+                }
+                // Actualiser les pastilles rouges sans recharger la page
+                updateTabNotifications();
+            }
+        }
+    }
+
+    // --- FONCTION NOTIFICATION ONGLETS ---
+    function updateTabNotifications() {
+        const newBadges = JSON.parse(localStorage.getItem('newBadges')) || [];
+        const tabs = document.querySelectorAll('.tab');
+
+        tabs.forEach(tab => {
+            const category = tab.textContent;
+            const hasNewInThisCategory = newBadges.some(badgeId => {
+                const badge = badgeData.find(b => b.id === badgeId);
+                return badge && badge.category === category;
+            });
+
+            if (hasNewInThisCategory) {
+                tab.classList.add('tab-notify');
+            } else {
+                tab.classList.remove('tab-notify');
+            }
+        });
+    }
+
+    // 4. INITIALISATION GRILLE ET ONGLETS
     window.onload = () => {
         const grid = document.getElementById('badgeGrid');
-        const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
-        const newBadges = JSON.parse(localStorage.getItem('newBadges')) || []; // Récupération des nouveaux badges
-        const sfxVol = parseFloat(localStorage.getItem('sfxVol') || 0.7);
+        const tabs = document.querySelectorAll('.tab');
 
-        badgeData.forEach(badge => {
-            const isUnlocked = unlockedBadges.includes(badge.id);
-            const isNew = newBadges.includes(badge.id);
+        function renderBadges(categoryFilter) {
+            grid.innerHTML = ""; 
+            const unlockedBadges = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+            const newBadges = JSON.parse(localStorage.getItem('newBadges')) || [];
+            const sfxVol = parseFloat(localStorage.getItem('sfxVol') || 0.7);
 
-            const item = document.createElement('div');
-            // Ajout de la classe new-badge si nécessaire
-            item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${isUnlocked && isNew ? 'new-badge' : ''}`;
-            
-            item.innerHTML = isUnlocked 
-                ? `<img src="${badge.img}" alt="${badge.name}">`
-                : `<div class="lock-icon">?</div>`;
+            const filteredBadges = badgeData.filter(b => b.category === categoryFilter);
 
-            item.onclick = () => {
-                const sndPath = isUnlocked ? '../assets/sounds/Open_Rules.mp3' : '../assets/sounds/Blocked.mp3';
-                const snd = new Audio(sndPath);
-                snd.volume = sfxVol;
-                snd.play();
+            filteredBadges.forEach(badge => {
+                const isUnlocked = unlockedBadges.includes(badge.id);
+                const isNew = newBadges.includes(badge.id);
+
+                const item = document.createElement('div');
+                item.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${isUnlocked && isNew ? 'new-badge' : ''}`;
                 
-                if (isUnlocked) {
-                    showDetails(badge);
+                item.innerHTML = isUnlocked 
+                    ? `<img src="${badge.img}" alt="${badge.name}">`
+                    : `<div class="lock-icon">?</div>`;
+
+                item.onclick = () => {
+                    const sndPath = isUnlocked ? '../assets/sounds/Open_Rules.mp3' : '../assets/sounds/Blocked.mp3';
+                    const snd = new Audio(sndPath);
+                    snd.volume = sfxVol;
+                    snd.play();
                     
-                    // Retrait du point rouge au clic
-                    if (item.classList.contains('new-badge')) {
-                        item.classList.remove('new-badge');
-                        const currentNew = JSON.parse(localStorage.getItem('newBadges')) || [];
-                        const updatedNew = currentNew.filter(id => id !== badge.id);
-                        localStorage.setItem('newBadges', JSON.stringify(updatedNew));
+                    if (isUnlocked) {
+                        showDetails(badge);
+                        if (item.classList.contains('new-badge')) {
+                            item.classList.remove('new-badge');
+                            const currentNew = JSON.parse(localStorage.getItem('newBadges')) || [];
+                            const updatedNew = currentNew.filter(id => id !== badge.id);
+                            localStorage.setItem('newBadges', JSON.stringify(updatedNew));
+                            updateTabNotifications();
+                        }
+                    } else {
+                        showDetails({ name: "???", desc: "Contenu verrouillé. Continuez à jouer !", img: "../assets/images/Unknown.png" });
                     }
-                } else {
-                    showDetails({ name: "???", desc: "Contenu verrouillé. Continuez à jouer !", img: "../assets/images/lock_placeholder.png" });
-                }
-            };
-            if (grid) grid.appendChild(item);
+                };
+                if (grid) grid.appendChild(item);
+            });
+        }
+
+        // Gestion du clic sur les onglets
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const sfxVol = parseFloat(localStorage.getItem('sfxVol') || 0.7);
+                const tabSnd = new Audio('../assets/sounds/TabsSound.mp3');
+                tabSnd.volume = sfxVol;
+                tabSnd.play();
+
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                tab.classList.remove('tab-notify');
+                
+                renderBadges(tab.textContent); 
+            });
         });
+
+        // Initialisation
+        renderBadges('CoP');
+        updateTabNotifications();
 
         // BOUTONS NAVIGATION
         const rulesBtn = document.querySelector('.btn-rect-rules');
         if (rulesBtn) {
             rulesBtn.onclick = (e) => {
                 e.preventDefault();
+                const sfxVol = parseFloat(localStorage.getItem('sfxVol') || 0.7);
                 const snd = new Audio('../assets/sounds/Game_Entry.mp3');
                 snd.volume = sfxVol;
                 snd.play();
@@ -187,6 +330,7 @@
         if (backBtn) {
             backBtn.onclick = (e) => {
                 e.preventDefault();
+                const sfxVol = parseFloat(localStorage.getItem('sfxVol') || 0.7);
                 const snd = new Audio('../assets/sounds/Return.mp3');
                 snd.volume = sfxVol;
                 snd.play();
@@ -198,9 +342,26 @@
     };
 
     function showDetails(badge) {
-        document.getElementById('detailImg').src = badge.img;
-        document.getElementById('detailName').textContent = badge.name;
-        document.getElementById('detailDesc').textContent = badge.desc;
+        const detailImg = document.getElementById('detailImg');
+        const detailName = document.getElementById('detailName');
+        const detailDesc = document.getElementById('detailDesc');
+        
+        const photoContainer = detailImg.parentElement;
+
+        detailImg.src = badge.img;
+        detailName.textContent = badge.name;
+        detailDesc.textContent = badge.desc;
+
+        // Condition pour le fond de la carte :
+        // Si l'image est le cadenas (Unknown.png), le fond est blanc
+        if (badge.img === "../assets/images/Unknown.png") {
+            photoContainer.style.backgroundColor = "#ffffff";
+            photoContainer.classList.remove('unlocked-photo-bg');
+        } else {
+            // Sinon (badge débloqué), on enlève le blanc et on laisse ta classe unlocked-photo-bg (noir) s'appliquer
+            photoContainer.style.backgroundColor = ""; 
+            photoContainer.classList.add('unlocked-photo-bg');
+        }
     }
 </script>
 </body>

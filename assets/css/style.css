@@ -999,6 +999,19 @@ body.world_3::before {
     margin: 2px 0;
 }
 
+/* Style spécifique pour le badge GoD */
+.badge-item[data-id="god_slayer"] {
+    background: linear-gradient(45deg, #000, #ff0000);
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 15px #ff4444;
+    animation: god-glow 1.5s infinite alternate;
+}
+
+@keyframes god-glow {
+    from { box-shadow: 0 0 10px #ff0000; transform: scale(1); }
+    to { box-shadow: 0 0 25px #ff4444; transform: scale(1.05); }
+}
+
 /* ===============================================================
    SOUS SECTION 3.4 : SYSTÈME DE CIBLES & GAMEPLAY
    =============================================================== */
@@ -1044,7 +1057,6 @@ body.world_3::before {
 .targets.ghost-mode {
     opacity: 0.35 !important; /* Très transparent */
     filter: brightness(1.2) grayscale(0.6) blur(1px);
-    pointer-events: none;
     transition: opacity 1s ease-in;
     z-index: 5;
 }
@@ -1876,7 +1888,8 @@ body.badge-page > * {
     font-size: 14px;
 }
 
-.tab.active { background: #f5c2cf; }
+.tab.active { opacity: 1; background: #f5c2cf; }
+.tab { opacity: 0.5; cursor: pointer; }
 
 /* --- GRILLE DES BADGES --- */
 .badge-grid {
@@ -1934,6 +1947,36 @@ body.badge-page > * {
 
 
 /* ===============================================================
+   SOUS SECTION 6.6 : NOTIFICATIONS TABS
+   =============================================================== */
+
+/* Style pour le point rouge de notification sur les onglets */
+.tab {
+    position: relative; /* Nécessaire pour placer le point par rapport à l'onglet */
+}
+
+.tab-notify::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background-color: #ff3b3b;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    animation: pulseNotify 1.5s infinite;
+}
+
+@keyframes pulseNotify {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+
+/* ===============================================================
    SOUS SECTION 6.7 : NOTIFICATIONS BADGE
    =============================================================== */
 
@@ -1978,6 +2021,31 @@ body.badge-page > * {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
     }
+}
+
+
+/* Le conteneur de l'image par défaut */
+.card-photo {
+    background-color: #eee; /* Ou ta couleur actuelle par défaut */
+    transition: background-color 0.3s ease;
+}
+
+/* La classe qui s'active pour les badges débloqués */
+.unlocked-photo-bg {
+    background-color: #000000 !important;
+}
+
+
+/* Style pour les badges débloqués */
+.badge-item.unlocked {
+    background-color: #000000; /* Le fond devient noir */
+    border: 2px solid #444;    /* Optionnel : ajoute une bordure pour qu'ils ressortent */
+    transition: background-color 0.3s ease;
+}
+
+/* Optionnel : changer le fond au survol pour un noir plus clair ou gris très foncé */
+.badge-item.unlocked:hover {
+    background-color: #1a1a1a;
 }
 
 /* --- CARTE DE DÉTAILS --- */

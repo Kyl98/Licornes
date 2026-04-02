@@ -16,10 +16,12 @@
     <div class="tap-to-continue" id="btnContinue">
         <span class="flashing-text">APPUYER SUR ESPACE OU ENTRER POUR CONTINUER</span>
     </div>
+    <div id="badgeNotificationContainer"></div>
 
- <audio id="scoreMusic" src="../assets/sounds/S_Scores.mp3" preload="auto"></audio>
+    <audio id="badgeSound" src="../assets/sounds/Achievement.mp3" preload="auto"></audio>
+    <audio id="scoreMusic" src="../assets/sounds/S_Scores.mp3" preload="auto"></audio>
 
-   <script>
+  <script>
     window.onload = () => {
     // 1. Lancement du son SYNCHRONISÉ
     const scoreMusic = document.getElementById('scoreMusic');
@@ -73,6 +75,49 @@
             </div>
         `;
     });
+
+    // --- AJOUT : LOGIQUE DE NOTIFICATION DE BADGE (PENDING BADGE) ---
+    const pendingBadgeId = localStorage.getItem('pendingBadge');
+    if (pendingBadgeId) {
+        const badgesInfo = {
+            'rank_1': { name: "Médaille d'Or", img: "../assets/images/trophy1.png" },
+            'rank_2': { name: "Médaille d'Argent", img: "../assets/images/trophy2.png" },
+            'rank_3': { name: "Médaille de Bronze", img: "../assets/images/trophy3.png" }
+        };
+
+        const badge = badgesInfo[pendingBadgeId];
+        if (badge) {
+            const container = document.getElementById('badgeNotificationContainer');
+            const sound = document.getElementById('badgeSound');
+
+            if (container) {
+                const notif = document.createElement('div');
+                notif.className = 'badge-notification';
+                notif.innerHTML = `
+                    <div class="badge-icon-notify"><img src="${badge.img}" alt="Icon"></div>
+                    <div class="badge-info-notify">
+                        <p class="title-notif">Badge Débloqué !</p>
+                        <p class="name-notif">${badge.name}</p>
+                    </div>`;
+                
+                container.appendChild(notif);
+
+                if (sound) {
+                    sound.volume = localStorage.getItem('sfxVol') || 0.7;
+                    sound.play().catch(e => console.log("Audio bloqué"));
+                }
+
+                setTimeout(() => notif.classList.add('show'), 500);
+
+                setTimeout(() => {
+                    notif.classList.remove('show');
+                    setTimeout(() => notif.remove(), 600);
+                }, 5000);
+            }
+        }
+        localStorage.removeItem('pendingBadge'); // On nettoie pour éviter les doublons
+    }
+    // --- FIN DE L'AJOUT ---
 
     const goToNextPage = () => {
         window.location.href = "remerciments.html";

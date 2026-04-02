@@ -142,12 +142,64 @@
     </div>
 </div>
 
+<div id="badgeNotificationContainer"></div>
+
+<audio id="badgeSound" src="../assets/sounds/Achievement.mp3" preload="auto"></audio>
 <audio id="RulMusic" src="../assets/sounds/Rules_Music.mp3" loop></audio>
 <audio id="clickRules" src="../assets/sounds/Open_Rules.mp3"></audio>
 <audio id="closeRules" src="../assets/sounds/Off_Rules.mp3"></audio>
 <audio id="evilSound" src="../assets/sounds/K.Booo.mp3"></audio>
 
 <script>
+    // --- SYSTÈME DE BADGES (Données mises à jour) ---
+    const badgeData = [
+        { id: 'settings_pro', category: 'ItA', name: "Curieux", desc: "Ouvrir le menu des paramètres avant de lancer une partie.", img: "../assets/images/gear3.png" },
+        { id: 'lakitu_clicker', category: 'SiV', name: "Rencontre Maléfique", desc: "Avoir osé déranger Lakitu dans les règles.", img: "../assets/images/Evil2.png" },
+        { id: 'fast_check', category: 'SiV', name: "L'Oeil du Savant", desc: "Ouvrir l'onglet des détails items.", img: "../assets/images/gear2.png" }
+    ];
+
+    function unlockBadge(badgeId) {
+        let unlocked = JSON.parse(localStorage.getItem('unlockedBadges')) || [];
+        let newBadges = JSON.parse(localStorage.getItem('newBadges')) || [];
+
+        if (!unlocked.includes(badgeId)) {
+            unlocked.push(badgeId);
+            newBadges.push(badgeId); 
+            localStorage.setItem('unlockedBadges', JSON.stringify(unlocked));
+            localStorage.setItem('newBadges', JSON.stringify(newBadges));
+            
+            const badge = badgeData.find(b => b.id === badgeId);
+            if (badge) {
+                // Son du badge
+                const sound = document.getElementById('badgeSound');
+                if (sound) {
+                    sound.currentTime = 0;
+                    sound.volume = localStorage.getItem('sfxVol') || 0.7;
+                    sound.play().catch(e => console.log("Audio bloqué"));
+                }
+
+                // Notification visuelle
+                const container = document.getElementById('badgeNotificationContainer');
+                if (container) {
+                    const notif = document.createElement('div');
+                    notif.className = 'badge-notification';
+                    notif.innerHTML = `
+                        <div class="badge-icon-notify"><img src="${badge.img}" alt="Icon"></div>
+                        <div class="badge-info-notify">
+                            <p class="title-notif">Badge Débloqué !</p>
+                            <p class="name-notif">${badge.name}</p>
+                        </div>`;
+                    container.appendChild(notif);
+                    setTimeout(() => notif.classList.add('show'), 100);
+                    setTimeout(() => {
+                        notif.classList.remove('show');
+                        setTimeout(() => notif.remove(), 600);
+                    }, 5000);
+                }
+            }
+        }
+    }
+
     const rulMusic = document.getElementById('RulMusic');
     const clickRulesSound = document.getElementById('clickRules'); 
     const closeRulesSound = document.getElementById('closeRules'); 
@@ -167,17 +219,18 @@
     // --- LOGIQUE LAKITU ---
     const lakituBtn = document.getElementById('lakituBadgeBtn');
     const lakituImg = document.getElementById('lakituImg');
-    const evilSound = document.getElementById('evilSound'); // Nouvelle variable audio
+    const evilSound = document.getElementById('evilSound'); 
 
     if (lakituBtn) {
         lakituBtn.onclick = () => {
-            // 1. ARRÊTER LA MUSIQUE IMMÉDIATEMENT
+            // DÉBLOCAGE DU BADGE LAKITU (SiL)
+            unlockBadge('lakitu_clicker');
+
             if (rulMusic) {
                 rulMusic.pause();
                 rulMusic.currentTime = 0;
             }
 
-            // 2. JOUER LE SON LAKITU EVIL (ou clickRules si le fichier n'est pas prêt)
             const targetSound = evilSound || clickRulesSound;
             if (targetSound) {
                 targetSound.volume = getSavedSfxVol();
@@ -185,11 +238,9 @@
                 targetSound.play();
             }
 
-            // 3. CHANGER L'APPARENCE
             lakituImg.src = "../assets/images/EL.png";
             lakituBtn.classList.add('evil');
 
-            // 4. DÉLAI DE CHARGEMENT AUGMENTÉ (3 secondes)
             setTimeout(() => {
                 window.location.href = "badges.html";
             }, 3000);
@@ -200,7 +251,6 @@
     const getSavedMusicVol = () => parseFloat(localStorage.getItem('musicVol') || 0.5);
     const getSavedSfxVol = () => parseFloat(localStorage.getItem('sfxVol') || 0.7);
 
-    // Initialisation sliders au chargement
     window.addEventListener('DOMContentLoaded', () => {
         musicSlider.value = getSavedMusicVol();
         sfxSlider.value = getSavedSfxVol();
@@ -210,6 +260,7 @@
     if (homeSettingsBtn) {
         homeSettingsBtn.onclick = () => {
             settingsOverlay.style.display = 'flex';
+            unlockBadge('settings_pro');
         };
     }
 
@@ -248,6 +299,9 @@
     document.addEventListener('click', startMusicWithFade);
 
     openBtn.addEventListener('click', (e) => {
+        // --- AJOUT DÉBLOCAGE BADGE FAST_CHECK ---
+        unlockBadge('fast_check');
+        
         if (clickRulesSound) {
             clickRulesSound.volume = getSavedSfxVol(); 
             clickRulesSound.currentTime = 0;
