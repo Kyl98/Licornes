@@ -1889,6 +1889,10 @@ body.ending-game::before {
    SEGEMENT 6 : BADGES (COLLECTIONS)
    ========================================================================================================================= */
 
+/* ===============================================================
+   SOUS SECTION 6.1 : STRUCTURE GÉNÉRALE DE LA PAGE
+   =============================================================== */
+
 body.badge-page {
     background-color: #888;
     display: flex;
@@ -1921,7 +1925,10 @@ body.badge-page > * {
     align-items: flex-start;
 }
 
-/* --- LE CARNET (Notebook) --- */
+/* ===============================================================
+   SOUS SECTION 6.2 : NOTEBOOK (CARNET PRINCIPAL)
+   =============================================================== */
+
 .notebook {
     background: #fff;
     width: 600px;
@@ -1930,7 +1937,7 @@ body.badge-page > * {
     box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
     padding: 20px;
     background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
-    background-size: 20px 20px; /* Effet petits points / quadrillage */
+    background-size: 20px 20px;
     border: 3px solid #333;
     display: flex;
     flex-direction: column;
@@ -1944,6 +1951,7 @@ body.badge-page > * {
     margin-bottom: 20px;
 }
 
+/* Bouton retour */
 .back-btn {
     background: #cccccc;
     border: 3px solid #333;
@@ -1955,13 +1963,13 @@ body.badge-page > * {
     margin-right: 20px;
     font-family: 'Arial Black', sans-serif;
     font-size: 11px;
-
 }
 
 .back-btn:hover {
     background: #f32d5e;
 }
 
+/* Onglets */
 .game-tabs {
     display: flex;
     gap: 10px;
@@ -1974,12 +1982,20 @@ body.badge-page > * {
     border-radius: 5px;
     font-weight: bold;
     font-size: 14px;
+    opacity: 0.5;
+    cursor: pointer;
+    position: relative;
 }
 
-.tab.active { opacity: 1; background: #f5c2cf; }
-.tab { opacity: 0.5; cursor: pointer; }
+.tab.active { 
+    opacity: 1; 
+    background: #f5c2cf; 
+}
 
-/* --- GRILLE DES BADGES --- */
+/* ===============================================================
+   SOUS SECTION 6.3 : GRILLE DES BADGES
+   =============================================================== */
+
 .badge-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -1998,13 +2014,27 @@ body.badge-page > * {
     align-items: center;
     background: #fff;
     transition: transform 0.1s;
+    position: relative;
 }
 
-.badge-item:hover { transform: scale(1.1); background: #f0f0f0; }
+.badge-item:hover { 
+    transform: scale(1.1); 
+    background: #f0f0f0; 
+}
 
 .badge-item.locked {
     background: #ccc;
     opacity: 0.5;
+}
+
+.badge-item.unlocked {
+    background-color: #000000;
+    border: 2px solid #444;
+    transition: background-color 0.3s ease;
+}
+
+.badge-item.unlocked:hover {
+    background-color: #1a1a1a;
 }
 
 .badge-item img {
@@ -2012,8 +2042,12 @@ body.badge-page > * {
     max-height: 80%;
 }
 
-.lock-icon { font-size: 24px; color: #777; }
+.lock-icon { 
+    font-size: 24px; 
+    color: #777; 
+}
 
+/* Pagination */
 .page-numbers {
     display: flex;
     justify-content: flex-end;
@@ -2031,18 +2065,86 @@ body.badge-page > * {
     font-weight: bold;
 }
 
-.page-btn.active { background: #333; color: white; }
-
-
-/* ===============================================================
-   SOUS SECTION 6.6 : NOTIFICATIONS TABS
-   =============================================================== */
-
-/* Style pour le point rouge de notification sur les onglets */
-.tab {
-    position: relative; /* Nécessaire pour placer le point par rapport à l'onglet */
+.page-btn.active { 
+    background: #333; 
+    color: white; 
 }
 
+/* ===============================================================
+   SOUS SECTION 6.4 : CARTE DE DÉTAILS
+   =============================================================== */
+
+.details-card {
+    width: 350px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.card-inner {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-photo {
+    width: 100%;
+    height: 200px;
+    background: #f9f9f9;
+    border: 2px solid #333;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.card-photo img { 
+    max-width: 90%; 
+    max-height: 90%; 
+}
+
+.unlocked-photo-bg {
+    background-color: #000000 !important;
+}
+
+.card-name {
+    font-size: 24px;
+    font-weight: bold;
+    background: #f5c2cf;
+    border: 2px solid #333;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    text-align: left;
+    background: #eee;
+    padding: 10px;
+    border-radius: 5px;
+    min-height: 80px;
+}
+
+/* Layout colonne droite */
+.side-column-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    gap: 20px;             
+}
+
+/* ===============================================================
+   SOUS SECTION 6.5 : NOTIFICATIONS (TABS & BADGES)
+   =============================================================== */
+
+/* Notification onglets */
 .tab-notify::after {
     content: '';
     position: absolute;
@@ -2063,23 +2165,7 @@ body.badge-page > * {
     100% { transform: scale(1); }
 }
 
-
-/* ===============================================================
-   SOUS SECTION 6.7 : NOTIFICATIONS BADGE
-   =============================================================== */
-
-/* --- SYSTÈME DE NOTIFICATION (POINT ROUGE) --- */
-
-/* On s'assure que le container du badge peut accueillir un élément positionné de façon absolue */
-.badge-item {
-    position: relative;
-}
-
-/* --- SYSTÈME DE NOTIFICATION (POINT ROUGE) --- */
-.badge-item {
-    position: relative;
-}
-
+/* Notification badges */
 .badge-item.new-badge::after {
     content: "";
     position: absolute;
@@ -2111,95 +2197,10 @@ body.badge-page > * {
     }
 }
 
-
-/* Le conteneur de l'image par défaut */
-.card-photo {
-    background-color: #eee; /* Ou ta couleur actuelle par défaut */
-    transition: background-color 0.3s ease;
-}
-
-/* La classe qui s'active pour les badges débloqués */
-.unlocked-photo-bg {
-    background-color: #000000 !important;
-}
-
-
-/* Style pour les badges débloqués */
-.badge-item.unlocked {
-    background-color: #000000; /* Le fond devient noir */
-    border: 2px solid #444;    /* Optionnel : ajoute une bordure pour qu'ils ressortent */
-    transition: background-color 0.3s ease;
-}
-
-/* Optionnel : changer le fond au survol pour un noir plus clair ou gris très foncé */
-.badge-item.unlocked:hover {
-    background-color: #1a1a1a;
-}
-
-/* --- CARTE DE DÉTAILS --- */
-.details-card {
-    width: 350px;
-    background: white;
-    border: 2px solid #333;
-    border-radius: 15px;
-    padding: 10px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-    position: relative;
-}
-
-.card-inner {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-}
-
-.card-photo {
-    width: 100%;
-    height: 200px;
-    background: #f9f9f9;
-    border: 2px solid #333;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-photo img { max-width: 90%; max-height: 90%; }
-
-.card-name {
-    font-size: 24px;
-    font-weight: bold;
-    background: #f5c2cf;
-    border: 2px solid #333;
-    padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-.card-description {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    text-align: left;
-    background: #eee;
-    padding: 10px;
-    border-radius: 5px;
-    min-height: 80px;
-}
-
-/* Cette classe pilote l'alignement des deux éléments : Carte et Bouton Jouer */
-.side-column-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;    
-    gap: 20px;             
-}
-
 /* ===============================================================
-   SOUS SECTION 6.7 : BOUTON MENANT AU JEU
+   SOUS SECTION 6.6 : BOUTON ACCÈS JEU
    =============================================================== */
 
-   /* Le style de ton bouton indépendant */
 .btn-rect-rules {
     display: flex;
     justify-content: center;
@@ -2228,12 +2229,7 @@ body.badge-page > * {
     cursor: pointer;
 }
 
-/* 3. Effet au CLIC (Active) - Optionnel mais conseillé */
 .btn-rect-rules:active {
     transform: translateY(2px);  
     box-shadow: 0 2px 0 #00cccc;
 }
-
-
-
-

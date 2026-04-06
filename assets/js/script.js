@@ -13,7 +13,7 @@
 // --- SYSTÈME DE BADGES ---
 const badgeData = [
 
-       // ======================== BADGES CATEGORIE CoP ========================
+        // ======================== BADGES CATEGORIE CoP ========================
         { id: 'first_kill', category: 'CoP', name: "Premier Sang", desc: "Vous avez éliminé votre première cible.", img: "../assets/images/star3.png" },
         { id: 'hit_all_classics', category: 'CoP', name: "Chasseur Complet", desc: "Toucher les 4 types de cibles classiques dans une partie.", img: "../assets/images/regular3.png" },
         { id: 'yami_hunter', category: 'CoP', name: "Yami !", desc: "A débusqué un Yami caché.", img: "../assets/images/yami3.png" },
@@ -47,23 +47,7 @@ const badgeData = [
         { id: 'tokyo_visitor', category: 'SiV', name: "Visiteur de Tokyo", desc: "Cliquer sur le chien secret 3 fois.", img: "../assets/images/Tokyo2.png" },
 
 
-        // BADGES SiL
-        { id: 'peaceful', category: 'SiV', name: "Pacifiste", desc: "Ne rien toucher pendant les 10 premières secondes d'une partie.", img: "../assets/images/regular2.png" },
-        { id: 'score_6500', category: 'SiV', name: "Score d'Argent", desc: "Atteindre un score de 6500 points.", img: "../assets/images/faceless2.png" },
-        { id: 'ghost_touch', category: 'SiV', name: "Chasseur de Fantômes", desc: "Cliquer sur une cible en mode Fantôme (Ghost-mode).", img: "../assets/images/cloudy2.png" },
-        { id: 'pause_master', category: 'SiV', name: "Maître du Temps", desc: "Avoir utilisé la pause pour reprendre son souffle.", img: "../assets/images/clock2.png"},
-        { id: 'rank_2', category: 'SiV', name: "Médaille d'Argent", desc: "Terminer à la 2ème place du classement.", img: "../assets/images/trophy2.png" },
-        { id: 'world_2_clear', category: 'SiV', name: "Voyageur des Cieux", desc: "Terminer avec succès le Monde 2.", img: "../assets/images/fusée2.png" },
-        { id: 'super_combo', category: 'SiV', name: "Fureur de Vaincre", desc: "Maintenir un Super Combo pendant plus de 30 secondes.", img: "../assets/images/star2.png" },
-        { id: 'combo_10', category: 'SiV', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/cursor2.png" },
-        { id: 'yami_eye', category: 'SiV', name: "Oeil de Yami", desc: "Éliminer 20 Yami dans la même session.", img: "../assets/images/yami2.png" },
-        { id: 'bomb_dodger', category: 'SiV', name: "Esquiveur", desc: "Finir une partie avec plus de 300 bombes ignorées.", img: "../assets/images/Bomby2.png" },
-        { id: 'ufo_finder', category: 'SiV', name: "Observateur d'OVNI", desc: "Toucher l'OVNI 20 fois au total.", img: "../assets/images/ovni2.png" },
-        { id: 'laki_expert', category: 'SiV', name: "Expert Lakitu", desc: "Toucher Lakitu 7 fois au total.", img: "../assets/images/Laki2.png" },
-        { id: 'boshi_hunter', category: 'SiV', name: "Chasseur de Boshi", desc: "Toucher Boshi 50 fois au total.", img: "../assets/images/Boshi2.png" },
-        { id: 'tokyo_visitor', category: 'SiV', name: "Visiteur de Tokyo", desc: "Cliquer sur le chien secret 7 fois.", img: "../assets/images/Tokyo2.png" },
-
-        // BADGES GoD
+        // ======================== BADGES CATEGORIE GoD =====================================================================================================================
         { id: 'score_10000', category: 'GoD', name: "Score d'Or", desc: "Atteindre un score de 10 000 points.", img: "../assets/images/faceless1.png" },
         { id: 'rank_1', category: 'GoD', name: "Médaille d'Or", desc: "Terminer à la 1ère place du classement.", img: "../assets/images/trophy1.png" },
         { id: 'world_3_clear', category: 'GoD', name: "Héros de l'Ombre", desc: "Terminer avec succès le Monde 3.", img: "../assets/images/fusée1.png" },
@@ -80,7 +64,6 @@ const badgeData = [
         { id: 'ufo_god', category: 'GoD', name: "As de l'Espace", desc: "Détruire l'OVNI 55 fois au total.", img: "../assets/images/ovni1.png" },
         { id: 'boshi_god', category: 'GoD', name: "Dieu Boshi", desc: "Toucher Boshi 100 fois au total.", img: "../assets/images/Boshi1.png" },
         { id: 'dog_god', category: 'GoD', name: "Dieu Canin", desc: "Cliquer sur les chiens secrets 20 fois.", img: "../assets/images/Tokyo1.png" },
-
 ];
 
 function unlockBadge(badgeId) {
@@ -134,6 +117,10 @@ function unlockBadge(badgeId) {
 
      const stats = ['totalYami', 'totalBombsIgnored', 'totalUfos', 'totalLakis', 'totalBoshis', 'totalDogs'];
      stats.forEach(s => { if(!localStorage.getItem(s)) localStorage.setItem(s, 0); });
+
+    // ================================================================================================================================================== 
+    //  FIN DE LA SECTION BADGES /// FIN DE LA SECTION BADGES /// FIN DE LA SECTION BADGES /// FIN DE LA SECTION BADGES /// FIN DE LA SECTION BADGES ///
+    // ==================================================================================================================================================
 
 class UnicornShooter {
     constructor() {
@@ -834,7 +821,7 @@ class Target {
                     unlockBadge('inverse_mode');
                 }
                 
-                this.game.timeLeft += 5; 
+                this.game.timeLeft += 8; 
                 this.game.isInverseMode = true;
                 document.body.style.boxShadow = "inset 0 0 100px rgba(0, 255, 0, 0.5)";
                 this.showFloatingText("+8s & MODE INVERSE CUMULÉ !", rect.left, rect.top, false, "#00FF00");
@@ -863,15 +850,15 @@ class Target {
                     document.body.style.boxShadow = "";
                 }, 15000); 
             } else {
-                this.game.score = Math.max(0, this.game.score - 150);
-                this.showFloatingText("-150", rect.left, rect.top - 30, true, "#ff0000");
+                this.game.score = Math.max(0, this.game.score - 100);
+                this.showFloatingText("-100", rect.left, rect.top - 30, true, "#ff0000");
                 const darkFlash = document.createElement('div');
                 darkFlash.className = 'evil-flash-overlay';
                 document.body.appendChild(darkFlash);
                 setTimeout(() => darkFlash.remove(), 800);
             }
 
-            this.showFloatingText(`${this.ghostClicks}/10`, centerX, centerY, false, "#ffffff");
+            this.showFloatingText(`${this.ghostClicks}/??`, centerX, centerY, false, "#ffffff");
 
             if (this.ghostClicks === 10) {
                 this.dropTimer = -999999;
@@ -923,10 +910,10 @@ class Target {
         if (dogCount >= 20 && typeof unlockBadge === 'function') unlockBadge('dog_god');
 
         if (isGodMode || this.game.isInverseMode) {
-            this.game.score += 1500;
+            this.game.score += 900;
             this.showFloatingText("+1500 PTS!", centerX, centerY, false, "#00FF00");
         } else {
-            this.game.score = Math.max(0, this.game.score - 1500);
+            this.game.score = Math.max(0, this.game.score - 900);
             this.game.comboCount = 0;
             this.showFloatingText("-1500 DARKNESS!", centerX, centerY, true, "#ff0000");
             const dark = document.createElement('div');
@@ -1005,7 +992,7 @@ class Target {
     }
     else if (this.isLakitu) {
         if (this.game.lakituSaveSound) { this.game.lakituSaveSound.currentTime = 0; this.game.lakituSaveSound.play(); }
-        this.game.score += 320; 
+        this.game.score += 480; 
         this.game.boshiUnlocked = true;
         this.showFloatingText("LAKITU LOOT!", centerX, centerY, false, "#00FF00");
         this.createParticles(centerX, centerY, "#FFFFFF");
@@ -1053,8 +1040,8 @@ class Target {
     }
     else if (this.isDog) {
         if (this.game.dogSound) { this.game.dogSound.currentTime = 0; this.game.dogSound.play(); }
-        this.game.score += 600;
-        this.showFloatingText("EASTER EGG +600!", centerX, centerY, false, "#00FF00");
+        this.game.score += 1000;
+        this.showFloatingText("EASTER EGG +1000!", centerX, centerY, false, "#00FF00");
         this.createParticles(centerX, centerY, "#00FF00");
         
         if(typeof unlockBadge === 'function') {
