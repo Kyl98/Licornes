@@ -154,7 +154,7 @@
     { id: 'lakitu_clicker', category: 'SiV', name: "Rencontre Maléfique", desc: "Avoir osé déranger Lakitu dans les règles.", img: "../assets/images/Evil2.png" },
 
     // ======================== CATEGORIE GoD (16) - Suffixe 1 =====================================================================================================================
-    { id: 'god_slayer', category: 'GoD', name: "GoD", desc: "A dompté l'Evil Lakitu.", img: "../assets/images/Evil1" },
+    { id: 'god_slayer', category: 'GoD', name: "GoD", desc: "A dompté l'Evil Lakitu", img: "../assets/images/Evil1.png" },
     { id: 'score_5000', category: 'GoD', name: "Score d'Or", desc: "Atteindre un score de 7000 points.", img: "../assets/images/faceless1.png" },
     { id: 'lakitu_slayer_god', category: 'GoD', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu 5 fois dans une partie.", img: "../assets/images/Laki1.png" },
     { id: 'sniper_master', category: 'GoD', name: "Œil de Lynx", desc: "Éliminer 20 cibles à la suite sans rater un seul tir.", img: "../assets/images/cursor1.png" },
@@ -214,8 +214,8 @@
                     setTimeout(() => notif.classList.add('show'), 100);
                     setTimeout(() => {
                         notif.classList.remove('show');
-                        setTimeout(() => notif.remove(), 600);
-                    }, 5000);
+                        setTimeout(() => notif.remove(), 500);
+                    }, 2000);
                 }
                 // Actualiser les pastilles rouges sans recharger la page
                 updateTabNotifications();

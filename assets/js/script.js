@@ -47,32 +47,27 @@ const badgeData = [
         { id: 'tokyo_visitor', category: 'SiV', name: "Visiteur de Tokyo", desc: "Cliquer sur le chien secret 3 fois.", img: "../assets/images/Tokyo2.png" },
 
 
-
-
         // BADGES SiL
-        { id: 'world_2_clear', category: 'SiL', name: "Voyageur des Cieux", desc: "Terminer avec succès le Monde 2.", img: "../assets/images/cloudy2.png" },
-        { id: 'combo_10', category: 'GoD', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/Laki2.png" },
-        { id: 'lakitu_slayer_god', category: 'GoD', name: "Chasseur de Lakitu", desc: "Éliminer Lakitu 5 fois dans une partie.", img: "../assets/images/Laki1.png" },
-        { id: 'ghost_touch', category: 'SiL', name: "Chasseur de Fantômes", desc: "Cliquer sur une cible en mode Fantôme (Ghost-mode).", img: "../assets/images/Evil2.png" },
+        { id: 'peaceful', category: 'SiV', name: "Pacifiste", desc: "Ne rien toucher pendant les 10 premières secondes d'une partie.", img: "../assets/images/regular2.png" },
+        { id: 'score_4500', category: 'SiV', name: "Score d'Argent", desc: "Atteindre un score de 4500 points.", img: "../assets/images/faceless2.png" },
+        { id: 'ghost_touch', category: 'SiV', name: "Chasseur de Fantômes", desc: "Cliquer sur une cible en mode Fantôme (Ghost-mode).", img: "../assets/images/cloudy2.png" },
         { id: 'pause_master', category: 'SiV', name: "Maître du Temps", desc: "Avoir utilisé la pause pour reprendre son souffle.", img: "../assets/images/clock2.png"},
         { id: 'rank_2', category: 'SiV', name: "Médaille d'Argent", desc: "Terminer à la 2ème place du classement.", img: "../assets/images/trophy2.png" },
-
-        
+        { id: 'world_2_clear', category: 'SiV', name: "Voyageur des Cieux", desc: "Terminer avec succès le Monde 2.", img: "../assets/images/fusée2.png" },
+        { id: 'super_combo', category: 'SiV', name: "Fureur de Vaincre", desc: "Maintenir un Super Combo pendant plus de 30 secondes.", img: "../assets/images/star2.png" },
+        { id: 'combo_10', category: 'SiV', name: "Série de 10", desc: "Atteindre un combo de 10 sans rater.", img: "../assets/images/cursor2.png" },
         { id: 'yami_eye', category: 'SiV', name: "Oeil de Yami", desc: "Éliminer 20 Yami dans la même session.", img: "../assets/images/yami2.png" },
-        { id: 'bomb_dodger', category: 'SiV', name: "Esquiveur", desc: "Finir une partie avec plus de 30 bombes ignorées.", img: "../assets/images/Bomby2.png" },
-        { id: 'ufo_finder', category: 'SiV', name: "Observateur d'OVNI", desc: "Toucher l'OVNI 10 fois au total.", img: "../assets/images/ovni2.png" },
-        { id: 'laki_expert', category: 'SiV', name: "Expert Lakitu", desc: "Toucher Lakitu 3 fois au total.", img: "../assets/images/Laki2.png" },
-        { id: 'boshi_hunter', category: 'SiV', name: "Chasseur de Boshi", desc: "Toucher Boshi 15 fois au total.", img: "../assets/images/Boshi2.png" },
-        { id: 'tokyo_visitor', category: 'SiV', name: "Visiteur de Tokyo", desc: "Cliquer sur le chien secret 3 fois.", img: "../assets/images/Tokyo2.png" },
-
-
-        
-
-
+        { id: 'bomb_dodger', category: 'SiV', name: "Esquiveur", desc: "Finir une partie avec plus de 300 bombes ignorées.", img: "../assets/images/Bomby2.png" },
+        { id: 'ufo_finder', category: 'SiV', name: "Observateur d'OVNI", desc: "Toucher l'OVNI 20 fois au total.", img: "../assets/images/ovni2.png" },
+        { id: 'laki_expert', category: 'SiV', name: "Expert Lakitu", desc: "Toucher Lakitu 7 fois au total.", img: "../assets/images/Laki2.png" },
+        { id: 'boshi_hunter', category: 'SiV', name: "Chasseur de Boshi", desc: "Toucher Boshi 50 fois au total.", img: "../assets/images/Boshi2.png" },
+        { id: 'tokyo_visitor', category: 'SiV', name: "Visiteur de Tokyo", desc: "Cliquer sur le chien secret 7 fois.", img: "../assets/images/Tokyo2.png" },
 
         // BADGES GoD
+        { id: 'score_6500', category: 'GoD', name: "Score d'Argent", desc: "Atteindre un score de 4500 points.", img: "../assets/images/faceless2.png" },
+        { id: 'god_slayer', category: 'GoD', name: "GoD", desc: "A dompté l'Evil Lakitu", img: "../assets/images/Evil1.png" },
         { id: 'world_3_clear', category: 'GoD', name: "Héros de l'Ombre", desc: "Terminer avec succès le Monde 3.", img: "../assets/images/cloudy1.png" },
-        { id: 'sniper_master', category: 'SiV', name: "Œil de Lynx", desc: "Éliminer 20 cibles à la suite sans rater un seul tir.", img: "../assets/images/badges/b9.png" },
+        { id: 'ghost', category: 'SiV', name: "Œil de Lynx", desc: "Éliminer 20 cibles à la suite sans rater un seul tir.", img: "../assets/images/badges/b9.png" },
         { id: 'super_combo', category: 'SiV', name: "Fureur de Vaincre", desc: "Maintenir un Super Combo pendant plus de 10 secondes.", img: "../assets/images/badges/b10.png" },
         { id: 'rank_1', category: 'GoD', name: "Médaille d'Or", desc: "Terminer à la 1ère place du classement.", img: "../assets/images/trophy1.png" },
 
@@ -116,12 +111,17 @@ function unlockBadge(badgeId) {
             <p class="title-notif">Badge Débloqué !</p>
             <p class="name-notif">${badge.name}</p>
         </div>`;
+
+    let duration = 2000; // Durée normale (3s)
+    if (container.querySelectorAll('.badge-notification').length > 2) {
+        duration = 1500; // Durée accélérée (1.5s) s'il y en a plus de 2
+    }
     container.appendChild(notif);
     setTimeout(() => notif.classList.add('show'), 100);
     setTimeout(() => {
         notif.classList.remove('show');
-        setTimeout(() => notif.remove(), 600);
-    }, 5000);
+        setTimeout(() => notif.remove(), 500);
+    }, 2000);
 }
 
      const stats = ['totalYami', 'totalBombsIgnored', 'totalUfos', 'totalLakis', 'totalBoshis', 'totalDogs'];
@@ -136,7 +136,7 @@ class UnicornShooter {
         this.isPlaying = false;
         this.isPaused = false;
         this.currentLevel = 1;
-        this.difficultyMultiplier = 0.95; 
+        this.difficultyMultiplier = 0.70; 
         this.spawnRate = 700; 
         this.pseudo = "JOUEUR";
         this.targets = []; 
@@ -145,8 +145,9 @@ class UnicornShooter {
         this.comboCount = 0;
         this.lastHitTime = 0;
         this.comboFreezeUntil = 0; 
-        this.totalClicks = 0; // Ajouté pour le badge Trigger Happy
-        this.isInvulnerable = false; // À mettre vers la ligne 30 avec les autres variables
+        this.totalClicks = 0; 
+        this.isInvulnerable = false; 
+        this.godModeTimeout = null; // Pour gérer l'extension du God Mode
 
         // --- ÉTATS BOSHI & SUPER COMBO ---
         this.isSuperComboActive = false;
@@ -191,8 +192,10 @@ class UnicornShooter {
         this.starSound = document.getElementById('starSound');
         this.guhaSound = document.getElementById('guhaSound');
         this.boshiSound = document.getElementById('boshiSound');
-        this.timerBeepSound = document.getElementById('timerBeepSound'); 
-
+        this.timerBeepSound = document.getElementById('timerBeepSound');
+        this.kyuremSound = document.getElementById('kyuremSound');
+        this.rocketSpawnSound = document.getElementById('rocketSpawnSound');
+        this.rocketHitSound = document.getElementById('rocketHitSound');
         this.updateMusicElement();
         this.applyVolumes();
 
@@ -207,11 +210,35 @@ class UnicornShooter {
         this.setupSettings();
     }
 
+    // --- NOUVELLE MÉTHODE : TIMER VISUEL TEMPORAIRE ---
+    showTemporaryTimer(durationMs, color) {
+        const oldTimer = document.getElementById('temp-game-timer');
+        if (oldTimer) oldTimer.remove();
+
+        const timerEl = document.createElement('div');
+        timerEl.id = 'temp-game-timer';
+        timerEl.style.cssText = `
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            font-size: 40px; font-weight: bold; color: ${color};
+            text-shadow: 0 0 15px ${color}; z-index: 10002; pointer-events: none;
+        `;
+        document.body.appendChild(timerEl);
+
+        let timeLeft = durationMs / 1000;
+        timerEl.innerText = timeLeft + "s";
+
+        const interval = setInterval(() => {
+            timeLeft -= 1;
+            timerEl.innerText = timeLeft + "s";
+            if (timeLeft <= 0) { clearInterval(interval); timerEl.remove(); }
+        }, 1000);
+    }
+
     activateSuperCombo() {
         this.isSuperComboActive = true;
-        unlockBadge('super_combo');
+        if(typeof unlockBadge === 'function') unlockBadge('super_combo');
         if (this.superComboTimer) clearTimeout(this.superComboTimer);
-        this.scoreElement.style.color = "#0077ff"; 
+        this.scoreElement.style.color = "#b300ff"; 
         this.superComboTimer = setTimeout(() => {
             this.isSuperComboActive = false;
             this.scoreElement.style.color = ""; 
@@ -230,7 +257,7 @@ class UnicornShooter {
             ...this.popSounds, this.countDownSound, this.resumeSound, this.endLevelSound,
             this.bombSound, this.dogSound, this.ufoSound, this.evilSound,
             this.lakituSaveSound, this.lakituEvilSound, this.lakituHitSound, 
-            this.starSound, this.timerBeepSound
+            this.starSound, this.timerBeepSound, this.guhaSound, this.boshiSound, this.rocketSpawnSound, this.rocketHitSound
         ];
         allSfx.forEach(s => { if(s) s.volume = sVol; });
     }
@@ -240,7 +267,7 @@ class UnicornShooter {
             this.settingsBtn.onclick = () => { 
                 this.settingsOverlay.style.zIndex = "3000";
                 this.settingsOverlay.style.display = 'flex';
-                unlockBadge('settings_pro');
+                if(typeof unlockBadge === 'function') unlockBadge('settings_pro');
             };
         }
         if(this.closeSettingsBtn) {
@@ -329,10 +356,7 @@ class UnicornShooter {
         this.isPaused = pauseActive;
 
         if (this.isPaused) {
-
-            if (typeof unlockBadge === 'function') 
-                {unlockBadge('pause_master');};
-
+            if (typeof unlockBadge === 'function') unlockBadge('pause_master');
             this.pauseOverlay.style.zIndex = "2000";
             this.pauseOverlay.style.display = 'flex';
             if (pauseBtn) pauseBtn.textContent = "▶";
@@ -372,15 +396,11 @@ class UnicornShooter {
             this.spawnLoop();
             this.update();
 
-            // --- AJOUT LOGIQUE PACIFISTE (SANS SUPPRESSION) ---
-            // On attend 10 secondes après le début réel du jeu
             setTimeout(() => {
-                // Si le jeu tourne toujours et que le score est encore à 0
                 if (this.isPlaying && this.score === 0) {
-                    unlockBadge('peaceful');
+                    if(typeof unlockBadge === 'function') unlockBadge('peaceful');
                 }
             }, 10000);
-            // --------------------------------------------------
 
         }, 3000);
     }
@@ -434,17 +454,22 @@ class UnicornShooter {
             let img;
             let rand = Math.random();
 
-            if (rand < 0.02) {
+         // --- GESTION DES SPAWNS AVEC KYUREM ---
+            if (rand < 0.008) { // 0.8% de chance (plus rare que Tokyo Dog)
+                img = '../assets/images/Kyurem.gif';
+            } else if (rand < 0.02) {
                 img = '../assets/images/Chien.gif'; 
             } else if (rand < 0.07) { 
                 img = '../assets/images/Litimes.gif'; 
-            } else if (rand < 0.10) {
+            } else if (rand < 0.10) { // Rocket insérée ici
+                img = '../assets/images/Rocket.gif';
+            } else if (rand < 0.13) { // OVNI décalé ici
                 img = '../assets/images/OVNI.gif';
-            } else if (this.currentLevel >= 2 && rand < 0.13) {
+            } else if (this.currentLevel >= 2 && rand < 0.16) {
                 img = '../assets/images/Lakitu.gif';
-            } else if (this.currentLevel >= 2 && rand < 0.17) {
+            } else if (this.currentLevel >= 2 && rand < 0.18) {
                 img = '../assets/images/Evil_Lakitu.gif';
-            } else if (rand < (0.22 + (this.currentLevel * 0.03))) {
+            } else if (rand < (0.25 + (this.currentLevel * 0.03))) {
                 img = Math.random() > 0.5 ? '../assets/images/Bomb.gif' : '../assets/images/Licornes-3.png';
             } else {
                 if (this.boshiUnlocked && Math.random() < 0.15) {
@@ -464,21 +489,14 @@ class UnicornShooter {
         if (this.isPlaying && !this.isPaused) {
             this.targets.forEach((target, index) => {
                 target.move();
-                
-                // On garde ta ligne de détection de sortie intacte
                 if (target.y > window.innerHeight + 100 || target.y < -200 || target.x > window.innerWidth + 300 || target.x < -300) {
-                    
-                    // --- AJOUT LOGIQUE BADGE SANS RIEN SUPPRIMER ---
-                    // On vérifie si c'est une sortie par le BAS et si c'est une BOMBE
                     if (target.y > window.innerHeight + 100 && target.isBomb) {
                         let totalIgnored = parseInt(localStorage.getItem('totalBombsIgnored') || 0) + 1;
                         localStorage.setItem('totalBombsIgnored', totalIgnored);
-                        if (totalIgnored >= 30) {
+                        if (totalIgnored >= 30 && typeof unlockBadge === 'function') {
                             unlockBadge('bomb_dodger');
                         }
                     }
-                    // --- FIN DE L'AJOUT ---
-
                     target.remove();
                     this.targets.splice(index, 1);
                 }
@@ -502,23 +520,16 @@ class UnicornShooter {
         clearTimeout(this.spawnTimeout);
         this.stopTimeAlert();
 
-        // --- DÉBLOCAGE BADGES MONDES ---
-        if (this.currentLevel === 1) unlockBadge('world_1_clear');
-        if (this.currentLevel === 2) unlockBadge('world_2_clear');
-        if (this.currentLevel === 3) unlockBadge('world_3_clear');
-
-        // --- DÉBLOCAGE BADGE SCORE 1500 ---
-        if (this.score >= 1500) {
-        unlockBadge('score_1500');
-    }
-
-        if (this.score >= 4500) {
-        unlockBadge('score_4500');
-    }    
-
-         if (this.score >= 6500) {
-        unlockBadge('score_6500');
-    }
+        if(typeof unlockBadge === 'function') {
+            if (this.currentLevel === 1) unlockBadge('world_1_clear');
+            if (this.currentLevel === 2) unlockBadge('world_2_clear');
+            if (this.currentLevel === 3) unlockBadge('world_3_clear');
+            if (this.score >= 1500) unlockBadge('score_1500');
+            if (this.score >= 4500) unlockBadge('score_4500');
+            if (this.score >= 6500) unlockBadge('score_6500');
+            if (this.score >= 8000) unlockBadge('score_8000');
+            if (this.score >= 10000) unlockBadge('score_10000');
+        }
 
         if (this.endLevelSound) { this.endLevelSound.currentTime = 0; this.endLevelSound.play(); }
         this.fadeOutAndStopMusic();
@@ -531,7 +542,8 @@ class UnicornShooter {
         else if (this.score < 1200) commentElement.textContent = "Pas ouf, tout ça...";
         else if (this.score < 3000) commentElement.textContent = "Mouais pas trop mal...";
         else if (this.score < 6500) commentElement.textContent = "Je dirai pas que t'es meilleur mais tu progresses...";
-        else commentElement.textContent = "Mais c'est que tu commences à devenir bon dis moi !";
+        else if (this.score < 9999) commentElement.textContent = "Mais c'est que tu commences à devenir bon dis moi !";
+        else commentElement.textContent = "Nan t'es bon, t'es bon GG !!";
 
         const continueBtn = document.querySelector('.click-to-continue');
         if (continueBtn) {
@@ -560,50 +572,29 @@ class UnicornShooter {
     }
 
     finishGame() { 
-    let leaderboard = JSON.parse(localStorage.getItem('unicornLeaderboard')) || [];
-    const newEntry = { name: this.pseudo, score: this.totalScore };
-    leaderboard.push(newEntry);
-    
-    // Tri du classement (plus haut score en premier)
-    leaderboard.sort((a, b) => b.score - a.score);
-    
-    // --- LOGIQUE DE DÉBLOCAGE DES BADGES DE CLASSEMENT ---
-    const playerRank = leaderboard.findIndex(e => e.name === this.pseudo && e.score === this.totalScore) + 1;
-    
-    // 1. Badge Rang 1
-    if (playerRank === 1) {
-        unlockBadge('rank_1');
-        localStorage.setItem('pendingBadge', 'rank_1'); // AJOUTÉ
-    } 
-    
-    // 2. Badge Rang 2
-    if (playerRank === 2) {
-        unlockBadge('rank_2');
-        localStorage.setItem('pendingBadge', 'rank_2'); // AJOUTÉ
-    }
+        let leaderboard = JSON.parse(localStorage.getItem('unicornLeaderboard')) || [];
+        const newEntry = { name: this.pseudo, score: this.totalScore };
+        leaderboard.push(newEntry);
+        leaderboard.sort((a, b) => b.score - a.score);
+        const playerRank = leaderboard.findIndex(e => e.name === this.pseudo && e.score === this.totalScore) + 1;
+        
+        if(typeof unlockBadge === 'function') {
+            if (playerRank === 1) unlockBadge('rank_1');
+            if (playerRank === 2) unlockBadge('rank_2');
+            if (playerRank === 3) unlockBadge('rank_3');
+        }
 
-    // 3. Badge Rang 3
-    if (playerRank === 3) {
-        unlockBadge('rank_3');
-        localStorage.setItem('pendingBadge', 'rank_3'); // AJOUTÉ
+        leaderboard = leaderboard.slice(0, 15);
+        localStorage.setItem('unicornLeaderboard', JSON.stringify(leaderboard));
+        localStorage.setItem('lastFinalScore', this.totalScore);
+        localStorage.setItem('lastPlayerName', this.pseudo);
+        window.location.href = "scores.html"; 
     }
-
-    // --- SAUVEGARDE ET REDIRECTION ---
-    leaderboard = leaderboard.slice(0, 15);
-    localStorage.setItem('unicornLeaderboard', JSON.stringify(leaderboard));
-    localStorage.setItem('lastFinalScore', this.totalScore);
-    localStorage.setItem('lastPlayerName', this.pseudo);
-    
-    window.location.href = "scores.html"; 
-}
 }
 
-// --- SYSTÈME DE BADGES ---
-// (Le tableau badgeData est supposé être défini plus haut ou dans un fichier séparé)
+// ===================================================================================================================================================================
+// ===================================================================================================================================================================
 
-/**
- * CLASSE CIBLE (Target)
- */
 class Target {
     constructor(imgSrc, game, isDropped = false) {
         this.game = game;
@@ -613,7 +604,9 @@ class Target {
         
         this.isBomb = imgSrc.includes('Bomb.gif');
         this.isDog = imgSrc.includes('Chien.gif');
+        this.isKyurem = imgSrc.includes('Kyurem.gif');
         this.isUFO = imgSrc.includes('OVNI.gif');
+        this.isRocket = imgSrc.includes('Rocket.gif'); // AJOUTÉ
         this.isEvilLicorne = imgSrc.includes('Licornes-3.png');
         this.isLakitu = imgSrc.includes('Lakitu.gif') && !imgSrc.includes('Evil');
         this.isEvilLakitu = imgSrc.includes('Evil_Lakitu.gif');
@@ -622,7 +615,9 @@ class Target {
 
         if (this.isBomb) this.element.classList.add('bomb-target');
         if (this.isDog) this.element.classList.add('dog-target');
+        if (this.isKyurem) this.element.classList.add('kyurem-target');
         if (this.isUFO) this.element.classList.add('ufo-target');
+        if (this.isRocket) this.element.classList.add('rocket-target'); // AJOUTÉ
         if (this.isEvilLicorne) this.element.classList.add('evil-target');
         if (this.isLakitu) this.element.classList.add('lakitu-target');
         if (this.isEvilLakitu) this.element.classList.add('evil-lakitu-target');
@@ -637,43 +632,110 @@ class Target {
             this.element.style.height = "auto";
         }
 
-        this.hp = this.isLakitu ? 3 : 1; 
         this.dropTimer = 0;
+        // --- CONFIGURATION DES PV ---
+        if (this.isLakitu && !this.isEvilLakitu) {
+            this.hp = 3; 
+        } else {
+            this.hp = 1; 
+        }
+
+        this.element.onmousedown = (e) => { 
+            e.preventDefault(); 
+            if (!this.game.isPaused && this.game.isPlaying) {
+                if (this.element.classList.contains('ghost-mode')) {
+                    this.explode();
+                    return;
+                }
+
+                this.hp--;
+                
+                if (this.isLakitu && !this.isEvilLakitu && this.hp > 0) {
+                    this.showFloatingText(`${3 - this.hp}/3`, e.clientX, e.clientY, false, "#00FF00");
+                }
+
+                if (this.hp <= 0) {
+                    this.explode();
+                } else {
+                    if (this.isLakitu && !this.isEvilLakitu) {
+                        if (this.game.lakituHitSound) { this.game.lakituHitSound.currentTime = 0; this.game.lakituHitSound.play(); }
+                        this.element.style.filter = "brightness(2) contrast(2)";
+                        this.element.classList.add('hit-shake');
+                        setTimeout(() => { this.element.style.filter = ""; this.element.classList.remove('hit-shake'); }, 150);
+                    }
+                }
+            }
+        };
 
         const mult = this.game.difficultyMultiplier;
         const levelSlowdown = 1 + (this.game.currentLevel - 1) * 0.15;
 
-        // --- GESTION SPÉCIFIQUE LICORNE ÉTOILE (SPEED & SPIN) ---
+        // ==========================================================
+        // --- SEGMENT : PHYSIQUE DES ITEMS SPÉCIAUX (STAR) ---
+        // ==========================================================
         if (this.isStarUnicorn) {
-            if (this.game.starSound) { this.game.starSound.currentTime = 0; this.game.starSound.play(); }
+            if (this.game.starSound) { 
+                this.game.starSound.currentTime = 0; 
+                this.game.starSound.play(); 
+            }
             this.side = Math.random() > 0.5 ? 'left' : 'right';
             this.x = this.side === 'left' ? -150 : window.innerWidth + 150;
             this.y = Math.random() * (window.innerHeight * 0.4);
-            
             let speed = 10.0; 
             this.vx = this.side === 'left' ? (speed * mult) : -(speed * mult);
             this.vy = 0;
             this.gravity = 0;
             this.rotationSpeed = 10; 
         } 
+        // ==========================================================
+        // --- SEGMENT : ITEMS LÂCHÉS (DROPPED BY LAKITU) ---
+        // ==========================================================
         else if (isDropped) {
             this.gravity = 0.015 * mult; 
             this.vx = (Math.random() - 0.5) * 0.8 * mult; 
             this.vy = 0.25 * mult;
-            this.x = 0; 
+            this.x = 0; // Sera ajusté par la fonction dropItem()
             this.y = 0;
             this.rotationSpeed = (Math.random() - 0.5) * 1;
         } 
-        else if (this.isUFO || this.isLakitu || this.isEvilLakitu) {
+        // ==========================================================
+        // --- SEGMENT : MOUVEMENT HORIZONTAL (OVNI, LAKITUS, ROCKET) ---
+        // ==========================================================
+        else if (this.isUFO || this.isLakitu || this.isEvilLakitu || this.isRocket) {
+            // Son spécifique à la Rocket au spawn
+            if (this.isRocket && this.game.rocketSpawnSound) {
+                this.game.rocketSpawnSound.currentTime = 0;
+                this.game.rocketSpawnSound.play();
+            }
+
             this.side = Math.random() > 0.5 ? 'left' : 'right';
             this.x = this.side === 'left' ? -150 : window.innerWidth + 150;
-            this.y = Math.random() * (window.innerHeight * 0.25);
-            let speed = (this.isLakitu || this.isEvilLakitu) ? 0.5 : 1.0; 
-            this.vx = this.side === 'left' ? (speed * mult * levelSlowdown) : -(speed * mult * levelSlowdown);
-            this.vy = (Math.random() - 0.5) * 0.25; 
+            this.y = Math.random() * (window.innerHeight * 0.3);
+            
+            let horizontalSpeed = this.isRocket ? 7 : 2.5;
+            this.vx = this.side === 'left' ? (horizontalSpeed * mult) : -(horizontalSpeed * mult);
+            
+            this.vy = 0;
             this.gravity = 0;
             this.rotationSpeed = 0;
-        } else {
+
+            // --- GESTION DES CLASSES MIROIRS POUR LA ROCKET ---
+            if (this.isRocket) {
+                // On remplace la classe par défaut par la classe directionnelle
+                if (this.side === 'left') {
+                    // Vient de gauche, va vers la droite -->
+                    this.element.className = 'targets rocket-right';
+                } else {
+                    // Vient de droite, va vers la gauche <--
+                    this.element.className = 'targets rocket-left';
+                }
+            }
+        }
+
+        // ==========================================================
+        // --- SEGMENT : PHYSIQUE PAR DÉFAUT (LANCER CLASSIQUE) ---
+        // ==========================================================
+        else {
             this.x = Math.random() * (window.innerWidth - 270);
             this.y = window.innerHeight;
             this.gravity = 0.012 * mult * levelSlowdown; 
@@ -682,35 +744,34 @@ class Target {
             this.rotationSpeed = (Math.random() - 0.5) * 2;
         }
 
+        // --- FINALISATION ---
         this.rotation = 0;
         this.game.gameArea.appendChild(this.element);
-
-        this.element.onmousedown = (e) => { 
-            e.preventDefault(); 
-            if (!this.game.isPaused && this.game.isPlaying) {
-                this.hp--;
-                if (this.hp <= 0) this.explode();
-                else {
-                    if (this.game.lakituHitSound) { this.game.lakituHitSound.currentTime = 0; this.game.lakituHitSound.play(); }
-                    this.element.style.filter = "brightness(2) contrast(2)";
-                    this.element.classList.add('hit-shake');
-                    setTimeout(() => { this.element.style.filter = ""; this.element.classList.remove('hit-shake'); }, 150);
-                }
-            }
-        };
     }
 
-    move() {
+  move() {
         this.vy += this.gravity; 
         this.x += this.vx; 
         this.y += this.vy; 
-        this.rotation += this.rotationSpeed;
+        
         this.element.style.left = `${this.x}px`; 
         this.element.style.top = `${this.y}px`;
-        this.element.style.transform = `rotate(${this.rotation}deg)`;
+
+        // SI C'EST UNE ROCKET : On ne touche à rien (le CSS fait tout)
+        if (this.isRocket) {
+            return; 
+        } 
+        
+        // POUR LES AUTRES : Rotation classique
+        else if (this.rotationSpeed !== 0) {
+            this.rotation += this.rotationSpeed;
+            this.element.style.transform = `rotate(${this.rotation}deg)`;
+        }
+
+        // Logique Lakitu
         if (this.isLakitu || this.isEvilLakitu) {
             this.dropTimer++;
-            if (this.dropTimer > 150) { this.dropItem(); this.dropTimer = 0; }
+            if (this.dropTimer > 250) { this.dropItem(); this.dropTimer = 0; }
         }
     }
 
@@ -721,57 +782,246 @@ class Target {
         this.game.targets.push(d);
     }
 
-   explode() {
-    // --- NOUVEAU : BLOC DE DÉTECTION DU FANTÔME ---
-    if (this.element.classList.contains('ghost-mode')) {
-        this.ghostClicks = (this.ghostClicks || 0) + 1;
-        this.showFloatingText(`${this.ghostClicks}/7`, 
-            this.element.getBoundingClientRect().left, 
-            this.element.getBoundingClientRect().top, 
-            false, "#ffffff");
+   
+// ===============================================================================
+// EXPLODE / EXPLODE / EXPLODE / EXPLODE / EXPLODE / EXPLODE / EXPLODE /EXPLODE 
+// ===============================================================================
 
-        if (this.ghostClicks >= 7) {
-            unlockBadge('ghost_touch');
-            this.showFloatingText("FANTÔME CAPTURÉ !", 
-                this.element.getBoundingClientRect().left, 
-                this.element.getBoundingClientRect().top, 
-                false, "#FFD700");
-        }
-        return; // TRÈS IMPORTANT : on arrête la fonction ici pour ne pas relancer l'explosion classique
+explode() {
+    // --- STATISTIQUES ET BADGES GLOBAUX ---
+    this.game.totalClicks++;
+    if (this.game.totalClicks >= 100 && typeof unlockBadge === 'function') {
+        unlockBadge('trigger_happy');
     }
 
-    this.game.totalClicks++; 
-    if (this.game.totalClicks >= 100) unlockBadge('trigger_happy');
-
+    // --- PRÉPARATION DES COORDONNÉES ET ÉTATS ---
     const rect = this.element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
+    const isGodMode = this.game.isInvulnerable;
 
-    if (this.isBoshi) {
-        if (this.game.boshiSound) { this.game.boshiSound.currentTime = 0; this.game.boshiSound.play(); }
-        this.game.score += 90;
-        this.game.activateSuperCombo();
-        this.showFloatingText("SUPER BOSHI! COMBO MAX", centerX, centerY, false, "#0077ff");
-        this.createParticles(centerX, centerY, "#0077ff");
-        unlockBadge('hit_boshi'); // DÉBLOCAGE BADGE BOSHI
+    // --------------------------------------------------------------------------------------------
+    // SEGMENT : GHOST MODE (LAKITU ET EVIL LAKITU REVENANTS)
+    // ---------------------------------------------------------------------------------------------
 
-        // Cumul permanent pour le badge Chasseur de Boshi
-        let count = parseInt(localStorage.getItem('totalBoshis') || 0) + 1;
-        localStorage.setItem('totalBoshis', count);
-        if (count >= 15) unlockBadge('boshi_hunter');
+    if (this.element.classList.contains('ghost-mode')) {
+        this.ghostClicks = (this.ghostClicks || 0) + 1;
+        
+        if (this.game.lakituHitSound) { 
+            this.game.lakituHitSound.currentTime = 0; 
+            this.game.lakituHitSound.play(); 
+        }
 
+        // --- CAS LAKITU CLASSIQUE (MODE INVERSE) ---
+        if (this.isLakitu && !this.isEvilLakitu) {
+            // Gain de 100 pts par clic
+            this.game.score += 100;
+            this.showFloatingText("+100", rect.left, rect.top - 30, false, "#00FF00");
 
-    } else if (this.isStarUnicorn) {
-        if (this.game.guhaSound) { this.game.guhaSound.currentTime = 0; this.game.guhaSound.play(); }
+            // --- FLASH DÉDIÉ (VERT) ---
+            const classicFlash = document.createElement('div');
+            classicFlash.className = 'classic-flash-overlay'; 
+            document.body.appendChild(classicFlash);
+            setTimeout(() => classicFlash.remove(), 800);
+
+            this.showFloatingText(`${this.ghostClicks}/8`, centerX, centerY, false, "#ffffff");
+
+            if (this.ghostClicks === 8) {
+                this.dropTimer = -999999; 
+                if(typeof unlockBadge === 'function') unlockBadge('SiV'); 
+                
+                this.game.timeLeft += 5; 
+                this.game.isInverseMode = true;
+                document.body.style.boxShadow = "inset 0 0 100px rgba(0, 255, 0, 0.5)";
+                this.showFloatingText("+8s & MODE INVERSE CUMULÉ !", rect.left, rect.top, false, "#00FF00");
+
+                if (this.game.inverseModeTimeout) clearTimeout(this.game.inverseModeTimeout);
+                
+                this.game.inverseModeTimeout = setTimeout(() => { 
+                    this.game.isInverseMode = false; 
+                    document.body.style.boxShadow = ""; 
+                    this.game.inverseModeTimeout = null;
+                }, 8000);
+
+                this.game.targets.forEach(t => { 
+                    if (t.isBoshi || t.isDog || t.isStarUnicorn) t.remove(); 
+                });
+                this.remove();
+            }
+        } 
+        // --- CAS EVIL LAKITU (RESTE EN ROUGE) ---
+        else if (this.isEvilLakitu) {
+            if (isGodMode) {
+                this.game.score += 100;
+                this.showFloatingText("+100", rect.left, rect.top - 30, false, "#00FF00");
+                if (this.game.godModeTimeout) clearTimeout(this.game.godModeTimeout);
+                this.game.godModeTimeout = setTimeout(() => {
+                    this.game.isInvulnerable = false;
+                    this.game.scoreElement.style.textShadow = "";
+                    document.body.style.boxShadow = "";
+                }, 15000); 
+            } else {
+                this.game.score = Math.max(0, this.game.score - 150);
+                this.showFloatingText("-150", rect.left, rect.top - 30, true, "#ff0000");
+                
+                const darkFlash = document.createElement('div');
+                darkFlash.className = 'evil-flash-overlay'; // Garde le flash rouge
+                document.body.appendChild(darkFlash);
+                setTimeout(() => darkFlash.remove(), 800);
+            }
+
+            this.showFloatingText(`${this.ghostClicks}/???`, centerX, centerY, false, "#ffffff");
+
+            if (this.ghostClicks === 10) {
+                this.dropTimer = -999999;
+                if (this.game.lakituEvilSound) { 
+                    this.game.lakituEvilSound.currentTime = 0; 
+                    this.game.lakituEvilSound.play(); 
+                }
+                
+                this.game.score += 2500; 
+                this.game.timeLeft += 15; 
+                
+                document.body.style.boxShadow = "inset 0 0 100px rgba(255, 0, 0, 0.7)";
+                this.game.isInvulnerable = true;
+                this.game.scoreElement.style.textShadow = "0 0 20px #ff0000";
+                this.showFloatingText("+2500 PTS & IMMUNITÉ (15s)!", centerX, centerY, false, "#ff0000");
+
+                if (this.game.godModeTimeout) clearTimeout(this.game.godModeTimeout);
+                this.game.godModeTimeout = setTimeout(() => { 
+                    this.game.isInvulnerable = false; 
+                    this.game.scoreElement.style.textShadow = ""; 
+                    document.body.style.boxShadow = ""; 
+                }, 15000);
+
+                if(typeof unlockBadge === 'function') { 
+                    unlockBadge('god_slayer'); 
+                    unlockBadge('ghost_touch'); 
+                }
+                
+                this.game.targets.forEach(t => t.convertToMalus());
+                this.remove();
+            }
+        }
+        return; 
+    }
+
+    // -------------------------------------------------------------------------------------------------
+    // SEGMENT : MALUS ET BOSS (KYUREM, BOMBES, YAMI)
+    // -----------------------------------------------------------------------------------------------
+    
+    else if (this.isKyurem) {
+        if (this.game.kyuremSound) { 
+            this.game.kyuremSound.currentTime = 0; 
+            this.game.kyuremSound.play(); 
+        }
+        // MODIFIÉ : Gain de points si isGodMode OU isInverseMode
+        if (isGodMode || this.game.isInverseMode) {
+            this.game.score += 1500;
+            this.showFloatingText("+1500 PTS!", centerX, centerY, false, "#00FF00");
+        } else {
+            this.game.score = Math.max(0, this.game.score - 1500);
+            this.game.comboCount = 0;
+            this.showFloatingText("-1500 DARKNESS!", centerX, centerY, true, "#ff0000");
+            const dark = document.createElement('div');
+            dark.className = 'darkness-overlay';
+            document.body.appendChild(dark);
+            setTimeout(() => {
+                dark.style.opacity = "0";
+                setTimeout(() => dark.remove(), 1000);
+            }, 2000);
+        }
+        this.createParticles(centerX, centerY, "black");
+        if (typeof unlockBadge === 'function') unlockBadge('hit_kyurem');
+        this.remove();
+        return;
+    }
+
+    else if (this.isBomb) {
+        if (isGodMode || this.game.isInverseMode) {
+            this.game.score += 320;
+            this.showFloatingText("+320 PTS!", centerX, centerY, false, "#00FF00");
+            this.createParticles(centerX, centerY, "gold");
+        } else {
+            if (this.game.bombSound) { 
+                this.game.bombSound.currentTime = 0; 
+                this.game.bombSound.play(); 
+            }
+            document.body.classList.add('screen-shake');
+            setTimeout(() => document.body.classList.remove('screen-shake'), 500);
+            this.game.score = Math.max(0, this.game.score - 320); 
+            this.game.comboCount = 0;
+            this.showFloatingText("BOMBY -320!!", centerX, centerY, true);
+            this.createParticles(centerX, centerY, "black");
+            if(typeof unlockBadge === 'function') unlockBadge('hit_bomb');
+        }
+        this.remove();
+    }
+
+    else if (this.isEvilLicorne) {
+        if (isGodMode || this.game.isInverseMode) {
+            this.game.score += 250;
+            this.showFloatingText("+250 PTS!", centerX, centerY, false, "#00FF00");
+            this.createParticles(centerX, centerY, "gold");
+        } else {
+            if (this.game.evilSound) { 
+                this.game.evilSound.currentTime = 0; 
+                this.game.evilSound.play(); 
+            }
+            this.game.score = Math.max(0, this.game.score - 250); 
+            this.game.comboCount = 0;
+            this.showFloatingText("CHEH -250!", centerX, centerY, true);
+            this.createParticles(centerX, centerY, "evil");
+            if(typeof unlockBadge === 'function') {
+                let count = parseInt(localStorage.getItem('totalYami') || 0) + 1;
+                localStorage.setItem('totalYami', count);
+                if (count >= 20) unlockBadge('yami_eye');
+                unlockBadge('yami_hunter');
+            }
+        }
+        this.remove(); 
+    }
+
+    // --- GESTION LITIMES ---
+    else if (this.isStarUnicorn) {
+        if (this.game.guhaSound) { 
+            this.game.guhaSound.currentTime = 0; 
+            this.game.guhaSound.play(); 
+        }
         this.game.timeLeft += 10; 
         this.game.score += 120;
         this.showFloatingText("TIME BONUS +10s!", centerX, centerY, false, "#FFD700");
         this.createParticles(centerX, centerY, "#FFD700");
         this.game.checkTimeAlert(); 
-        unlockBadge('hit_litimes'); // DÉBLOCAGE BADGE LITIMES (StarUnicorn)
+        if(typeof unlockBadge === 'function') unlockBadge('hit_litimes');
+        this.remove();
+    }
 
-    } else if (this.isLakitu) {
-        if (this.game.lakituSaveSound) { this.game.lakituSaveSound.currentTime = 0; this.game.lakituSaveSound.play(); }
+    // --- GESTION BOSHI ---
+    else if (this.isBoshi) {
+        if (this.game.boshiSound) { 
+            this.game.boshiSound.currentTime = 0; 
+            this.game.boshiSound.play(); 
+        }
+        this.game.score += 90;
+        this.game.activateSuperCombo();
+        this.showFloatingText("SUPER BOSHI! COMBO MAX", centerX, centerY, false, "#0077ff");
+        this.createParticles(centerX, centerY, "#0077ff");
+        if(typeof unlockBadge === 'function') {
+            unlockBadge('hit_boshi');
+            let count = parseInt(localStorage.getItem('totalBoshis') || 0) + 1;
+            localStorage.setItem('totalBoshis', count);
+            if (count >= 15) unlockBadge('boshi_hunter');
+        }
+        this.remove();
+    }
+
+    // --- GESTION LAKITU ---
+    else if (this.isLakitu) {
+        if (this.game.lakituSaveSound) { 
+            this.game.lakituSaveSound.currentTime = 0; 
+            this.game.lakituSaveSound.play(); 
+        }
         this.game.score += 320; 
         this.game.boshiUnlocked = true;
         this.showFloatingText("LAKITU LOOT!", centerX, centerY, false, "#00FF00");
@@ -782,165 +1032,136 @@ class Target {
         this.spawnLoot(this.game.targetImages[1], centerX, centerY);
         this.spawnLoot('../assets/images/Chien.gif', centerX, centerY);
         this.game.targets.forEach(t => { if(t.isBomb) t.convertToBonus(); });
-
-        // Cumul permanent pour le badge Expert Lakitu
-        let count = parseInt(localStorage.getItem('totalLakis') || 0) + 1;
-        localStorage.setItem('totalLakis', count);
-        if (count >= 3) unlockBadge('laki_expert');
-        
-        unlockBadge('lakitu_slayer'); // DÉBLOCAGE BADGE LAKITU
-
+        if(typeof unlockBadge === 'function') {
+            let count = parseInt(localStorage.getItem('totalLakis') || 0) + 1;
+            localStorage.setItem('totalLakis', count);
+            if (count >= 3) unlockBadge('laki_expert');
+            unlockBadge('lakitu_slayer');
+        }
         this.element.classList.add('is-exploding'); 
         this.hp = Infinity; 
-
         setTimeout(() => {
-        this.element.classList.remove('is-exploding');
-        this.element.style.pointerEvents = 'auto'; // RÉ-AUTORISE LE CLIC
-        this.hp = 1; // Remet 1 HP pour que la fonction explode() puisse être rappelée au prochain clic
-        this.element.classList.add('ghost-mode');}, 600);                   
-         
+            this.element.classList.remove('is-exploding');
+            this.element.style.pointerEvents = 'auto'; 
+            this.hp = 1; 
+            this.element.classList.add('ghost-mode');
+        }, 600);
         setTimeout(() => this.remove(), 30000); 
+    }
 
-    } else if (this.isEvilLakitu) {
-        if (this.game.lakituEvilSound) { this.game.lakituEvilSound.currentTime = 0; this.game.lakituEvilSound.play(); }
+    // --- GESTION EVIL LAKITU ---
+    else if (this.isEvilLakitu) {
+        if (this.game.lakituEvilSound) { 
+            this.game.lakituEvilSound.currentTime = 0; 
+            this.game.lakituEvilSound.play(); 
+        }
         this.game.score = Math.max(0, this.game.score - 550);
         this.showFloatingText("CHAOS & BOMBS!", centerX, centerY, true, "#FF0000");
         this.createParticles(centerX, centerY, "evil");
-        
-        unlockBadge('hit_evil_lakitu'); // DÉBLOCAGE BADGE EVIL LAKITU
-
-        const flash = document.createElement('div');
-        flash.style.position = 'fixed'; flash.style.top = '0'; flash.style.left = '0';
-        flash.style.width = '100vw'; flash.style.height = '100vh';
-        flash.style.backgroundColor = 'rgba(255, 0, 0, 0.4)'; flash.style.zIndex = '9999';
-        flash.style.pointerEvents = 'none'; document.body.appendChild(flash);
-        setTimeout(() => flash.remove(), 200);
+        if(typeof unlockBadge === 'function') unlockBadge('hit_evil_lakitu');
+        this.spawnLoot('../assets/images/Kyurem.gif', centerX, centerY);
         this.game.targets.forEach(t => t.convertToMalus());
         for(let i=0; i<3; i++) this.game.targets.push(new Target('../assets/images/Licornes-3.png', this.game));
-
         this.element.classList.add('is-exploding');
         this.hp = Infinity; 
-
-       setTimeout(() => {
-       this.element.classList.remove('is-exploding');
-       this.element.style.pointerEvents = 'auto'; // RÉ-AUTORISE LE CLIC
-       this.hp = 1; // Remet 1 HP pour que la fonction explode() puisse être rappelée au prochain clic
-       this.element.classList.add('ghost-mode');}, 600);
-
+        setTimeout(() => {
+            this.element.classList.remove('is-exploding');
+            this.element.style.pointerEvents = 'auto'; 
+            this.hp = 1; 
+            this.element.classList.add('ghost-mode');
+        }, 600);
         setTimeout(() => this.remove(), 30000);
+    }
 
-    } else if (this.isBomb) {
-        // --- VÉRIFICATION IMMUNITÉ (GOD MODE) ---
-        if (this.game.isInvulnerable) {
-            this.showFloatingText("IMMUNISÉ !", centerX, centerY, false, "#FFFFFF");
-            this.createParticles(centerX, centerY, "white");
-            this.remove();
-            return; // On arrête ici : pas de malus, pas de secousse
+    // --- GESTION CHIEN ---
+    else if (this.isDog) {
+        if (this.game.dogSound) { 
+            this.game.dogSound.currentTime = 0; 
+            this.game.dogSound.play(); 
         }
-
-        // --- LOGIQUE NORMALE DE LA BOMBE ---
-        if (this.game.bombSound) { this.game.bombSound.currentTime = 0; this.game.bombSound.play(); }
-        document.body.classList.add('screen-shake'); // Secousse de l'écran en cas de bombe
-        setTimeout(() => document.body.classList.remove('screen-shake'), 500);
-        
-        this.game.score = Math.max(0, this.game.score - 280); 
-        this.game.comboCount = 0;
-        this.showFloatingText("BOMBY -320!!", centerX, centerY, true);
-        this.createParticles(centerX, centerY, "black");
-        
-        unlockBadge('hit_bomb'); // DÉBLOCAGE BADGE BOMBE
-        this.remove(); // On supprime la bombe après l'explosion
-    }  
-         else if (this.isDog) {
-        if (this.game.dogSound) { this.game.dogSound.currentTime = 0; this.game.dogSound.play(); }
         this.game.score += 600;
         this.showFloatingText("EASTER EGG +600!", centerX, centerY, false, "#00FF00");
+        if(typeof unlockBadge === 'function') {
+            unlockBadge('dog_lover');
+            let count = parseInt(localStorage.getItem('totalDogs') || 0) + 1;
+            localStorage.setItem('totalDogs', count);
+            if (count >= 3) unlockBadge('tokyo_visitor');
+        }
         this.createParticles(centerX, centerY, "#00FF00");
-        
-        // Cumul permanent pour le badge Visiteur de Tokyo
-        let count = parseInt(localStorage.getItem('totalDogs') || 0) + 1;
-        localStorage.setItem('totalDogs', count);
-        if (count >= 3) unlockBadge('tokyo_visitor');
-        
-        unlockBadge('dog_lover'); // DÉBLOCAGE BADGE CHIEN
+        this.remove();
+    }
 
-    } else if (this.isUFO) {
-        if (this.game.ufoSound) { this.game.ufoSound.currentTime = 0; this.game.ufoSound.play(); }
+    // --- GESTION UFO ---
+    else if (this.isUFO) {
+        if (this.game.ufoSound) { 
+            this.game.ufoSound.currentTime = 0; 
+            this.game.ufoSound.play(); 
+        }
         this.game.score += 180;
         this.showFloatingText("UFO +180!", centerX, centerY, false, "#00FFFF");
-        this.createParticles(centerX, centerY, "ufo");
-
-        // Cumul permanent pour le badge Observateur d'OVNI
-        let count = parseInt(localStorage.getItem('totalUfos') || 0) + 1;
-        localStorage.setItem('totalUfos', count);
-        if (count >= 10) unlockBadge('ufo_finder');
-        
-        unlockBadge('ufo_slayer'); // DÉBLOCAGE BADGE UFO
-
-    } else if (this.isEvilLicorne) {
-        // --- VÉRIFICATION IMMUNITÉ (GOD MODE) ---
-        if (this.game.isInvulnerable) {
-            this.showFloatingText("IMMUNISÉ !", centerX, centerY, false, "#FFFFFF");
-            this.createParticles(centerX, centerY, "white");
-            this.remove();
-            return; // On stoppe ici : pas de malus, pas de perte de combo
+        if(typeof unlockBadge === 'function') {
+            unlockBadge('ufo_slayer');
+            let count = parseInt(localStorage.getItem('totalUfos') || 0) + 1;
+            localStorage.setItem('totalUfos', count);
+            if (count >= 10) unlockBadge('ufo_finder');
         }
+        this.createParticles(centerX, centerY, "ufo");
+        this.remove();
+    }
+    
+    // --- GESTION ROCKET ---
+    else if (this.isRocket) {
+        if (this.game.rocketHitSound) { 
+            this.game.rocketHitSound.currentTime = 0; 
+            this.game.rocketHitSound.play(); 
+        }
+        // MODIFIÉ : Gain de points si isGodMode OU isInverseMode
+        if (isGodMode || this.game.isInverseMode) {
+            this.game.score += 450;
+            this.showFloatingText("+450 PTS!", centerX, centerY, false, "#00FF00");
+            this.createParticles(centerX, centerY, "#00FF00");
+        } else {
+            this.game.score = Math.max(0, this.game.score - 450);
+            this.game.comboCount = 0;
+            this.showFloatingText("ROCKET CRASH -450!", centerX, centerY, true, "#FF4500");
+            document.body.classList.add('screen-shake');
+            setTimeout(() => document.body.classList.remove('screen-shake'), 300);
+            this.createParticles(centerX, centerY, "#FF4500");
+        }
+        if(typeof unlockBadge === 'function') unlockBadge('rocket_hit');
+        this.remove();
+    }
 
-        // --- LOGIQUE NORMALE DE L'EVIL LICORNE ---
-        if (this.game.evilSound) { this.game.evilSound.currentTime = 0; this.game.evilSound.play(); }
-        this.game.score = Math.max(0, this.game.score - 250); 
-        this.game.comboCount = 0;
-        this.showFloatingText("CHEH -250!", centerX, centerY, true);
-        this.createParticles(centerX, centerY, "evil");
-
-        // Cumul permanent pour le badge Oeil de Yami
-        let count = parseInt(localStorage.getItem('totalYami') || 0) + 1;
-        localStorage.setItem('totalYami', count);
-        if (count >= 20) unlockBadge('yami_eye');
-        
-        unlockBadge('yami_hunter'); // DÉBLOCAGE BADGE YAMI (EvilLicorne)
-        
-        this.remove(); // Suppression de la licorne après le clic
-    } else {
-        // --- LICORNES NORMALES ---
-        unlockBadge('first_kill'); // DÉBLOCAGE PREMIER SANG
-        
-        // Système pour détecter les 4 types classiques
-        if(!this.game.tappedTypes) this.game.tappedTypes = new Set();
-        this.game.tappedTypes.add(this.element.src);
-        if(this.game.tappedTypes.size >= 4) unlockBadge('hit_all_classics');
-
+    // --- CIBLES CLASSIQUES ---
+    else {
+        if(typeof unlockBadge === 'function') {
+            unlockBadge('first_kill'); 
+            if(!this.game.tappedTypes) this.game.tappedTypes = new Set();
+            this.game.tappedTypes.add(this.element.src);
+            if(this.game.tappedTypes.size >= 4) unlockBadge('hit_all_classics');
+        }
         const now = Date.now();
-        // Gestion des combos basée sur le temps entre les clics
         if (now < this.game.comboFreezeUntil || now - this.game.lastHitTime < 800) {
             this.game.comboCount++;
-            if (this.game.comboCount >= 10) unlockBadge('combo_10');
-        } else {
-            this.game.comboCount = 1;
+            if (this.game.comboCount >= 10 && typeof unlockBadge === 'function') unlockBadge('combo_10');
+        } else { 
+            this.game.comboCount = 1; 
         }
         this.game.lastHitTime = now;
-        
-        // Son de pop aléatoire
         const s = this.game.popSounds[Math.floor(Math.random() * this.game.popSounds.length)];
         if (s) { s.currentTime = 0; s.play(); }
-        
-        // Calcul des points avec multiplicateur de combo
         let pts = this.game.isSuperComboActive ? 50 : (25 * this.game.comboCount); 
+        
         this.game.score += pts;
         this.showFloatingText(`+${pts}`, centerX, centerY, false);
         this.createParticles(centerX, centerY, "#ff00ff");
-    }
-
-    // Suppression de l'élément sauf si c'est un Lakitu (qui reste en fantôme)
-    if (!this.isLakitu && !this.isEvilLakitu) {
         this.remove();
     }
 }
 
     spawnLoot(img, x, y) {
         const loot = new Target(img, this.game, true);
-        loot.x = x; 
-        loot.y = y;
+        loot.x = x; loot.y = y;
         loot.vx = (Math.random() - 0.5) * 3; 
         loot.vy = -1.5 - Math.random() * 1.5;     
         this.game.targets.push(loot);
@@ -956,12 +1177,12 @@ class Target {
     }
     
     convertToMalus() { 
-        if (!this.isBomb && !this.isLakitu && !this.isEvilLakitu && !this.isUFO && !this.isDog) { 
-            this.isBomb = true; 
-            this.element.src = '../assets/images/Bomb.gif'; 
-            this.element.className = 'targets bomb-target'; 
-        } 
-    }
+    if (!this.isBomb && !this.isLakitu && !this.isEvilLakitu && !this.isUFO && !this.isDog && !this.isKyurem) { 
+        this.isBomb = true; 
+        this.element.src = '../assets/images/Bomb.gif'; 
+        this.element.className = 'targets bomb-target'; 
+    } 
+}
 
     showFloatingText(t, x, y, m, c = null) {
         const d = document.createElement('div'); d.className = m ? 'combo-text malus' : 'combo-text';
